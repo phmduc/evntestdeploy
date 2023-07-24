@@ -1,0 +1,40 @@
+.blogdetail {
+  margin-bottom: 4rem;
+}
+
+.blogdetail .icon-left{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.blogdetail h6 {
+  text-align: center;
+  padding: 1rem 0;
+  background: #fff;
+}
+
+.blogdetail .content {
+  padding: 1rem 0;
+  background: #e8e8e8;
+}
+
+.blogdetail .content .name {
+  text-align: center;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.blogdetail .content p {
+  color: black;
+  font-weight: 600;
+  text-align: justify;
+}
+
+.blogdetail .content span {
+  display: block;
+  text-align: center;
+  font-weight: 900;
+  color: #b5b5b5;
+}

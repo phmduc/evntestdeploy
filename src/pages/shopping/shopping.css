@@ -1,0 +1,88 @@
+.img-wrap {
+    position: relative;
+    height: auto;
+    overflow: hidden;
+    background-position: 50% 50%;
+    background-size: cover;
+    padding-top: 56.25%;
+}
+.img-wrap img {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    transform: translateZ(0);
+    margin: 0 auto;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    position: absolute;
+    object-position: 50% 50%;
+    object-fit: cover;
+}
+.shopping .headerShopping{
+    background: rgb(255, 255, 255);
+    position: relative;
+    padding: 0.813rem 1rem;
+}
+.shopping .headerShopping .iconBack{
+    color: #000000;
+    font-size: 1.563rem;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+}
+.shopping .headerShopping .title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #000000;
+}
+.shopping .bannerImg{
+    padding-top: 60.25%;
+}
+.shopping .bannerImg .points{
+    position: absolute;
+    top: -7px;
+    left: 0;
+    width: 150px;
+    height: 42px;
+    border: 1px solid orange;
+    border-radius: 0 1.5rem 1.5rem 0;
+    background-color: rgba(0,0,0,.54);
+    line-height: 42px;
+    color: orange;
+}
+.shopping .boardProduct .title{
+    color: rgb(101, 101, 101);
+    font-size: 1.1rem;
+    margin-top: 1.5rem;
+    background-color: #fff;
+}
+.shopping .boardProduct .title::after,
+.shopping .boardProduct .title::before{
+    content: '';
+    position: absolute;
+    width: 27%;
+    height: 1.4px;
+    border-color: rgb(109, 109, 109);
+    border-bottom: 2px solid #e4e7ed;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.shopping .boardProduct .title::after{
+    left: 0;
+}
+.shopping .boardProduct .title::before{
+    right: 0;
+}
+.shopping .boardProduct .listProduct{
+    margin: 5px;
+}
+.shopping .boardProduct .paginationơ{
+    margin: 0.625rem 7px;
+}

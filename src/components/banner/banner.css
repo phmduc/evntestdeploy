@@ -1,0 +1,23 @@
+.banner .banner-item{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    height: 12rem;
+}
+
+.banner .slick-dots{
+    bottom: 0;
+}
+
+.banner .slick-dots li{
+    margin: 0;
+}
+
+.banner .slick-dots li button:before{
+    color: #fff;
+}
+
+.banner .slick-dots li.slick-active button:before{
+    color: #fff;
+    opacity: 1;
+}

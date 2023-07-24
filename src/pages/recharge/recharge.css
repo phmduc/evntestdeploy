@@ -1,0 +1,132 @@
+.recharge {
+  width: 100%;
+  height: 100vh;
+  background: #f3f3f3;
+}
+
+.recharge .icon-left {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.recharge h6 {
+  text-align: center;
+  padding: 1rem 0;
+  background: #fff;
+}
+
+.recharge .main-content .usable{
+    width: 90%;
+    height: 124px;
+    background: linear-gradient(135deg,#00c989,#51e0b3);
+    margin: 0 auto;
+    border-radius: 10px;
+    color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 2px 2px 5px #888;
+}
+
+.recharge .main-content .usable .usable-left{
+    padding: 1rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.recharge .main-content .usable .usable-left span:first-child{
+    display: block;
+    font-size: 17px;
+}
+.recharge .main-content .usable .usable-left span:last-child{
+    display: block;
+    font-size: 23px;
+}
+
+.recharge .main-content .usable .usable-right a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.recharge .main-content .recharge-title{
+    width: 90%;
+    height: 204px;
+    opacity: 1;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px #888;
+    margin: 1rem auto;
+}
+
+.recharge .main-content .recharge-title .name{
+    width: 100%;
+    padding: 0 1rem .5rem;
+    font-size: 17px;
+}
+
+.recharge .main-content .recharge-title .list-recharge{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.recharge .main-content .recharge-title .list-recharge .item{
+    width: 145px;
+    height: 67px;
+    opacity: 1;
+    background: #ecfef3;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00be6e;
+    margin: .5rem;
+}
+
+/* active */
+.recharge .main-content .recharge-title .list-recharge .active{
+    width: 145px;
+    height: 67px;
+    opacity: 1;
+    background: linear-gradient(135deg,#00c989,#51e0b3);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    box-shadow: 2px 2px 5px #888;
+}
+/*  */
+
+.recharge .main-content .recharge-title .list-recharge .item input{
+    border: none;
+    background: none;
+    text-align: center;
+    outline: none;
+    overflow: hidden;
+}
+
+.recharge .main-content .recharge-title .list-recharge .item input::placeholder{
+    font-size: 13px;
+}
+
+.recharge .main-content .link-btn{
+    text-align: center;
+    width: 80%;
+    margin: .8rem auto;
+    border-radius: 30px;
+    background-color: #00c989;
+    box-shadow: 2px 2px 5px #888;
+}
+
+.recharge .main-content .link-btn a{
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    padding: .5rem 0;
+}

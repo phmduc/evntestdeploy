@@ -1,0 +1,85 @@
+/* .accountdetail {
+    width: 100%;
+    height: 100vh;
+} */
+
+.accountdetail h6{
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.accountdetail .icon-left{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.accountdetail .main-content .card-bg{
+    width: 100%;
+    height: 208px;
+    background: linear-gradient(110.59550000000002deg,#45444a,#1b1b20);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.accountdetail .main-content .list-item .card{
+    width: 95%;
+    height: 171px;
+    background: linear-gradient(115.4494deg,#f0c483,#d8a24b);
+    box-shadow: -2px 0 23px 2px #d1a66f;
+    border-radius: 13px;
+    margin: 10px 0;
+    color: #fff;
+    /* margin-bottom: -7rem; */
+}
+
+.accountdetail .main-content .list-item .card .card-info{
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+}
+
+.accountdetail .main-content .list-item .card .card-info .image{
+    width: 8rem;
+    margin-right: .5rem;
+}
+
+.accountdetail .main-content .list-item .card .card-info .image img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.accountdetail .main-content .list-item .card .card-info .info-title span{
+    display: block;
+}
+
+.accountdetail .main-content .list-item{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: -8rem;
+    padding-bottom: 6rem;
+}
+
+.accountdetail .main-content .list-item .item{
+    width: 165px;
+    height: 130px;
+    padding: 1rem;
+    background: linear-gradient(120.3656deg,#ffad12,#ff641f);
+    border-radius: 7px;
+    color: #fff;
+}
+
+.accountdetail .main-content .list-item .item:nth-child(odd){
+    background: linear-gradient(120.3656deg,#95d6fd,#1295e6);
+}
+
+.accountdetail .main-content .list-item .item span{
+    display: block;
+}

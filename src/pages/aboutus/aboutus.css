@@ -1,0 +1,26 @@
+.aboutus h6{
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.aboutus .list-item .item .item-title img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.aboutus .list-item .item{
+    color: black;
+    text-decoration: none;
+    margin-bottom: 1rem;
+}
+
+.aboutus .list-item .item .item-title p {
+    margin-bottom: 0;
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}

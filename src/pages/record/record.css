@@ -1,0 +1,90 @@
+.record .headerRecord{
+    background: rgb(255, 255, 255);
+    position: relative;
+    padding: 0.813rem 1rem;
+}
+.record .headerRecord .iconBack{
+    color: #000000;
+    font-size: 1.563rem;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+}
+.record .headerRecord .title{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #000000;
+}
+.record .recordTabs{
+    background: -webkit-linear-gradient(top,#93bdea,#28cde8);
+}
+.record .nav-tabs{
+    flex-wrap: nowrap;
+    border-bottom: unset;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+}
+.record .nav-tabs .nav-link{
+    border-color: rgb(0, 122, 255);
+    line-height: 20px;
+    padding: 0.5rem 1rem;
+    height: 100%;
+    width: 100%;
+}
+.record .nav-tabs .nav-link.active{
+    color: rgb(255, 255, 255);
+    border-color: rgb(0, 122, 255);
+    background-color: rgb(0, 122, 255);
+}
+.record .nav-tabs .nav-link:hover{
+    border-color: rgb(0, 122, 255);
+}
+.record .nav-tabs .nav-item{
+    width: calc(100%/2);
+}
+.record .nav-tabs .nav-item:first-child .nav-link{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.record .nav-tabs .nav-item:last-child .nav-link{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.record .recordTabs .tab-content{
+    padding: 0.5rem 1rem;
+}
+.record .recordTabs .tab-content .boxRechange .box1,
+.record .recordTabs .tab-content .boxRechange .box2,
+.record .recordTabs .tab-content .boxWithdraw .box1,
+.record .recordTabs .tab-content .boxWithdraw .box2{
+    flex: 1;
+    color: #fff;
+}
+.record .boardFile{
+    background: #fff;
+    width: 100%;
+}
+.record .boardFile .text{
+    border-right: 1px #ddd solid;
+    font-size: 0.938rem;
+    width: 21%;
+}
+.record .boardFile .text:first-child{
+    width: 39%;
+}
+.record .boardFile .text:last-child{
+    border-right: unset;
+}
+.record .boardFile{
+    display: none;
+}
+.record .boardFile.active{
+    display: block;
+}

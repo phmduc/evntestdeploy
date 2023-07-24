@@ -1,0 +1,41 @@
+.notifydetail {
+    margin-bottom: 5rem;
+    background: #F3F3F3;
+  }
+
+.notifydetail h6{
+    text-align: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.notifydetail .icon-left{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.notifydetail .sec-date{
+    padding-bottom: .5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.notifydetail .sec-date p{
+    margin-bottom: .2rem;
+    color: #b5b5b5;
+    font-weight: 600;
+}
+
+.notifydetail .sec-date span{
+    color: #7a7a7a;
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: .5rem;
+}
+
+.notifydetail .content p {
+    margin-top: 1rem;
+    color: black;
+    font-weight: 600;
+    text-align: justify;
+  }

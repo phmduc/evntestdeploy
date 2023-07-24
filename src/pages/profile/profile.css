@@ -1,0 +1,96 @@
+.infoProfile{
+    background-color: rgb(255, 255, 255);
+}
+.infoProfile .title{
+    padding-top: 1.25rem;
+    font-size: 1.125rem;
+    letter-spacing: 1px;
+    color: #000;
+    font-weight: 400;
+    line-height: 40px;
+    padding-bottom: 0.7rem;
+}
+.infoProfile .user{
+    gap: 0.6rem;
+    margin: 1.25rem;
+}
+.infoProfile .user .avatar{
+    width: 122px;
+    height: 32px;
+    object-fit: cover;
+}
+.infoProfile .user .nameUser{}
+.infoProfile .user .nameUser .name{
+    color: rgb(0, 0, 0);
+    font-size: 1.063rem;
+    font-weight: 400;
+}
+.infoProfile .user .nameUser .level{
+    font-size: 0.75rem;
+    background-color: rgb(194, 163, 39);
+    padding: 0px 0.625rem;
+    color: #fff;
+    width: max-content;
+    margin-top: 0.3rem;
+}
+.infoProfile .assets .itemAssets p{
+    margin: 5px 0;
+    font-size: 1.063rem;
+    color: #000;
+}
+.infoProfile .assets .itemAssets > div{
+    font-size: 0.938rem;
+    font-weight: 900;
+    margin: 5px 0;
+}
+.profile .listDetails,
+.profile .listMoney{
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0.5px 5px 5px hsla(0,0%,87.5%,.3);
+    padding: 0.7rem;
+    margin-top: 1rem;
+}
+.profile .listDetails a,
+.profile .listMoney .itemMoney{
+    text-decoration: none;
+}
+.profile .listMoney .itemMoney .bgImg{
+    width: 45px;
+    height: 45px;
+    margin: 0 auto;
+    border-radius: 100%;
+    margin-bottom: 5px;
+}
+.profile .listMoney .itemMoney p{
+    margin: 0;
+    font-size: 0.938rem;
+    font-weight: 400;
+    color: #151a40;
+}
+.profile .listDetails{
+    display: grid;
+    grid-auto-flow: row dense;
+    max-width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 2.5rem;
+}
+.profile .listDetails a .bgIcon{
+    width: 45px;
+    height: 45px;
+    background: rgb(21, 26, 64);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    margin: 0.6rem auto;
+    font-size: 1.5rem;
+}
+.profile .listDetails a p{
+    font-weight: 400;
+    font-size: 0.813rem;
+    color: #333;
+    line-height: 16px;
+}
+

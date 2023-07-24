@@ -1,0 +1,155 @@
+.img-wrap {
+    position: relative;
+    height: auto;
+    overflow: hidden;
+    background-position: 50% 50%;
+    background-size: cover;
+    padding-top: 56.25%;
+}
+.img-wrap img {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    transform: translateZ(0);
+    margin: 0 auto;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    top: 0;
+    position: absolute;
+    object-position: 50% 50%;
+    object-fit: cover;
+}
+.tabHeader{
+    background: rgb(21, 26, 64);
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+.tabHeader .slick-list{
+    padding: 0 !important;
+}
+.tabHeader .slick-track{
+    transform: unset !important;
+}
+.tabHeader .slick-track,
+.tabHeader .slick-initialized .slick-slide{
+    width: max-content !important;
+}
+.tabHeader .slick-current .itemHeader{
+    font-weight: bold;
+}
+.tabHeader .itemHeader{
+    padding: 0.7rem 0.635rem;
+    color: rgb(255, 255, 255);
+    font-size: 0.938rem;
+    position: relative;
+    width: max-content !important;
+}
+.tabHeader .slick-current .itemHeader::before{
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 3px;
+}
+.contentTab{
+    padding: 1rem 0.625rem;
+    background: #F3F3F3;
+    height: 110vh;
+    overflow: auto;
+}
+.contentTab .boxProject{
+    background: #fff;
+    border-bottom: #bcbcbc 1px solid;
+    border-radius: 6px;
+    margin-bottom: 0.938rem !important;
+    padding-bottom: 2rem;
+}
+.contentTab .boxProject .title{
+    font-size: 0.938rem;
+    padding: 0px 7px;
+    padding-top: 1.3rem;
+}
+.contentTab .boxProject .image{
+    padding-top: 47.25%;
+}
+.contentTab .boxProject .image img{
+    object-fit: fill;
+}
+.contentTab .boxProject .span{
+    top: 7px;
+    left: 0;
+}
+.contentTab .boxProject .image .span > div{
+    background: #d81e06;
+    border-radius: 0 4px 4px 0;
+    font-size: 0.625rem;
+    color: #fff;
+    padding: 0 5px;
+    margin-top: 6px;
+}
+.contentTab .boxProject .content{
+    padding: 0.4rem;
+}
+.contentTab .boxProject .content ul{
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+.contentTab .boxProject .content ul span{
+    font-size: 0.938rem;
+    color: red;
+    font-weight: 500;
+}
+.contentTab .boxProject .content ul p{
+    font-size: 0.75rem;
+    margin-bottom: 0;
+}
+.contentTab .boxProject .content .note{
+    font-size: 0.5rem;
+    /* margin: 5px 0px 0px 5px; */
+    color: rgb(216, 30, 6);
+}
+.contentTab .boxProject .content .progressBar{
+    margin-top: 5px;
+    margin-bottom: 0.625rem;
+}
+.contentTab .boxProject .content .progressBar label{
+    font-size: 0.75rem;
+}
+.contentTab .boxProject .content .progressBar .progress{
+    height: 11px;
+}
+.contentTab .boxProject .content .progressBar .progress-bar{
+    background-color: rgb(255, 3, 19);
+    font-size: 0.625rem;
+}
+.contentTab .boxProject .content .btnRegister{
+    width: 100%;
+    color: rgba(0,0,0,.3);
+    background: rgb(240, 240, 240);
+    font-size: 0.875rem;
+    border-radius: 0;
+    padding: 0.25rem;
+}
+.contentTab .boxProject .content .countdown{
+    font-size: 0.813rem;
+    width: 90%;
+    margin: 0.625rem 0;
+}
+.contentTab .boxProject .content .textCountDown{
+    font-weight: bold;
+}
+.contentTab .boxProject .content .countdownJS span{
+    font-weight: bold;
+    background-color: rgb(255, 3, 19);
+    color: rgb(255, 255, 255);
+    padding: 2px 5px;
+}

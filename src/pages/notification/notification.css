@@ -1,0 +1,70 @@
+.notifition {
+  width: 100%;
+  height: 100vh;
+  background: #f3f3f3;
+}
+
+.notifition .icon-left {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.notifition .icon-right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.notifition .icon-right i {
+  font-size: 1.5rem;
+}
+
+.notifition h6 {
+  text-align: center;
+  padding: 1rem 0;
+  background: #f3f3f3;
+}
+
+.notifition .list-item .item .item-title img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.notifition .list-item .item{
+    color: black;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.notifition .list-item .item .item-title p {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.notifition .sec-date{
+    margin-left: 1rem;
+}
+
+.notifition .sec-date span{
+    color: #989898;
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: .5rem;
+}
+
+.notifition .main-content .pages .item-page span{
+    font-size: 14px;
+    opacity: .8;
+    padding: .5rem;
+    margin: .3rem;
+    background: #fff;
+}
+

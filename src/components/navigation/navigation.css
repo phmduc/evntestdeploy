@@ -1,0 +1,34 @@
+.listNavigation{
+    display: grid;
+    grid-auto-flow: row dense;
+    max-width: 100%;
+    grid-template-columns: repeat(4, 1fr);
+    background: #fff;
+    border-style: solid;
+    margin-top: 5px;
+    padding: 0.625rem;
+    gap: 1.3rem 0;
+}
+.listNavigation .item{
+    margin-top: 0.5rem;
+    padding: 0 0.138rem;
+    text-decoration: none;
+}
+.listNavigation .item .bgIcon{
+    width: 40px;
+    height: 40px;
+    background: rgb(21, 26, 64);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    margin: 0 auto;
+    font-size: 1.5rem;
+}
+.listNavigation .item p{
+    margin-bottom: 0;
+    margin-top: 0.413rem;
+    color: #666;
+    line-height: 1.3rem;
+}
