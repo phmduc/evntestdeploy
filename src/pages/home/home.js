@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MainLayout from '~/layouts/MainLayout/MainLayout.js';
+import MainLayout from '~/layouts/MainLayout/MainLayout';
 import Popup from '~/components/popup/popup';
 import Logo from '~/components/logo/logo';
 import Navigation from '~/components/navigation/navigation';
