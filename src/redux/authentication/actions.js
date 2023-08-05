@@ -7,6 +7,15 @@ const actions = {
   LOGOUT_SUCCESS: 'LOGOUT_SUCCESS',
   LOGOUT_ERR: 'LOGOUT_ERR',
 
+  GETINFO_BEGIN: 'GETINFO_BEGIN',
+  GETINFO_SUCCESS: 'GETINFO_SUCCESS',
+  GETINFO_ERR: 'GETINFO_ERR',
+
+  GETPERPJ_BEGIN: 'GETPERPJ_BEGIN',
+  GETPERPJ_SUCCESS: 'GETPERPJ_SUCCESS',
+  GETPERPJ_ERR: 'GETPERPJ_ERR',
+
+
   CLEAR_ERR: 'CLEAR_ERR',
 
 
@@ -53,6 +62,47 @@ const actions = {
   logoutErr: (err) => {
     return {
       type: actions.LOGOUT_ERR,
+      err,
+    };
+  },
+
+  getinfoBegin: () => {
+    return {
+      type: actions.GETINFO_BEGIN,
+    };
+  },
+
+  getinfoSuccess: (data) => {
+    return {
+      type: actions.GETINFO_SUCCESS,
+      data,
+    };
+  },
+
+  getinfoErr: (err) => {
+    return {
+      type: actions.GETINFO_ERR,
+      err,
+    };
+  },
+
+
+  getauthpjBegin: () => {
+    return {
+      type: actions.GETPERPJ_BEGIN,
+    };
+  },
+
+  getauthpjSuccess: (data) => {
+    return {
+      type: actions.GETPERPJ_SUCCESS,
+      data,
+    };
+  },
+
+  getauthpjErr: (err) => {
+    return {
+      type: actions.GETPERPJ_ERR,
       err,
     };
   },

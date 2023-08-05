@@ -30,7 +30,6 @@
     padding: 0 !important;
 }
 .tabHeader .slick-track{
-    transform: unset !important;
 }
 .tabHeader .slick-track,
 .tabHeader .slick-initialized .slick-slide{
@@ -44,7 +43,6 @@
     color: rgb(255, 255, 255);
     font-size: 0.938rem;
     position: relative;
-    width: max-content !important;
 }
 .tabHeader .slick-current .itemHeader::before{
     content: '';
@@ -61,7 +59,6 @@
 .contentTab{
     padding: 1rem 0.625rem;
     background: #F3F3F3;
-    height: 110vh;
     overflow: auto;
 }
 .contentTab .boxProject{
@@ -133,8 +130,24 @@
 }
 .contentTab .boxProject .content .btnRegister{
     width: 100%;
+    color: white;
+    background: rgb(21, 26, 64);
+    font-size: 0.875rem;
+    border-radius: 0;
+    padding: 0.25rem;
+}
+.contentTab .boxProject .content .btnStop{
+    width: 100%;
     color: rgba(0,0,0,.3);
     background: rgb(240, 240, 240);
+    font-size: 0.875rem;
+    border-radius: 0;
+    padding: 0.25rem;
+}
+.contentTab .boxProject .content .btnRegister{
+    width: 100%;
+    color: white;
+    background: rgb(21, 26, 64);
     font-size: 0.875rem;
     border-radius: 0;
     padding: 0.25rem;
@@ -152,4 +165,35 @@
     background-color: rgb(255, 3, 19);
     color: rgb(255, 255, 255);
     padding: 2px 5px;
+}
+
+
+ .ReactModal__Content {
+    height: max-content;
+    top: 50% !important;
+    transform: translate(-50%, -50%);
+    width: 90% !important;
+    left: 50% !important;
+}
+
+.ReactModal__Content h2{
+    font-size: 1.2rem;
+}
+.ReactModal__Content p{
+    margin-bottom: 0;
+}
+.ReactModal__Content input{
+    display: block;
+    margin-bottom: 1rem;
+    padding: .5rem ;
+    width: 100%;
+}
+.ReactModal__Content button{
+    width: 100%;
+    color: white;
+    background: rgb(21, 26, 64);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    border-radius: 0;
+    padding: 0.25rem;
 }

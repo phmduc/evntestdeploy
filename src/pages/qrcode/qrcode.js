@@ -1,11 +1,22 @@
 import React, { Component } from "react";
+import { useEffect } from "react";
 import FooterOnly from "~/layouts/FooterOnly/FooterOnly.js";
 import Tabs from "~/components/tabs/tabs";
 import "~/pages/qrcode/qrcode.css";
 import imgQR from "~/assets/images//tải xuống (2).webp";
+import { useSelector, useDispatch } from "react-redux";
+import { getinfo } from "~/redux/authentication/actionCreator";
 
-class Qrcode extends Component {
-  handleCopyClick = () => {
+function Qrcode() {
+  const { auth } = useSelector((state) => ({
+    auth: state.auth.login,
+  }));
+  const id = sessionStorage.getItem('user_id')
+  const dispatch= useDispatch()
+  useEffect(()=>{
+    dispatch(getinfo(id));
+  },[dispatch])
+  const handleCopyClick = () => {
     const valueToCopy = document.querySelector(
       ".qrcode .contentQR .inviteCode .valueSpan"
     ).textContent;
@@ -30,7 +41,6 @@ class Qrcode extends Component {
       copyNotif.classList.remove("show");
     }, 3000);
   };
-  render() {
     return (
       <FooterOnly>
         <div className="qrcode position-relative">
@@ -50,9 +60,9 @@ class Qrcode extends Component {
                 <span>Mã mời</span>
               </li>
               <li>
-                <span className="valueSpan">123456</span>
+                <span className="valueSpan">{auth ? auth.refcode :''}</span>
               </li>
-              <li onClick={this.handleCopyClick}>
+              <li onClick={handleCopyClick}>
                 <span>Sao Chép</span>
               </li>
             </ul>
@@ -68,6 +78,5 @@ class Qrcode extends Component {
       </FooterOnly>
     );
   }
-}
 
 export default Qrcode;

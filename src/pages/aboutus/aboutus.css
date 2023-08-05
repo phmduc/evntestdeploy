@@ -3,6 +3,9 @@
     padding: 1rem 0;
     border-bottom: 1px solid #e9ecef;
 }
+.aboutus {
+    background-color: white;
+}
 
 .aboutus .list-item .item .item-title img{
     width: 1.5rem;
@@ -11,6 +14,7 @@
 
 .aboutus .list-item .item{
     color: black;
+    padding: .5rem 0;
     text-decoration: none;
     margin-bottom: 1rem;
 }

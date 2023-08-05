@@ -27,7 +27,6 @@ function Authen() {
   const [codes, setCodes] = useState(randomNumber.toString());
   const [codeInput, setCodeInput] = useState('');
 
-  toast("Wow so easy!");
 
   useEffect(()=>{
 

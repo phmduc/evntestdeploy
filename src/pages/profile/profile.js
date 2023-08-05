@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import FooterOnly from "~/layouts/FooterOnly/FooterOnly.js";
 import "~/pages/profile/profile.css";
 import image from "~/assets/images//EVN-logo.9702d7df.webp";
@@ -7,11 +7,22 @@ import image2 from "~/assets/images//tixian.370c1ff2.webp";
 import image3 from "~/assets/images//tải xuống (1).webp";
 import { useDispatch } from 'react-redux';
 import { logOut } from "~/redux/authentication/actionCreator";
+import { useSelector } from "react-redux";
+import { getinfo } from "~/redux/authentication/actionCreator";
 
 function Profile(){
   const phone = sessionStorage.getItem('phone')
 
   const dispatch = useDispatch()
+  const id = sessionStorage.getItem("user_id");
+  const { auth } = useSelector((state) => ({
+    auth: state.auth.login,
+  }));
+  useEffect(()=>{
+    dispatch(getinfo(id));
+  },[dispatch])
+
+
 
   const handleLogOut = (e)=>{
     e.preventDefault()
@@ -34,7 +45,7 @@ function Profile(){
                   <b>{phone}</b>
                 </div>
                 <div className="level">
-                  <span>VIP0</span>
+                  <span>{auth ? auth.rank : ''}</span>
                 </div>
               </div>
             </div>
@@ -42,13 +53,13 @@ function Profile(){
               <div className="itemAssets">
                 <p>Tổng tài sản</p>
                 <div>
-                  <b>₫ 0</b>
+                  <b>₫ {auth ? auth.wallet : ''}</b>
                 </div>
               </div>
               <div className="itemAssets">
                 <p>Số tiền có thể rút</p>
                 <div>
-                  <b>₫ 10.000</b>
+                  <b>₫ {auth ? auth.wallet_can_cash : ''}</b>
                 </div>
               </div>
             </div>
@@ -61,7 +72,7 @@ function Profile(){
                 </div>
                 <p>Nạp tiền</p>
               </a>
-              <a href="profile/Widthdraw" className="itemMoney">
+              <a href="profile/Withdraw" className="itemMoney">
                 <div className="bgImg">
                   <img src={image2} alt="" className="img-fluid" />
                 </div>

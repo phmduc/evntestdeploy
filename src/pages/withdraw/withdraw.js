@@ -39,10 +39,9 @@ class Withdraw extends Component {
 
             <div className="option-form">
               <div className="row">
-                <div className="col-12 p-1 d-flex justify-space-between align-items-center">
+                <div className="col-3 p-1 d-flex justify-space-between align-items-center">
                   <div className="name">Số tiền rút</div>
                 </div>
-                <div className="col-3"></div>
                 <div className="col-9 p-1 d-flex justify-space-between align-items-center">
                   <input className="withdraw"
                     type="text"
