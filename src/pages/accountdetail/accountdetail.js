@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FooterOnly from "~/layouts/FooterOnly/FooterOnly.js";
 import Tabs from "~/components/tabs/tabs";
+import image from "~/assets/images/EVN-logo.9702d7df.webp"
 import "~/pages/accountdetail/accountdetail.css";
 
 class AccountDetail extends Component {
@@ -22,7 +23,7 @@ class AccountDetail extends Component {
               <div className="card">
                 <div className="card-info">
                   <div className="image">
-                    <img src="image/logo.webp" />
+                    <img src={image} />
                   </div>
                   <div className="info-title">
                     <span>Tổng tài sản</span>

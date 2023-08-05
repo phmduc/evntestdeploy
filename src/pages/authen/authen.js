@@ -10,6 +10,8 @@ import { login,register} from "~/redux/authentication/actionCreator";
 import actions from "~/redux/authentication/actions";
 import Captcha from 'react-captcha-code';
 import { ToastContainer, toast } from 'react-toastify';
+import image from "~/assets/images/EVN-logo.9702d7df.webp"
+
 
 function Authen() {
   const dispatch = useDispatch()
@@ -57,7 +59,7 @@ function Authen() {
       <FooterOnly>
         <div className="authen">
           <div className="logo">
-            <img src="image/logo.webp" />
+            <img src={image} />
           </div>
 
           <div className="form">
