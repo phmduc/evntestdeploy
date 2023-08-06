@@ -60,7 +60,7 @@ function Record() {
                 <div className="boxWithdraw d-flex align-items-center">
                   <div className="box1 text-center">
                     <div>
-                      <span>{commands.length}</span>
+                      <span>{commands ? commands.length : '0'}</span>
                     </div>
                     <div>
                       <span>Rút tiền</span>
@@ -68,7 +68,7 @@ function Record() {
                   </div>
                   <div className="box2 text-center">
                     <div>
-                      <span>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(commands.reduce((total, elem)=>{return total + Number(elem.value)},0))}</span>
+                      <span>{commands ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(commands.reduce((total, elem)=>{return total + Number(elem.value)},0)) : '0'}</span>
                     </div>
                     <div>
                       <span>Tích luỹ rút tiền</span>
@@ -115,7 +115,6 @@ function Record() {
             (commands.length > 0)
             ?
             commands.map((elem, index)=>{
-              console.log(elem)
               return(
                 <div className="text-center rowss d-flex align-items-center">
                   <div className="text">
