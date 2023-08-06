@@ -1,6 +1,6 @@
 import actions from './actions';
 
-const { LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_ERR, LOGOUT_BEGIN, LOGOUT_SUCCESS, LOGOUT_ERR, CLEAR_ERR, GETINFO_BEGIN, GETINFO_SUCCESS, GETINFO_ERR, GETPERPJ_BEGIN, GETPERPJ_ERR, GETPERPJ_SUCCESS } = actions;
+const {GETWITHDRAWCOMMAND_READ_BEGIN, GETWITHDRAWCOMMAND_READ_ERR, GETWITHDRAWCOMMAND_READ_SUCCESS, LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_ERR, LOGOUT_BEGIN, LOGOUT_SUCCESS, LOGOUT_ERR, CLEAR_ERR, GETINFO_BEGIN, GETINFO_SUCCESS, GETINFO_ERR, GETPERPJ_BEGIN, GETPERPJ_ERR, GETPERPJ_SUCCESS ,WITHDRAWCOMMAND_READ_BEGIN, WITHDRAWCOMMAND_READ_ERR, WITHDRAWCOMMAND_READ_SUCCESS} = actions;
 
 const initState = {
   loading: false,
@@ -77,12 +77,12 @@ const AuthReducer = (state = initState, action) => {
 };
 
 const initStatePJ = {
-  data: {},
+  data: [],
   loading: false,
   error: null,
 };
 
-const projectauthReducer= (state = initState, action) =>{
+const projectauthReducer= (state = initStatePJ, action) =>{
   const { type, data, err } = action;
   switch (type) {
     case GETPERPJ_BEGIN:
@@ -106,4 +106,54 @@ const projectauthReducer= (state = initState, action) =>{
       return state;
   }
 }
-export {AuthReducer, projectauthReducer};
+
+
+const initStateCommand = {
+  data: [],
+  loading: false,
+  error: null,
+};
+const commandReducer= (state = initStateCommand, action) =>{
+  const { type, data, err } = action;
+  switch (type) {
+    case WITHDRAWCOMMAND_READ_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case WITHDRAWCOMMAND_READ_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+    case WITHDRAWCOMMAND_READ_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
+
+      case GETWITHDRAWCOMMAND_READ_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GETWITHDRAWCOMMAND_READ_SUCCESS:
+      return {
+        ...state,
+        commands: data,
+        loading: false,
+      };
+    case GETWITHDRAWCOMMAND_READ_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
+
+
+export {AuthReducer, projectauthReducer, commandReducer};

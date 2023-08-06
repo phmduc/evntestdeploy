@@ -77,7 +77,13 @@
     width: 21%;
 }
 .record .boardFile .text:first-child{
-    width: 39%;
+    width: 25%;
+}
+.record .boardFile .text:nth-child(2){
+    width: 30%;
+}
+.record .boardFile .text:nth-child(3){
+    width: 45%;
 }
 .record .boardFile .text:last-child{
     border-right: unset;
@@ -87,4 +93,8 @@
 }
 .record .boardFile.active{
     display: block;
+}
+
+.record .boardFile .rowss{
+    padding-bottom: 1rem;
 }

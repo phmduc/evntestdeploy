@@ -15,6 +15,14 @@ const actions = {
   GETPERPJ_SUCCESS: 'GETPERPJ_SUCCESS',
   GETPERPJ_ERR: 'GETPERPJ_ERR',
 
+  WITHDRAWCOMMAND_READ_BEGIN: 'WITHDRAWCOMMAND_READ_BEGIN',
+  WITHDRAWCOMMAND_READ_SUCCESS: 'WITHDRAWCOMMAND_READ_SUCCESS',
+  WITHDRAWCOMMAND_READ_ERR: 'WITHDRAWCOMMAND_READ_ERR',
+
+  GETWITHDRAWCOMMAND_READ_BEGIN: 'GETWITHDRAWCOMMAND_READ_BEGIN',
+  GETWITHDRAWCOMMAND_READ_SUCCESS: 'GETWITHDRAWCOMMAND_READ_SUCCESS',
+  GETWITHDRAWCOMMAND_READ_ERR: 'GETWITHDRAWCOMMAND_READ_ERR',
+
 
   CLEAR_ERR: 'CLEAR_ERR',
 
@@ -103,6 +111,46 @@ const actions = {
   getauthpjErr: (err) => {
     return {
       type: actions.GETPERPJ_ERR,
+      err,
+    };
+  },
+
+  withdrawCommandReadBegin: () => {
+    return {
+      type: actions.WITHDRAWCOMMAND_READ_BEGIN,
+    };
+  },
+
+  withdrawCommandReadSuccess: (data) => {
+    return {
+      type: actions.WITHDRAWCOMMAND_READ_SUCCESS,
+      data,
+    };
+  },
+
+  withdrawCommandReadErr: (err) => {
+    return {
+      type: actions.WITHDRAWCOMMAND_READ_ERR,
+      err,
+    };
+  },
+
+  getwithdrawCommandReadBegin: () => {
+    return {
+      type: actions.GETWITHDRAWCOMMAND_READ_BEGIN,
+    };
+  },
+
+  getwithdrawCommandReadSuccess: (data) => {
+    return {
+      type: actions.GETWITHDRAWCOMMAND_READ_SUCCESS,
+      data,
+    };
+  },
+
+  getwithdrawCommandReadErr: (err) => {
+    return {
+      type: actions.GETWITHDRAWCOMMAND_READ_ERR,
       err,
     };
   },

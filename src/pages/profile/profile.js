@@ -53,13 +53,13 @@ function Profile(){
               <div className="itemAssets">
                 <p>Tổng tài sản</p>
                 <div>
-                  <b>₫ {auth ? auth.wallet : ''}</b>
+                  <b> {auth ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(auth.wallet) : ''}</b>
                 </div>
               </div>
               <div className="itemAssets">
                 <p>Số tiền có thể rút</p>
                 <div>
-                  <b>₫ {auth ? auth.wallet_can_cash : ''}</b>
+                  <b> {auth ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(auth.wallet_can_cash) : ''}</b>
                 </div>
               </div>
             </div>

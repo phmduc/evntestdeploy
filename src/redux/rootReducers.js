@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import {AuthReducer, projectauthReducer} from './authentication/reducers';
+import {AuthReducer, projectauthReducer, commandReducer} from './authentication/reducers';
 import { SingleBlogReducer, blogsReducer } from './blogs/reducers';
 import { projectsReducer } from './projects/reducers';
 
@@ -8,6 +8,7 @@ const rootReducers = combineReducers({
   blogs: blogsReducer,
   pjauth: projectauthReducer,
   blog: SingleBlogReducer,
+  command: commandReducer,
   projects: projectsReducer,
 });
 

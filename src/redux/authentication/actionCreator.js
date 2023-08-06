@@ -1,7 +1,8 @@
 import actions from './actions';
 import { DataService } from '../../config/dataService/dataService';
+import { toast } from 'react-toastify';
  
-const { loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr, getinfoBegin, getinfoErr, getinfoSuccess, getauthpjBegin, getauthpjErr, getauthpjSuccess } = actions;
+const {getwithdrawCommandReadBegin, getwithdrawCommandReadErr, getwithdrawCommandReadSuccess, loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr, getinfoBegin, getinfoErr, getinfoSuccess, getauthpjBegin, getauthpjErr, getauthpjSuccess, withdrawCommandReadBegin, withdrawCommandReadSuccess, withdrawCommandReadErr } = actions;
 
 
 const login = (values, callback) => {
@@ -77,4 +78,31 @@ const getauthpj = (id) => {
     }
   };
 };
-export { login, logOut, register ,getinfo, getauthpj };
+
+const withdrawCommand = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(withdrawCommandReadBegin());
+      const initialState = await DataService.post('/wp-json/dbevn/v1/cash-requests/create', data);
+      dispatch(withdrawCommandReadSuccess(initialState.data));
+      toast.success('Tạo lệnh rút thành công')
+    } catch (err) {
+      dispatch(withdrawCommandReadErr(err.response.data.message));
+      toast.error(err.response.data.message)
+    }
+  };
+};
+
+const withdrawCommandGet = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(getwithdrawCommandReadBegin());
+      const initialState = await DataService.post(`/wp-json/dbevn/v1/cash-requests/user-${id}`);
+      dispatch(getwithdrawCommandReadSuccess(initialState.data));
+    } catch (err) {
+      dispatch(getwithdrawCommandReadErr(err.response.data.message));
+    }
+  };
+};
+
+export { login, logOut, register ,getinfo, getauthpj , withdrawCommand, withdrawCommandGet};

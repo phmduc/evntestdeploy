@@ -1,36 +1,125 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import FooterOnly from "~/layouts/FooterOnly/FooterOnly.js";
 import "~/pages/ourproject/ourproject.css";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
+import { useSelector, useDispatch } from "react-redux";
+import { projectsGetData } from "~/redux/projects/actionCreator";
+import { getauthpj, getinfo } from "~/redux/authentication/actionCreator";
+import numeral from "numeral";
 
-class OurProject extends Component {
-  render() {
-    return (
-      <FooterOnly>
-        <div className="ourproject">
-          <div className="headerOurProject">
-            <a href="# " className="iconBack">
-              <i class="bi bi-chevron-left"></i>
-            </a>
-            <div className="title">Đầu tư của tôi</div>
-          </div>
-          <Tabs
-            defaultActiveKey="tabOne"
-            id="uncontrolled-tab-example"
-            className="mb-3"
-          >
-            <Tab eventKey="tabOne" title="Dự án đầu tư khả quan">
-              Tab content for Home
-            </Tab>
-            <Tab eventKey="tabTwo" title="Dự án đã kết thúc">
-              Tab content for Profile
-            </Tab>
-          </Tabs>
+function OurProject() {
+  const dispatch = useDispatch();
+  const id = sessionStorage.getItem("user_id");
+  const { projects, loading, error } = useSelector((state) => ({
+    projects: state.projects.projects,
+    loading: state.blogs.loading,
+    error: state.blogs.error,
+  }));
+  const { authpj } = useSelector((state) => ({
+    authpj: state.pjauth.pjs,
+  }));
+  console.log(projects)
+  useEffect(() => {
+    dispatch(projectsGetData());
+    dispatch(getauthpj(id));
+    dispatch(getinfo(id));
+  }, [dispatch, id]);
+
+  return (
+    <FooterOnly>
+      <div className="ourproject">
+        <div className="headerOurProject">
+          <a href="# " className="iconBack">
+            <i class="bi bi-chevron-left"></i>
+          </a>
+          <div className="title">Đầu tư của tôi</div>
         </div>
-      </FooterOnly>
-    );
-  }
+        <Tabs
+          defaultActiveKey="tabOne"
+          id="uncontrolled-tab-example"
+          className="mb-3"
+        >
+          <Tab eventKey="tabOne" title="Dự án đầu tư khả quan">
+            <div className="contentTab contentSlider">
+                <div className="itemsProject">
+                  {projects.map((item, index) => {
+                    if(authpj.some(elem => {return elem.product_id == item.id}))
+                        return (
+                          <div key={index} className="boxProject">
+                            <div className="title">{item.title}</div>
+                            {item.thumbnail ? (
+                              <div className="image img-wrap mt-2">
+                                <img
+                                  src={item.thumbnail}
+                                  alt=""
+                                  className="img-fluid"
+                                />
+                              </div>
+                            ) : (
+                              " "
+                            )}
+                            {/* <div className="span position-absolute">
+                        <div>
+                          <span>Sản phẩm phúc lợi</span>
+                        </div>
+                        <div>
+                          <span>Rất khuyến khích</span>
+                        </div>
+                      </div> */}
+                            <div className="content">
+                              <ul>
+                                <li className="text-center">
+                                  <span>
+                                    {item.dbevn_product_time_invest}phút
+                                  </span>
+                                  <p>Thời gian đầu tư</p>
+                                </li>
+                                <li className="text-center">
+                                  <span>{item.dbevn_product_percent}%</span>
+                                  <p>Tỷ lệ lợi nhuận</p>
+                                </li>
+                                <li className="text-center">
+                                  <span>
+                                    {numeral(
+                                      (item.dbevn_product_min_invest *
+                                        item.dbevn_product_percent) /
+                                        100
+                                    )
+                                      .format("0,0")
+                                      .replaceAll(",", ".")}
+                                  </span>
+                                  <p>Tổng thu nhập</p>
+                                </li>
+                                <li className="text-center">
+                                  <span>
+                                    {numeral(item.dbevn_product_min_invest)
+                                      .format("0,0")
+                                      .replaceAll(",", ".")}
+                                  </span>
+                                  <p>Số tiền mua tối thiểu</p>
+                                </li>
+                              </ul>
+                              <span className="note">
+                                Lợi nhuận được tính theo phút , vốn và lợi nhuận
+                                sẽ được hoàn trả khi kết thúc phiên
+                              </span>
+                              <div className="progressBar">
+                                <label>tiến độ dự án:</label>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                          
+                  })}
+                </div>
+            </div>
+          </Tab>
+          <Tab eventKey="tabTwo" title="Dự án đã kết thúc"></Tab>
+        </Tabs>
+      </div>
+    </FooterOnly>
+  );
 }
 
 export default OurProject;

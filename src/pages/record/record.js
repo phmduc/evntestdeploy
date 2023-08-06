@@ -1,22 +1,25 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import FooterOnly from "~/layouts/FooterOnly/FooterOnly.js";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import "~/pages/record/record.css";
+import { withdrawCommandGet } from "~/redux/authentication/actionCreator";
+import { useDispatch, useSelector } from "react-redux";
 
-class Record extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeTab: "recharge",
-    };
-  }
-
-  handleTabSelect = (tab) => {
-    this.setState({ activeTab: tab });
+function Record() {
+  const [activeTab, setActiveTab] = useState('recharge')
+  const id = sessionStorage.getItem('user_id')
+  const { commands } = useSelector((state) => ({
+    commands: state.command.commands,
+  }));
+  console.log(commands)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    dispatch(withdrawCommandGet(id));
+  },[dispatch])
+  const handleTabSelect = (e) => {
+    setActiveTab(e);
   };
-  render() {
-    const { activeTab } = this.state;
     return (
       <FooterOnly>
         <div className="record">
@@ -29,7 +32,7 @@ class Record extends Component {
           <div className="recordTabs">
             <Tabs
               activeKey={activeTab}
-              onSelect={this.handleTabSelect}
+              onSelect={(e)=>{handleTabSelect(e)}}
               id="uncontrolled-tab-example"
               className="mb-0"
             >
@@ -57,7 +60,7 @@ class Record extends Component {
                 <div className="boxWithdraw d-flex align-items-center">
                   <div className="box1 text-center">
                     <div>
-                      <span>0</span>
+                      <span>{commands.length}</span>
                     </div>
                     <div>
                       <span>Rút tiền</span>
@@ -65,7 +68,7 @@ class Record extends Component {
                   </div>
                   <div className="box2 text-center">
                     <div>
-                      <span>0</span>
+                      <span>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(commands.reduce((total, elem)=>{return total + Number(elem.value)},0))}</span>
                     </div>
                     <div>
                       <span>Tích luỹ rút tiền</span>
@@ -80,7 +83,7 @@ class Record extends Component {
               activeTab === "recharge" ? "active" : ""
             }`}
           >
-            <div className="text-center d-flex align-items-center">
+            <div className="text-center rowss d-flex align-items-center">
               <div className="text">
                 <span>Mã giao dịch</span>
               </div>
@@ -90,9 +93,6 @@ class Record extends Component {
               <div className="text">
                 <span>Tình trạng nạp tiền</span>
               </div>
-              <div className="text">
-                <span>Xem thêm</span>
-              </div>
             </div>
           </div>
           <div
@@ -100,7 +100,7 @@ class Record extends Component {
               activeTab === "withdraw" ? "active" : ""
             }`}
           >
-            <div className="text-center d-flex align-items-center">
+            <div className="text-center rowss d-flex align-items-center">
               <div className="text">
                 <span>Mã giao dịch</span>
               </div>
@@ -110,16 +110,34 @@ class Record extends Component {
               <div className="text">
                 <span>Tình trạng rút tiền</span>
               </div>
-              <div className="text">
-                <span>Xem thêm</span>
-              </div>
             </div>{" "}
+            {
+            (commands.length > 0)
+            ?
+            commands.map((elem, index)=>{
+              console.log(elem)
+              return(
+                <div className="text-center rowss d-flex align-items-center">
+                  <div className="text">
+                    <span>{elem.id}</span>
+                  </div>
+                  <div className="text">
+                    <span>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(elem.value)}</span>
+                  </div>
+                  <div className="text">
+                    <span>{elem.status}</span>
+                  </div>
+                </div>
+              )
+            })
+            :
+            ''}
+            
           </div>
           <div className="pagination"></div>
         </div>
       </FooterOnly>
     );
-  }
 }
 
 export default Record;
