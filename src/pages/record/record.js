@@ -112,7 +112,7 @@ function Record() {
               </div>
             </div>{" "}
             {
-            (commands.length > 0)
+            ( commands && commands.length > 0)
             ?
             commands.map((elem, index)=>{
               return(
