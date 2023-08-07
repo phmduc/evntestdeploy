@@ -52,9 +52,9 @@ function Tabs() {
     const sessionStart = moment(startTime, "HH:mm");
     let sessionEnd;
     if (startTime === "9h") {
-      sessionEnd = sessionStart.clone().add(8, "hours"); // 9h đến 17h30
+      sessionEnd = sessionStart.clone().add(8, "hours").add(30, "minutes"); // 9h đến 17h30
     } else if (startTime === "17h30") {
-      sessionEnd = sessionStart.clone().add(4, "hours").add(30, "minutes"); // 17h30 đến 21h
+      sessionEnd = sessionStart.clone().add(3, "hours").add(30, "minutes"); // 17h30 đến 21h
     } else if (startTime === "21h") {
       sessionEnd = sessionStart.clone().add(12, "hours"); // 21h đến 9h
     }
