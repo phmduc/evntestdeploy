@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import {AuthReducer, projectauthReducer, commandReducer} from './authentication/reducers';
-import { SingleBlogReducer, blogsReducer } from './blogs/reducers';
+import { SingleBlogReducer, blogsReducer, categoryReducer } from './blogs/reducers';
 import { projectsReducer } from './projects/reducers';
 
 const rootReducers = combineReducers({
@@ -10,6 +10,8 @@ const rootReducers = combineReducers({
   blog: SingleBlogReducer,
   command: commandReducer,
   projects: projectsReducer,
+  category: categoryReducer,
+
 });
 
 export default rootReducers;

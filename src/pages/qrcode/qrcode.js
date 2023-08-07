@@ -6,11 +6,19 @@ import "~/pages/qrcode/qrcode.css";
 import imgQR from "~/assets/images//tải xuống (2).webp";
 import { useSelector, useDispatch } from "react-redux";
 import { getinfo } from "~/redux/authentication/actionCreator";
+import { useNavigate } from "react-router-dom";
+
 
 function Qrcode() {
   const { auth } = useSelector((state) => ({
     auth: state.auth.login,
   }));
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const id = sessionStorage.getItem('user_id')
   const dispatch= useDispatch()
   useEffect(()=>{
@@ -45,7 +53,7 @@ function Qrcode() {
       <FooterOnly>
         <div className="qrcode position-relative">
           <div className="headerQR">
-            <a href="# " className="iconBack">
+            <a href="# " onClick={goBack} className="iconBack">
               <i class="bi bi-chevron-left"></i>
             </a>
             <div className="title">Mời bạn bè</div>

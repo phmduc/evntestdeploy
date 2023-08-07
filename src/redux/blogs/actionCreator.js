@@ -21,7 +21,7 @@ const fetchData = async () => {
 
 fetchData();
 
-const {starUpdateBegin, starUpdateErr, starUpdateSuccess, blogsReadBegin, blogsReadSuccess, blogsReadErr, singleBlogBegin, singleBlogErr, singleBlogSuccess ,eventCreateBegin ,eventCreateErr ,eventCreateSuccess, startDeleteBegin, startDeleteSuccess, startDeleteErr } = actions;
+const {categoryBlogBegin, categoryBlogErr, categoryBlogSuccess, starUpdateBegin, starUpdateErr, starUpdateSuccess, blogsReadBegin, blogsReadSuccess, blogsReadErr, singleBlogBegin, singleBlogErr, singleBlogSuccess ,eventCreateBegin ,eventCreateErr ,eventCreateSuccess, startDeleteBegin, startDeleteSuccess, startDeleteErr } = actions;
 
 const blogsGetData = () => {
   return async (dispatch) => {
@@ -89,4 +89,15 @@ const blogsUpdateData = (id, values, callback) => {
   };
 };
 
-export { blogsGetData, filterSinglePage, blogsCreateData, blogsDeleteData, blogsUpdateData };
+const categoriesGetData = () =>{
+  return async (dispatch) => {
+    try {
+      dispatch(categoryBlogBegin());
+      const initialState = await  DataService.get('/wp-json/wp/v2/categories');
+      dispatch(categoryBlogSuccess(initialState.data));
+    } catch (err) {
+      dispatch(categoryBlogErr(err));
+    }
+  };
+}
+export { blogsGetData, filterSinglePage, blogsCreateData, blogsDeleteData, blogsUpdateData, categoriesGetData };

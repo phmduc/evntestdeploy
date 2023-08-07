@@ -80,9 +80,9 @@ function App() {
           { isLoggedIn ? '' : <Route path='/authen' element={<Authen />} /> }
           
           <Route path='/blogs' element={<Blogs />} />
-          <Route path='/blogdetail' element={<Blogdetail />} />
+          <Route path='/blogdetail/:id' element={<Blogdetail />} />
           <Route path='/notification' element={<Notification />} />
-          <Route path='/notifydetail' element={<NotifyDetail />} />
+          <Route path='/notifydetail/:id' element={<NotifyDetail />} />
         </Routes>
       </Router>
     </Provider>

@@ -11,11 +11,13 @@
 
 .notifydetail .icon-left{
     position: absolute;
+    cursor: pointer;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .notifydetail .sec-date{
+    padding: 0 .5rem;
     padding-bottom: .5rem;
     border-bottom: 1px solid #e9ecef;
 }
@@ -33,7 +35,10 @@
     margin-right: .5rem;
 }
 
-.notifydetail .content p {
+.notifydetail .content{
+    padding: 0 .5rem;
+}
+.notifydetail .content * {
     margin-top: 1rem;
     color: black;
     font-weight: 600;

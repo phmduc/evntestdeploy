@@ -7,9 +7,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { projectsGetData } from "~/redux/projects/actionCreator";
 import { getauthpj, getinfo } from "~/redux/authentication/actionCreator";
 import numeral from "numeral";
+import { useNavigate } from "react-router-dom";
 
 function OurProject() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
+
   const id = sessionStorage.getItem("user_id");
   const { projects, loading, error } = useSelector((state) => ({
     projects: state.projects.projects,
@@ -30,7 +37,7 @@ function OurProject() {
     <FooterOnly>
       <div className="ourproject">
         <div className="headerOurProject">
-          <a href="# " className="iconBack">
+          <a href="# " onClick={goBack} className="iconBack">
             <i class="bi bi-chevron-left"></i>
           </a>
           <div className="title">Đầu tư của tôi</div>
@@ -42,9 +49,10 @@ function OurProject() {
         >
           <Tab eventKey="tabOne" title="Dự án đầu tư khả quan">
             <div className="contentTab contentSlider">
+              {(projects && projects.length>0)?
                 <div className="itemsProject">
                   {projects.map((item, index) => {
-                    if(authpj.some(elem => {return elem.product_id == item.id}))
+                    if( authpj && authpj.some(elem => {return elem.product_id == item.id}))
                         return (
                           <div key={index} className="boxProject">
                             <div className="title">{item.title}</div>
@@ -113,6 +121,8 @@ function OurProject() {
                           
                   })}
                 </div>
+                :''
+              }
             </div>
           </Tab>
           <Tab eventKey="tabTwo" title="Dự án đã kết thúc"></Tab>

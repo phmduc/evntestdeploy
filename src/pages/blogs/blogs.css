@@ -6,7 +6,12 @@
     padding: 1rem 0;
     margin-bottom: 0;
 }
-
+.blogs .icon-left{
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
+}
 .blogs .list-item .item{
     color: black;
     text-decoration: none;

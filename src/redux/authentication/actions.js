@@ -23,6 +23,10 @@ const actions = {
   GETWITHDRAWCOMMAND_READ_SUCCESS: 'GETWITHDRAWCOMMAND_READ_SUCCESS',
   GETWITHDRAWCOMMAND_READ_ERR: 'GETWITHDRAWCOMMAND_READ_ERR',
 
+  ADDBANK_READ_BEGIN: 'ADDBANK_READ_BEGIN',
+  ADDBANK_READ_SUCCESS: 'ADDBANK_READ_SUCCESS',
+  ADDBANK_READ_ERR: 'ADDBANK_READ_ERR',
+
 
   CLEAR_ERR: 'CLEAR_ERR',
 
@@ -151,6 +155,26 @@ const actions = {
   getwithdrawCommandReadErr: (err) => {
     return {
       type: actions.GETWITHDRAWCOMMAND_READ_ERR,
+      err,
+    };
+  },
+
+
+  addBankReadBegin: () => {
+    return {
+      type: actions.ADDBANK_READ_BEGIN,
+    };
+  },
+
+  addBankReadSuccess: (data) => {
+    return {
+      type: actions.ADDBANK_READ_SUCCESS,
+    };
+  },
+
+  addBankReadErr: (err) => {
+    return {
+      type: actions.ADDBANK_READ_ERR,
       err,
     };
   },

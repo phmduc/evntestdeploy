@@ -1,6 +1,6 @@
 import actions from './actions';
 
-const {GETWITHDRAWCOMMAND_READ_BEGIN, GETWITHDRAWCOMMAND_READ_ERR, GETWITHDRAWCOMMAND_READ_SUCCESS, LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_ERR, LOGOUT_BEGIN, LOGOUT_SUCCESS, LOGOUT_ERR, CLEAR_ERR, GETINFO_BEGIN, GETINFO_SUCCESS, GETINFO_ERR, GETPERPJ_BEGIN, GETPERPJ_ERR, GETPERPJ_SUCCESS ,WITHDRAWCOMMAND_READ_BEGIN, WITHDRAWCOMMAND_READ_ERR, WITHDRAWCOMMAND_READ_SUCCESS} = actions;
+const {ADDBANK_READ_BEGIN, ADDBANK_READ_SUCCESS, ADDBANK_READ_ERR,GETWITHDRAWCOMMAND_READ_BEGIN, GETWITHDRAWCOMMAND_READ_ERR, GETWITHDRAWCOMMAND_READ_SUCCESS, LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_ERR, LOGOUT_BEGIN, LOGOUT_SUCCESS, LOGOUT_ERR, CLEAR_ERR, GETINFO_BEGIN, GETINFO_SUCCESS, GETINFO_ERR, GETPERPJ_BEGIN, GETPERPJ_ERR, GETPERPJ_SUCCESS ,WITHDRAWCOMMAND_READ_BEGIN, WITHDRAWCOMMAND_READ_ERR, WITHDRAWCOMMAND_READ_SUCCESS} = actions;
 
 const initState = {
   loading: false,
@@ -48,6 +48,22 @@ const AuthReducer = (state = initState, action) => {
         error: err,
         loading: false,
       };
+      case ADDBANK_READ_BEGIN:
+        return {
+          ...state,
+          loading: true,
+        };
+      case ADDBANK_READ_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+        };
+      case ADDBANK_READ_ERR:
+        return {
+          ...state,
+          error: err,
+          loading: false,
+        };
     case CLEAR_ERR:
       return {
         ...state,

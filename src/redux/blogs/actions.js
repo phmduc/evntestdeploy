@@ -19,6 +19,10 @@ const actions = {
   SINGLE_BLOG_SUCCESS: 'SINGLE_BLOG_SUCCESS',
   SINGLE_BLOG_ERR: 'SINGLE_BLOG_ERR',
 
+  CATEGORY_BLOG_BEGIN: 'CATEGORY_BLOG_BEGIN',
+  CATEGORY_BLOG_SUCCESS: 'CATEGORY_BLOG_SUCCESS',
+  CATEGORY_BLOG_ERR: 'CATEGORY_BLOG_ERR',
+
   starUpdateBegin: () => {
     return {
       type: actions.BLOGS_UPDATE_BEGIN,
@@ -115,6 +119,25 @@ const actions = {
   singleBlogErr: (err) => {
     return {
       type: actions.SINGLE_BLOG_ERR,
+      err,
+    };
+  },
+  categoryBlogBegin: () => {
+    return {
+      type: actions.CATEGORY_BLOG_BEGIN,
+    };
+  },
+
+  categoryBlogSuccess: (data) => {
+    return {
+      type: actions.CATEGORY_BLOG_SUCCESS,
+      data,
+    };
+  },
+
+  categoryBlogErr: (err) => {
+    return {
+      type: actions.CATEGORY_BLOG_ERR,
       err,
     };
   },

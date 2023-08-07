@@ -1,6 +1,6 @@
 import actions from './actions';
 
-const {BLOGS_UPDATE_BEGIN, BLOGS_UPDATE_ERR, BLOGS_UPDATE_SUCCESS, BLOGS_READ_BEGIN, BLOGS_READ_SUCCESS, BLOGS_READ_ERR, SINGLE_BLOG_BEGIN, SINGLE_BLOG_SUCCESS, SINGLE_BLOG_ERR, BLOGS_CREATE_BEGIN, BLOGS_CREATE_ERR, BLOGS_CREATE_SUCCESS, BLOGS_DELETE_BEGIN, BLOGS_DELETE_ERR, BLOGS_DELETE_SUCCESS } = actions;
+const {CATEGORY_BLOG_BEGIN,CATEGORY_BLOG_ERR, CATEGORY_BLOG_SUCCESS, BLOGS_UPDATE_BEGIN, BLOGS_UPDATE_ERR, BLOGS_UPDATE_SUCCESS, BLOGS_READ_BEGIN, BLOGS_READ_SUCCESS, BLOGS_READ_ERR, SINGLE_BLOG_BEGIN, SINGLE_BLOG_SUCCESS, SINGLE_BLOG_ERR, BLOGS_CREATE_BEGIN, BLOGS_CREATE_ERR, BLOGS_CREATE_SUCCESS, BLOGS_DELETE_BEGIN, BLOGS_DELETE_ERR, BLOGS_DELETE_SUCCESS } = actions;
 
 const initialState = {
   blogs: [], // Thay `events` bằng key tương ứng với trạng thái bạn muốn lưu trữ dữ liệu
@@ -115,4 +115,35 @@ const SingleBlogReducer = (state = initialStateSingle, action) => {
   }
 };
 
-export { SingleBlogReducer, blogsReducer };
+
+const initialStateCategory = {
+  category: [],
+  loading: false,
+  error: null,
+};
+
+const categoryReducer = (state = initialStateCategory, action) => {
+  const { type, data, err } = action;
+  switch (type) {
+    case CATEGORY_BLOG_BEGIN:
+      return {
+        ...initialStateCategory,
+        loading: true,
+      };
+    case CATEGORY_BLOG_SUCCESS:
+      return {
+        ...initialStateCategory,
+        category: data,
+        loading: false,
+      };
+    case CATEGORY_BLOG_ERR:
+      return {
+        ...initialStateCategory,
+        error: err,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
+export { SingleBlogReducer, blogsReducer, categoryReducer  };

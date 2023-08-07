@@ -61,10 +61,28 @@ function Tabs() {
     return now.isBetween(sessionStart, sessionEnd);
   };
 
+  const sortedItems = projects.sort((a, b) => {
+    if (
+      isCurrentSession(a.nhom_thoi_gian[0]) &&
+      !isCurrentSession(b.nhom_thoi_gian[0])
+    ) {
+      return -1;
+    }
+    if (
+      !isCurrentSession(a.nhom_thoi_gian[0]) &&
+      isCurrentSession(b.nhom_thoi_gian[0])
+    ) {
+      return 1;
+    }
+    return 0;
+  });
+
   const isWithinOpeningTime = (item) => {
     const currentTime = moment();
-    const sessionStart = moment(item.nhom_thoi_gian[0], 'HH:mm');
-    const openingEnd = sessionStart.clone().add(Number(item.dbevn_product_time_invest), 'minutes');
+    const sessionStart = moment(item.nhom_thoi_gian[0], "HH:mm");
+    const openingEnd = sessionStart
+      .clone()
+      .add(Number(item.dbevn_product_time_invest), "minutes");
     return currentTime.isBetween(sessionStart, openingEnd);
   };
 
@@ -110,22 +128,21 @@ function Tabs() {
           <div className="itemsProject">
             {projects.map((item, index) => {
               if (item.nhom_sp.length < 1) {
-                if (isCurrentSession(item.nhom_thoi_gian[0]))
-                  return (
-                    <div key={index} className="boxProject">
-                      <div className="title">{item.title}</div>
-                      {item.thumbnail ? (
-                        <div className="image img-wrap mt-2">
-                          <img
-                            src={item.thumbnail}
-                            alt=""
-                            className="img-fluid"
-                          />
-                        </div>
-                      ) : (
-                        " "
-                      )}
-                      {/* <div className="span position-absolute">
+                return (
+                  <div key={index} className="boxProject">
+                    <div className="title">{item.title}</div>
+                    {item.thumbnail ? (
+                      <div className="image img-wrap mt-2">
+                        <img
+                          src={item.thumbnail}
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                    ) : (
+                      " "
+                    )}
+                    {/* <div className="span position-absolute">
                         <div>
                           <span>Sản phẩm phúc lợi</span>
                         </div>
@@ -133,78 +150,75 @@ function Tabs() {
                           <span>Rất khuyến khích</span>
                         </div>
                       </div> */}
-                      <div className="content">
-                        <ul>
-                          <li className="text-center">
-                            <span>{item.dbevn_product_time_invest}phút</span>
-                            <p>Thời gian đầu tư</p>
-                          </li>
-                          <li className="text-center">
-                            <span>{item.dbevn_product_percent}%</span>
-                            <p>Tỷ lệ lợi nhuận</p>
-                          </li>
-                          <li className="text-center">
-                            <span>
-                              {numeral(
-                                (item.dbevn_product_min_invest *
-                                  item.dbevn_product_percent) /
-                                  100
-                              )
-                                .format("0,0")
-                                .replaceAll(",", ".")}
-                            </span>
-                            <p>Tổng thu nhập</p>
-                          </li>
-                          <li className="text-center">
-                            <span>
-                              {numeral(item.dbevn_product_min_invest)
-                                .format("0,0")
-                                .replaceAll(",", ".")}
-                            </span>
-                            <p>Số tiền mua tối thiểu</p>
-                          </li>
-                        </ul>
-                        <span className="note">
-                          Lợi nhuận được tính theo phút , vốn và lợi nhuận sẽ
-                          được hoàn trả khi kết thúc phiên
-                        </span>
-                        <div className="progressBar">
-                          <label>tiến độ dự án:</label>
-                        </div>
-                        
-                        {
-                          (id && authpj) ? (isWithinOpeningTime(item)) ? (
-                            authpj.some((elem) => elem.product_id == item.id) ? (
-                              <button
-                                className="btn btnStop"
-                                disabled
-                              >
-                                Đã đầu tư
-                              </button>
-                            ) : (
-                              <button
-                                className="btn btnRegister"
-                                onClick={() => setSelectedProduct(item)}
-                              >
-                                Đăng ký
-                              </button>
-                            ) 
-                          ) : <button
-                          className="btn btnStop"
-                          disabled
-                        >
-                          Ngừng đăng ký
-                        </button> : (
-                            <a href="/authen" className="btn btnRegister">
-                              Đăng nhập để giao dịch
-                            </a>
-                          )
-                        }
+                    <div className="content">
+                      <ul>
+                        <li className="text-center">
+                          <span>{item.dbevn_product_time_invest}phút</span>
+                          <p>Thời gian đầu tư</p>
+                        </li>
+                        <li className="text-center">
+                          <span>{item.dbevn_product_percent}%</span>
+                          <p>Tỷ lệ lợi nhuận</p>
+                        </li>
+                        <li className="text-center">
+                          <span>
+                            {numeral(
+                              (item.dbevn_product_min_invest *
+                                item.dbevn_product_percent) /
+                                100
+                            )
+                              .format("0,0")
+                              .replaceAll(",", ".")}
+                          </span>
+                          <p>Tổng thu nhập</p>
+                        </li>
+                        <li className="text-center">
+                          <span>
+                            {numeral(item.dbevn_product_min_invest)
+                              .format("0,0")
+                              .replaceAll(",", ".")}
+                          </span>
+                          <p>Số tiền mua tối thiểu</p>
+                        </li>
+                      </ul>
+                      <span className="note">
+                        Lợi nhuận được tính theo phút , vốn và lợi nhuận sẽ được
+                        hoàn trả khi kết thúc phiên
+                      </span>
+                      <div className="progressBar">
+                        <label>tiến độ dự án:</label>
+                      </div>
 
-                        <div className="countdown d-flex align-items-center justify-content-center">
-                          <span className="textCountDown">Mua đếm ngược: </span>
-                          <div className="countdownJS">
-                            <span id="demo">
+                      {id && authpj ? (
+                        isWithinOpeningTime(item) ? (
+                          authpj.some((elem) => elem.product_id == item.id) ? (
+                            <button className="btn btnStop" disabled>
+                              Đã đầu tư
+                            </button>
+                          ) : (
+                            <button
+                              className="btn btnRegister"
+                              onClick={() => setSelectedProduct(item)}
+                            >
+                              Đăng ký
+                            </button>
+                          )
+                        ) : (
+                          <button className="btn btnStop" disabled>
+                            Ngừng đăng ký
+                          </button>
+                        )
+                      ) : (
+                        <a href="/authen" className="btn btnRegister">
+                          Đăng nhập để giao dịch
+                        </a>
+                      )}
+
+                      <div className="countdown d-flex align-items-center justify-content-center">
+                        <span className="textCountDown">Mua đếm ngược: </span>
+                        <div className="countdownJS">
+                          <span id="demo">
+                            {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                               <Countdown
                                 nextSessionTime={
                                   item.nhom_thoi_gian[0] == "21h"
@@ -214,12 +228,15 @@ function Tabs() {
                                     : "17h30"
                                 }
                               />
-                            </span>
-                          </div>
+                            ) : (
+                              "Chưa đến phiên"
+                            )}
+                          </span>
                         </div>
                       </div>
                     </div>
-                  );
+                  </div>
+                );
               }
             })}
           </div>
@@ -230,22 +247,21 @@ function Tabs() {
                   return item == "Sản phẩm phúc lợi";
                 })
               ) {
-                if (isCurrentSession(item.nhom_thoi_gian[0]))
-                  return (
-                    <div key={index} className="boxProject">
-                      <div className="title">{item.title}</div>
-                      {item.thumbnail ? (
-                        <div className="image img-wrap mt-2">
-                          <img
-                            src={item.thumbnail}
-                            alt=""
-                            className="img-fluid"
-                          />
-                        </div>
-                      ) : (
-                        " "
-                      )}
-                      {/* <div className="span position-absolute">
+                return (
+                  <div key={index} className="boxProject">
+                    <div className="title">{item.title}</div>
+                    {item.thumbnail ? (
+                      <div className="image img-wrap mt-2">
+                        <img
+                          src={item.thumbnail}
+                          alt=""
+                          className="img-fluid"
+                        />
+                      </div>
+                    ) : (
+                      " "
+                    )}
+                    {/* <div className="span position-absolute">
                       <div>
                         <span>Sản phẩm phúc lợi</span>
                       </div>
@@ -253,85 +269,93 @@ function Tabs() {
                         <span>Rất khuyến khích</span>
                       </div>
                     </div> */}
-                      <div className="content">
-                        <ul>
-                          <li className="text-center">
-                            <span>{item.dbevn_product_time_invest}phút</span>
-                            <p>Thời gian đầu tư</p>
-                          </li>
-                          <li className="text-center">
-                            <span>{item.dbevn_product_percent}%</span>
-                            <p>Tỷ lệ lợi nhuận</p>
-                          </li>
-                          <li className="text-center">
-                            <span>
-                              {numeral(
-                                (item.dbevn_product_min_invest *
-                                  item.dbevn_product_percent) /
-                                  100
-                              )
-                                .format("0,0")
-                                .replaceAll(",", ".")}
-                            </span>
-                            <p>Tổng thu nhập</p>
-                          </li>
-                          <li className="text-center">
-                            <span>
-                              {numeral(item.dbevn_product_min_invest)
-                                .format("0,0")
-                                .replaceAll(",", ".")}
-                            </span>
-                            <p>Số tiền mua tối thiểu</p>
-                          </li>
-                        </ul>
-                        <span className="note">
-                          Lợi nhuận được tính theo phút , vốn và lợi nhuận sẽ
-                          được hoàn trả khi kết thúc phiên
-                        </span>
-                        <div className="progressBar">
-                          <label>tiến độ dự án:</label>
-                        </div>
-                        {
-                          id ? (
-                            authpj.some((elem) => elem.product_id !== item.id) ? (
-                              <button
-                                className="btn btnRegister"
-                                onClick={() => setSelectedProduct(item)}
-                              >
-                                Đăng ký
-                              </button>
-                            ) : (
-                              <button
-                                className="btn btnStop"
-                                onClick={() => setSelectedProduct(item)}
-                                disabled
-                              >
-                                Đã đầu tư
-                              </button>
+                    <div className="content">
+                      <ul>
+                        <li className="text-center">
+                          <span>{item.dbevn_product_time_invest}phút</span>
+                          <p>Thời gian đầu tư</p>
+                        </li>
+                        <li className="text-center">
+                          <span>{item.dbevn_product_percent}%</span>
+                          <p>Tỷ lệ lợi nhuận</p>
+                        </li>
+                        <li className="text-center">
+                          <span>
+                            {numeral(
+                              (item.dbevn_product_min_invest *
+                                item.dbevn_product_percent) /
+                                100
                             )
+                              .format("0,0")
+                              .replaceAll(",", ".")}
+                          </span>
+                          <p>Tổng thu nhập</p>
+                        </li>
+                        <li className="text-center">
+                          <span>
+                            {numeral(item.dbevn_product_min_invest)
+                              .format("0,0")
+                              .replaceAll(",", ".")}
+                          </span>
+                          <p>Số tiền mua tối thiểu</p>
+                        </li>
+                      </ul>
+                      <span className="note">
+                        Lợi nhuận được tính theo phút , vốn và lợi nhuận sẽ được
+                        hoàn trả khi kết thúc phiên
+                      </span>
+                      <div className="progressBar">
+                        <label>tiến độ dự án:</label>
+                      </div>
+
+                      {id && authpj ? (
+                        isWithinOpeningTime(item) ? (
+                          authpj.some((elem) => elem.product_id == item.id) ? (
+                            <button className="btn btnStop" disabled>
+                              Đã đầu tư
+                            </button>
                           ) : (
-                            <a href="/authen" className="btn btnRegister">
-                              Đăng nhập để giao dịch
-                            </a>
+                            <button
+                              className="btn btnRegister"
+                              onClick={() => setSelectedProduct(item)}
+                            >
+                              Đăng ký
+                            </button>
                           )
-                        }
-                        <div className="countdown d-flex align-items-center justify-content-center">
-                          <span className="textCountDown">Mua đếm ngược: </span>
+                        ) : (
+                          <button className="btn btnStop" disabled>
+                            Ngừng đăng ký
+                          </button>
+                        )
+                      ) : (
+                        <a href="/authen" className="btn btnRegister">
+                          Đăng nhập để giao dịch
+                        </a>
+                      )}
+
+                      <div className="countdown d-flex align-items-center justify-content-center">
+                        <span className="textCountDown">Mua đếm ngược: </span>
+                        <div className="countdownJS">
                           <span id="demo">
-                            <Countdown
-                              nextSessionTime={
-                                item.nhom_thoi_gian[0] == "21h"
-                                  ? "9h"
-                                  : item.nhom_thoi_gian[0] === "17h30"
-                                  ? "21h"
-                                  : "17h30"
-                              }
-                            />
+                            {isCurrentSession(item.nhom_thoi_gian[0]) ? (
+                              <Countdown
+                                nextSessionTime={
+                                  item.nhom_thoi_gian[0] == "21h"
+                                    ? "9h"
+                                    : item.nhom_thoi_gian[0] === "17h30"
+                                    ? "21h"
+                                    : "17h30"
+                                }
+                              />
+                            ) : (
+                              "Chưa đến phiên"
+                            )}
                           </span>
                         </div>
                       </div>
                     </div>
-                  );
+                  </div>
+                );
               }
             })}
           </div>
@@ -346,22 +370,21 @@ function Tabs() {
                       return item == "Khu VIP 1";
                     })
                   ) {
-                    if (isCurrentSession(item.nhom_thoi_gian[0]))
-                      return (
-                        <div key={index} className="boxProject">
-                          <div className="title">{item.title}</div>
-                          {item.thumbnail ? (
-                            <div className="image img-wrap mt-2">
-                              <img
-                                src={item.thumbnail}
-                                alt=""
-                                className="img-fluid"
-                              />
-                            </div>
-                          ) : (
-                            " "
-                          )}
-                          {/* <div className="span position-absolute">
+                    return (
+                      <div key={index} className="boxProject">
+                        <div className="title">{item.title}</div>
+                        {item.thumbnail ? (
+                          <div className="image img-wrap mt-2">
+                            <img
+                              src={item.thumbnail}
+                              alt=""
+                              className="img-fluid"
+                            />
+                          </div>
+                        ) : (
+                          " "
+                        )}
+                        {/* <div className="span position-absolute">
                           <div>
                             <span>Sản phẩm phúc lợi</span>
                           </div>
@@ -369,64 +392,79 @@ function Tabs() {
                             <span>Rất khuyến khích</span>
                           </div>
                         </div> */}
-                          <div className="content">
-                            <ul>
-                              <li className="text-center">
-                                <span>
-                                  {item.dbevn_product_time_invest}phút
-                                </span>
-                                <p>Thời gian đầu tư</p>
-                              </li>
-                              <li className="text-center">
-                                <span>{item.dbevn_product_percent}%</span>
-                                <p>Tỷ lệ lợi nhuận</p>
-                              </li>
-                              <li className="text-center">
-                                <span>
-                                  {numeral(
-                                    (item.dbevn_product_min_invest *
-                                      item.dbevn_product_percent) /
-                                      100
-                                  )
-                                    .format("0,0")
-                                    .replaceAll(",", ".")}
-                                </span>
-                                <p>Tổng thu nhập</p>
-                              </li>
-                              <li className="text-center">
-                                <span>
-                                  {numeral(item.dbevn_product_min_invest)
-                                    .format("0,0")
-                                    .replaceAll(",", ".")}
-                                </span>
-                                <p>Số tiền mua tối thiểu</p>
-                              </li>
-                            </ul>
-                            <span className="note">
-                              Lợi nhuận được tính theo phút , vốn và lợi nhuận
-                              sẽ được hoàn trả khi kết thúc phiên
-                            </span>
-                            <div className="progressBar">
-                              <label>tiến độ dự án:</label>
-                            </div>
-                            {id ? (
-                              <button
-                                className="btn btnRegister "
-                                onClick={() => setSelectedProduct(item)}
-                              >
-                                Đăng ký
-                              </button>
-                            ) : (
-                              <a href="/authen" className="btn btnRegister ">
-                                Đăng nhập để giao dịch
-                              </a>
-                            )}
-                            <div className="countdown d-flex align-items-center justify-content-center">
-                              <span className="textCountDown">
-                                Mua đếm ngược:{" "}
+                        <div className="content">
+                          <ul>
+                            <li className="text-center">
+                              <span>{item.dbevn_product_time_invest}phút</span>
+                              <p>Thời gian đầu tư</p>
+                            </li>
+                            <li className="text-center">
+                              <span>{item.dbevn_product_percent}%</span>
+                              <p>Tỷ lệ lợi nhuận</p>
+                            </li>
+                            <li className="text-center">
+                              <span>
+                                {numeral(
+                                  (item.dbevn_product_min_invest *
+                                    item.dbevn_product_percent) /
+                                    100
+                                )
+                                  .format("0,0")
+                                  .replaceAll(",", ".")}
                               </span>
-                              <div className="countdownJS">
-                                <span id="demo">
+                              <p>Tổng thu nhập</p>
+                            </li>
+                            <li className="text-center">
+                              <span>
+                                {numeral(item.dbevn_product_min_invest)
+                                  .format("0,0")
+                                  .replaceAll(",", ".")}
+                              </span>
+                              <p>Số tiền mua tối thiểu</p>
+                            </li>
+                          </ul>
+                          <span className="note">
+                            Lợi nhuận được tính theo phút , vốn và lợi nhuận sẽ
+                            được hoàn trả khi kết thúc phiên
+                          </span>
+                          <div className="progressBar">
+                            <label>tiến độ dự án:</label>
+                          </div>
+
+                          {id && authpj ? (
+                            isWithinOpeningTime(item) ? (
+                              authpj.some(
+                                (elem) => elem.product_id == item.id
+                              ) ? (
+                                <button className="btn btnStop" disabled>
+                                  Đã đầu tư
+                                </button>
+                              ) : (
+                                <button
+                                  className="btn btnRegister"
+                                  onClick={() => setSelectedProduct(item)}
+                                >
+                                  Đăng ký
+                                </button>
+                              )
+                            ) : (
+                              <button className="btn btnStop" disabled>
+                                Ngừng đăng ký
+                              </button>
+                            )
+                          ) : (
+                            <a href="/authen" className="btn btnRegister">
+                              Đăng nhập để giao dịch
+                            </a>
+                          )}
+
+                          <div className="countdown d-flex align-items-center justify-content-center">
+                            <span className="textCountDown">
+                              Mua đếm ngược:{" "}
+                            </span>
+                            <div className="countdownJS">
+                              <span id="demo">
+                                {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                                   <Countdown
                                     nextSessionTime={
                                       item.nhom_thoi_gian[0] == "21h"
@@ -436,12 +474,15 @@ function Tabs() {
                                         : "17h30"
                                     }
                                   />
-                                </span>
-                              </div>
+                                ) : (
+                                  "Chưa đến phiên"
+                                )}
+                              </span>
                             </div>
                           </div>
                         </div>
-                      );
+                      </div>
+                    );
                   }
                 })
               : "Tài khoản của bạn cần đạt VIP 1"}
@@ -454,87 +495,101 @@ function Tabs() {
                       return item == "Khu VIP 2";
                     })
                   ) {
-                    if (isCurrentSession(item.nhom_thoi_gian[0]))
-                      return (
-                        <div key={index} className="boxProject">
-                          <div className="title">{item.title}</div>
-                          {item.thumbnail ? (
-                            <div className="image img-wrap mt-2">
-                              <img
-                                src={item.thumbnail}
-                                alt=""
-                                className="img-fluid"
-                              />
-                            </div>
-                          ) : (
-                            " "
-                          )}
-                          {/* <div className="span position-absolute">
-                      <div>
-                        <span>Sản phẩm phúc lợi</span>
-                      </div>
-                      <div>
-                        <span>Rất khuyến khích</span>
-                      </div>
-                    </div> */}
-                          <div className="content">
-                            <ul>
-                              <li className="text-center">
-                                <span>
-                                  {item.dbevn_product_time_invest}phút
-                                </span>
-                                <p>Thời gian đầu tư</p>
-                              </li>
-                              <li className="text-center">
-                                <span>{item.dbevn_product_percent}%</span>
-                                <p>Tỷ lệ lợi nhuận</p>
-                              </li>
-                              <li className="text-center">
-                                <span>
-                                  {numeral(
-                                    (item.dbevn_product_min_invest *
-                                      item.dbevn_product_percent) /
-                                      100
-                                  )
-                                    .format("0,0")
-                                    .replaceAll(",", ".")}
-                                </span>
-                                <p>Tổng thu nhập</p>
-                              </li>
-                              <li className="text-center">
-                                <span>
-                                  {numeral(item.dbevn_product_min_invest)
-                                    .format("0,0")
-                                    .replaceAll(",", ".")}
-                                </span>
-                                <p>Số tiền mua tối thiểu</p>
-                              </li>
-                            </ul>
-                            <span className="note">
-                              Lợi nhuận được tính theo phút , vốn và lợi nhuận
-                              sẽ được hoàn trả khi kết thúc phiên
-                            </span>
-                            <div className="progressBar">
-                              <label>tiến độ dự án:</label>
-                            </div>
-                            {id ? (
-                              <button
-                                className="btn btnRegister "
-                                onClick={() => setSelectedProduct(item)}
-                              >
-                                Đăng ký
-                              </button>
-                            ) : (
-                              <a href="/authen" className="btn btnRegister ">
-                                Đăng nhập để giao dịch
-                              </a>
-                            )}
-                            <div className="countdown d-flex align-items-center justify-content-center">
-                              <span className="textCountDown">
-                                Mua đếm ngược:{" "}
+                    return (
+                      <div key={index} className="boxProject">
+                        <div className="title">{item.title}</div>
+                        {item.thumbnail ? (
+                          <div className="image img-wrap mt-2">
+                            <img
+                              src={item.thumbnail}
+                              alt=""
+                              className="img-fluid"
+                            />
+                          </div>
+                        ) : (
+                          " "
+                        )}
+                        {/* <div className="span position-absolute">
+                          <div>
+                            <span>Sản phẩm phúc lợi</span>
+                          </div>
+                          <div>
+                            <span>Rất khuyến khích</span>
+                          </div>
+                        </div> */}
+                        <div className="content">
+                          <ul>
+                            <li className="text-center">
+                              <span>{item.dbevn_product_time_invest}phút</span>
+                              <p>Thời gian đầu tư</p>
+                            </li>
+                            <li className="text-center">
+                              <span>{item.dbevn_product_percent}%</span>
+                              <p>Tỷ lệ lợi nhuận</p>
+                            </li>
+                            <li className="text-center">
+                              <span>
+                                {numeral(
+                                  (item.dbevn_product_min_invest *
+                                    item.dbevn_product_percent) /
+                                    100
+                                )
+                                  .format("0,0")
+                                  .replaceAll(",", ".")}
                               </span>
-                              <div className="countdownJS">
-                                <span id="demo">
+                              <p>Tổng thu nhập</p>
+                            </li>
+                            <li className="text-center">
+                              <span>
+                                {numeral(item.dbevn_product_min_invest)
+                                  .format("0,0")
+                                  .replaceAll(",", ".")}
+                              </span>
+                              <p>Số tiền mua tối thiểu</p>
+                            </li>
+                          </ul>
+                          <span className="note">
+                            Lợi nhuận được tính theo phút , vốn và lợi nhuận sẽ
+                            được hoàn trả khi kết thúc phiên
+                          </span>
+                          <div className="progressBar">
+                            <label>tiến độ dự án:</label>
+                          </div>
+
+                          {id && authpj ? (
+                            isWithinOpeningTime(item) ? (
+                              authpj.some(
+                                (elem) => elem.product_id == item.id
+                              ) ? (
+                                <button className="btn btnStop" disabled>
+                                  Đã đầu tư
+                                </button>
+                              ) : (
+                                <button
+                                  className="btn btnRegister"
+                                  onClick={() => setSelectedProduct(item)}
+                                >
+                                  Đăng ký
+                                </button>
+                              )
+                            ) : (
+                              <button className="btn btnStop" disabled>
+                                Ngừng đăng ký
+                              </button>
+                            )
+                          ) : (
+                            <a href="/authen" className="btn btnRegister">
+                              Đăng nhập để giao dịch
+                            </a>
+                          )}
+
+                          <div className="countdown d-flex align-items-center justify-content-center">
+                            <span className="textCountDown">
+                              Mua đếm ngược:{" "}
+                            </span>
+                            <div className="countdownJS">
+                              <span id="demo">
+                                {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                                   <Countdown
                                     nextSessionTime={
                                       item.nhom_thoi_gian[0] == "21h"
@@ -544,12 +599,15 @@ function Tabs() {
                                         : "17h30"
                                     }
                                   />
-                                </span>
-                              </div>
+                                ) : (
+                                  "Chưa đến phiên"
+                                )}
+                              </span>
                             </div>
                           </div>
                         </div>
-                      );
+                      </div>
+                    );
                   }
                 })
               : "Tài khoản của bạn cần đạt VIP 2"}
@@ -562,87 +620,101 @@ function Tabs() {
                       return item == "Khu VIP 3";
                     })
                   ) {
-                    if (isCurrentSession(item.nhom_thoi_gian[0]))
-                      return (
-                        <div key={index} className="boxProject">
-                          <div className="title">{item.title}</div>
-                          {item.thumbnail ? (
-                            <div className="image img-wrap mt-2">
-                              <img
-                                src={item.thumbnail}
-                                alt=""
-                                className="img-fluid"
-                              />
-                            </div>
-                          ) : (
-                            " "
-                          )}
-                          {/* <div className="span position-absolute">
-                      <div>
-                        <span>Sản phẩm phúc lợi</span>
-                      </div>
-                      <div>
-                        <span>Rất khuyến khích</span>
-                      </div>
-                    </div> */}
-                          <div className="content">
-                            <ul>
-                              <li className="text-center">
-                                <span>
-                                  {item.dbevn_product_time_invest}phút
-                                </span>
-                                <p>Thời gian đầu tư</p>
-                              </li>
-                              <li className="text-center">
-                                <span>{item.dbevn_product_percent}%</span>
-                                <p>Tỷ lệ lợi nhuận</p>
-                              </li>
-                              <li className="text-center">
-                                <span>
-                                  {numeral(
-                                    (item.dbevn_product_min_invest *
-                                      item.dbevn_product_percent) /
-                                      100
-                                  )
-                                    .format("0,0")
-                                    .replaceAll(",", ".")}
-                                </span>
-                                <p>Tổng thu nhập</p>
-                              </li>
-                              <li className="text-center">
-                                <span>
-                                  {numeral(item.dbevn_product_min_invest)
-                                    .format("0,0")
-                                    .replaceAll(",", ".")}
-                                </span>
-                                <p>Số tiền mua tối thiểu</p>
-                              </li>
-                            </ul>
-                            <span className="note">
-                              Lợi nhuận được tính theo phút , vốn và lợi nhuận
-                              sẽ được hoàn trả khi kết thúc phiên
-                            </span>
-                            <div className="progressBar">
-                              <label>tiến độ dự án:</label>
-                            </div>
-                            {id ? (
-                              <button
-                                className="btn btnRegister "
-                                onClick={() => setSelectedProduct(item)}
-                              >
-                                Đăng ký
-                              </button>
-                            ) : (
-                              <a href="/authen" className="btn btnRegister ">
-                                Đăng nhập để giao dịch
-                              </a>
-                            )}
-                            <div className="countdown d-flex align-items-center justify-content-center">
-                              <span className="textCountDown">
-                                Mua đếm ngược:{" "}
+                    return (
+                      <div key={index} className="boxProject">
+                        <div className="title">{item.title}</div>
+                        {item.thumbnail ? (
+                          <div className="image img-wrap mt-2">
+                            <img
+                              src={item.thumbnail}
+                              alt=""
+                              className="img-fluid"
+                            />
+                          </div>
+                        ) : (
+                          " "
+                        )}
+                        {/* <div className="span position-absolute">
+                          <div>
+                            <span>Sản phẩm phúc lợi</span>
+                          </div>
+                          <div>
+                            <span>Rất khuyến khích</span>
+                          </div>
+                        </div> */}
+                        <div className="content">
+                          <ul>
+                            <li className="text-center">
+                              <span>{item.dbevn_product_time_invest}phút</span>
+                              <p>Thời gian đầu tư</p>
+                            </li>
+                            <li className="text-center">
+                              <span>{item.dbevn_product_percent}%</span>
+                              <p>Tỷ lệ lợi nhuận</p>
+                            </li>
+                            <li className="text-center">
+                              <span>
+                                {numeral(
+                                  (item.dbevn_product_min_invest *
+                                    item.dbevn_product_percent) /
+                                    100
+                                )
+                                  .format("0,0")
+                                  .replaceAll(",", ".")}
                               </span>
-                              <div className="countdownJS">
-                                <span id="demo">
+                              <p>Tổng thu nhập</p>
+                            </li>
+                            <li className="text-center">
+                              <span>
+                                {numeral(item.dbevn_product_min_invest)
+                                  .format("0,0")
+                                  .replaceAll(",", ".")}
+                              </span>
+                              <p>Số tiền mua tối thiểu</p>
+                            </li>
+                          </ul>
+                          <span className="note">
+                            Lợi nhuận được tính theo phút , vốn và lợi nhuận sẽ
+                            được hoàn trả khi kết thúc phiên
+                          </span>
+                          <div className="progressBar">
+                            <label>tiến độ dự án:</label>
+                          </div>
+
+                          {id && authpj ? (
+                            isWithinOpeningTime(item) ? (
+                              authpj.some(
+                                (elem) => elem.product_id == item.id
+                              ) ? (
+                                <button className="btn btnStop" disabled>
+                                  Đã đầu tư
+                                </button>
+                              ) : (
+                                <button
+                                  className="btn btnRegister"
+                                  onClick={() => setSelectedProduct(item)}
+                                >
+                                  Đăng ký
+                                </button>
+                              )
+                            ) : (
+                              <button className="btn btnStop" disabled>
+                                Ngừng đăng ký
+                              </button>
+                            )
+                          ) : (
+                            <a href="/authen" className="btn btnRegister">
+                              Đăng nhập để giao dịch
+                            </a>
+                          )}
+
+                          <div className="countdown d-flex align-items-center justify-content-center">
+                            <span className="textCountDown">
+                              Mua đếm ngược:{" "}
+                            </span>
+                            <div className="countdownJS">
+                              <span id="demo">
+                                {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                                   <Countdown
                                     nextSessionTime={
                                       item.nhom_thoi_gian[0] == "21h"
@@ -652,12 +724,15 @@ function Tabs() {
                                         : "17h30"
                                     }
                                   />
-                                </span>
-                              </div>
+                                ) : (
+                                  "Chưa đến phiên"
+                                )}
+                              </span>
                             </div>
                           </div>
                         </div>
-                      );
+                      </div>
+                    );
                   }
                 })
               : "Tài khoản của bạn cần đạt VIP 3"}

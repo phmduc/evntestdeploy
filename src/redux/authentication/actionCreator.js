@@ -2,7 +2,7 @@ import actions from './actions';
 import { DataService } from '../../config/dataService/dataService';
 import { toast } from 'react-toastify';
  
-const {getwithdrawCommandReadBegin, getwithdrawCommandReadErr, getwithdrawCommandReadSuccess, loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr, getinfoBegin, getinfoErr, getinfoSuccess, getauthpjBegin, getauthpjErr, getauthpjSuccess, withdrawCommandReadBegin, withdrawCommandReadSuccess, withdrawCommandReadErr } = actions;
+const {addBankReadBegin, addBankReadErr, addBankReadSuccess ,getwithdrawCommandReadBegin, getwithdrawCommandReadErr, getwithdrawCommandReadSuccess, loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr, getinfoBegin, getinfoErr, getinfoSuccess, getauthpjBegin, getauthpjErr, getauthpjSuccess, withdrawCommandReadBegin, withdrawCommandReadSuccess, withdrawCommandReadErr } = actions;
 
 
 const login = (values, callback) => {
@@ -23,6 +23,7 @@ const login = (values, callback) => {
     }
   };
 };
+
 
 const register = (values, callback) => {
   return async (dispatch) => {
@@ -79,10 +80,11 @@ const getauthpj = (id) => {
   };
 };
 
-const withdrawCommand = (data) => {
+const withdrawCommand = (data, checkpass) => {
   return async (dispatch) => {
     try {
       dispatch(withdrawCommandReadBegin());
+      const response = await DataService.post('/wp-json/dbevn/v1/auth', checkpass);
       const initialState = await DataService.post('/wp-json/dbevn/v1/cash-requests/create', data);
       dispatch(withdrawCommandReadSuccess(initialState.data));
       toast.success('Tạo lệnh rút thành công')
@@ -105,4 +107,36 @@ const withdrawCommandGet = (id) => {
   };
 };
 
-export { login, logOut, register ,getinfo, getauthpj , withdrawCommand, withdrawCommandGet};
+
+const addBank = (id, data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(addBankReadBegin());
+      const initialState1 = await DataService.post(`/wp-json/dbevn/v1/users/${id}/bank-account`,{bank_account: data.bank_account});
+      const initialState2 = await DataService.post(`/wp-json/dbevn/v1/users/${id}/bank-name`,{bank_name: data.bank_name});
+      dispatch(addBankReadSuccess(initialState1.data));
+      dispatch(addBankReadSuccess(initialState2.data));
+      toast.success('Thêm ngân hàng thành công')
+    } catch (err) {
+      dispatch(addBankReadErr(err.response.data.message));
+      toast.error(err.response.data.message)
+    }
+  };
+};
+
+const removeBank = (id, data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(addBankReadBegin());
+      const initialState1 = await DataService.post(`/wp-json/dbevn/v1/users/${id}/bank-account`,{bank_account: data.bank_account});
+      const initialState2 = await DataService.post(`/wp-json/dbevn/v1/users/${id}/bank-name`,{bank_name: data.bank_name});
+      dispatch(addBankReadSuccess(initialState1.data));
+      dispatch(addBankReadSuccess(initialState2.data));
+      toast.success('Xoá tài khoản ngân hàng thành công')
+    } catch (err) {
+      dispatch(addBankReadErr(err.response.data.message));
+      toast.error(err.response.data.message)
+    }
+  };
+};
+export { login, logOut, register ,getinfo, getauthpj , withdrawCommand, withdrawCommandGet, addBank, removeBank};
