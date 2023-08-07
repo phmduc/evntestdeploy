@@ -5,6 +5,7 @@ import Tabs from "react-bootstrap/Tabs";
 import "~/pages/record/record.css";
 import { withdrawCommandGet } from "~/redux/authentication/actionCreator";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Record() {
   const [activeTab, setActiveTab] = useState('recharge')
@@ -12,7 +13,11 @@ function Record() {
   const { commands } = useSelector((state) => ({
     commands: state.command.commands,
   }));
-  console.log(commands)
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(withdrawCommandGet(id));
@@ -24,7 +29,7 @@ function Record() {
       <FooterOnly>
         <div className="record">
           <div className="headerRecord">
-            <a href="# " className="iconBack">
+            <a onClick={goBack} href="# " className="iconBack">
               <i class="bi bi-chevron-left"></i>
             </a>
             <div className="title">Hồ sơ gửi và rút tiền</div>

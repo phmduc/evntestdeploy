@@ -3,14 +3,19 @@ import FooterOnly from "~/layouts/FooterOnly/FooterOnly.js";
 import Tabs from "~/components/tabs/tabs";
 import "~/pages/shopping/shopping.css";
 import imgBanner from "~/assets/images/488888.webp";
+import { useNavigate } from "react-router-dom";
 
-class Shopping extends Component {
-  render() {
+function Shopping() {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
     return (
       <FooterOnly>
         <div className="shopping">
           <div className="headerShopping">
-            <a href="# " className="iconBack">
+            <a href="# " onClick={goBack} className="iconBack">
               <i class="bi bi-chevron-left"></i>
             </a>
             <div className="title text-center">Trung tâm mua sắm Points</div>
@@ -32,6 +37,5 @@ class Shopping extends Component {
       </FooterOnly>
     );
   }
-}
 
 export default Shopping;
