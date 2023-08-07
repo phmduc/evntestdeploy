@@ -27,8 +27,8 @@ const blogsGetData = () => {
   return async (dispatch) => {
     try {
       dispatch(blogsReadBegin());
-      const initialState = await fetchData();
-      dispatch(blogsReadSuccess(initialState));
+      const initialState = await DataService.get('/wp-json/wp/v2/posts');
+      dispatch(blogsReadSuccess(initialState.data));
     } catch (err) {
       dispatch(blogsReadErr(err));
     }
@@ -39,8 +39,8 @@ const filterSinglePage = (paramsId) => {
   return async (dispatch) => {
     try {
       dispatch(singleBlogBegin());
-      const initialState = await fetchData();
-      const data = initialState.filter((blog) => {
+      const initialState = await DataService.get('/wp-json/wp/v2/posts');
+      const data = initialState.data.filter((blog) => {
         return blog.id === parseInt(paramsId, 10);
       });
       dispatch(singleBlogSuccess(data));
