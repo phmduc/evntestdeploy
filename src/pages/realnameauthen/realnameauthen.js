@@ -57,14 +57,22 @@ function RealNameAuthen() {
         'entry.1227273925': urls[1],
       };
 
-    const response = await axios.post(formUrl, fields);
+      const requestOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(fields).toString(),
+      };
+  
+      const response = await fetch(formUrl, requestOptions);
+      setSelectedImages([])
       message.success('Tải lên và lưu ảnh thành công');
       console.log(urls);
 
     } catch (error) {
       setUploading(false);
-      message.error(error.message); // Hiển thị thông báo lỗi từ error.message
-      console.error(error);
+      setSelectedImages([])
     }
   };
 
