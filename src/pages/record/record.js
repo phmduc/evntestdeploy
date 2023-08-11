@@ -3,13 +3,16 @@ import FooterOnly from "~/layouts/FooterOnly/FooterOnly.js";
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
 import "~/pages/record/record.css";
-import { withdrawCommandGet } from "~/redux/authentication/actionCreator";
+import { withdrawCommandGet, depCommandGet } from "~/redux/authentication/actionCreator";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 function Record() {
   const [activeTab, setActiveTab] = useState('recharge')
   const id = sessionStorage.getItem('user_id')
+  const { deps } = useSelector((state) => ({
+    deps: state.deps.deps,
+  }));
   const { commands } = useSelector((state) => ({
     commands: state.command.commands,
   }));
@@ -21,6 +24,8 @@ function Record() {
   const dispatch = useDispatch()
   useEffect(()=>{
     dispatch(withdrawCommandGet(id));
+    dispatch(depCommandGet(id));
+
   },[dispatch])
   const handleTabSelect = (e) => {
     setActiveTab(e);
@@ -99,6 +104,26 @@ function Record() {
                 <span>Tình trạng nạp tiền</span>
               </div>
             </div>
+            {
+            ( deps && deps.length > 0)
+            ?
+            deps.map((elem, index)=>{
+              return(
+                <div className="text-center rowss d-flex align-items-center">
+                  <div className="text">
+                    <span>{elem.id}</span>
+                  </div>
+                  <div className="text">
+                    <span>{Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(elem.value)}</span>
+                  </div>
+                  <div className="text">
+                    <span>{elem.status}</span>
+                  </div>
+                </div>
+              )
+            })
+            :
+            ''}
           </div>
           <div
             className={`boardFile boardWithdraw ${

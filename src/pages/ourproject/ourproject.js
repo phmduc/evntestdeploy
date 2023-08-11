@@ -8,6 +8,7 @@ import { projectsGetData } from "~/redux/projects/actionCreator";
 import { getauthpj, getinfo } from "~/redux/authentication/actionCreator";
 import numeral from "numeral";
 import { useNavigate } from "react-router-dom";
+import { Table } from "antd";
 
 function OurProject() {
   const dispatch = useDispatch();
@@ -26,12 +27,40 @@ function OurProject() {
   const { authpj } = useSelector((state) => ({
     authpj: state.pjauth.pjs,
   }));
-  console.log(projects)
+  console.log(authpj);
   useEffect(() => {
     dispatch(projectsGetData());
     dispatch(getauthpj(id));
     dispatch(getinfo(id));
   }, [dispatch, id]);
+  const columns = [
+    {
+      title: "Tên dự án",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Tiền đầu tư",
+      dataIndex: "invested",
+      key: "invested",
+    },
+    {
+      title: "Lợi nhuận",
+      dataIndex: "profit",
+      key: "profit",
+    },
+  ];
+  let usersTableData = [];
+  if (authpj) {
+    authpj.map((pj) => {
+      return usersTableData.push({
+        key: id,
+        name: pj.product_name,
+        invested: numeral(pj.total_invested).format("0,0").replaceAll(",", "."),
+        profit: numeral(pj.total_profit).format("0,0").replaceAll(",", "."),
+      });
+    });
+  }
 
   return (
     <FooterOnly>
@@ -49,25 +78,30 @@ function OurProject() {
         >
           <Tab eventKey="tabOne" title="Dự án đầu tư khả quan">
             <div className="contentTab contentSlider">
-              {(projects && projects.length>0)?
+              {projects && projects.length > 0 ? (
                 <div className="itemsProject">
                   {projects.map((item, index) => {
-                    if( authpj && authpj.some(elem => {return elem.product_id == item.id}))
-                        return (
-                          <div key={index} className="boxProject">
-                            <div className="title">{item.title}</div>
-                            {item.thumbnail ? (
-                              <div className="image img-wrap mt-2">
-                                <img
-                                  src={item.thumbnail}
-                                  alt=""
-                                  className="img-fluid"
-                                />
-                              </div>
-                            ) : (
-                              " "
-                            )}
-                            {/* <div className="span position-absolute">
+                    if (
+                      authpj &&
+                      authpj.some((elem) => {
+                        return elem.product_id == item.id;
+                      })
+                    )
+                      return (
+                        <div key={index} className="boxProject">
+                          <div className="title">{item.title}</div>
+                          {item.thumbnail ? (
+                            <div className="image img-wrap mt-2">
+                              <img
+                                src={item.thumbnail}
+                                alt=""
+                                className="img-fluid"
+                              />
+                            </div>
+                          ) : (
+                            " "
+                          )}
+                          {/* <div className="span position-absolute">
                         <div>
                           <span>Sản phẩm phúc lợi</span>
                         </div>
@@ -75,57 +109,59 @@ function OurProject() {
                           <span>Rất khuyến khích</span>
                         </div>
                       </div> */}
-                            <div className="content">
-                              <ul>
-                                <li className="text-center">
-                                  <span>
-                                    {item.dbevn_product_time_invest}phút
-                                  </span>
-                                  <p>Thời gian đầu tư</p>
-                                </li>
-                                <li className="text-center">
-                                  <span>{item.dbevn_product_percent}%</span>
-                                  <p>Tỷ lệ lợi nhuận</p>
-                                </li>
-                                <li className="text-center">
-                                  <span>
-                                    {numeral(
-                                      (item.dbevn_product_min_invest *
-                                        item.dbevn_product_percent) /
-                                        100
-                                    )
-                                      .format("0,0")
-                                      .replaceAll(",", ".")}
-                                  </span>
-                                  <p>Tổng thu nhập</p>
-                                </li>
-                                <li className="text-center">
-                                  <span>
-                                    {numeral(item.dbevn_product_min_invest)
-                                      .format("0,0")
-                                      .replaceAll(",", ".")}
-                                  </span>
-                                  <p>Số tiền mua tối thiểu</p>
-                                </li>
-                              </ul>
-                              <span className="note">
-                                Lợi nhuận được tính theo phút , vốn và lợi nhuận
-                                sẽ được hoàn trả khi kết thúc phiên
-                              </span>
-                              <div className="progressBar">
-                                <label>tiến độ dự án:</label>
-                              </div>
+                          <div className="content">
+                            <ul>
+                              <li className="text-center">
+                                <span>
+                                  {item.dbevn_product_time_invest}phút
+                                </span>
+                                <p>Thời gian đầu tư</p>
+                              </li>
+                              <li className="text-center">
+                                <span>{item.dbevn_product_percent}%</span>
+                                <p>Tỷ lệ lợi nhuận</p>
+                              </li>
+                              <li className="text-center">
+                                <span>
+                                  {numeral(
+                                    (item.dbevn_product_min_invest *
+                                      item.dbevn_product_percent) /
+                                      100
+                                  )
+                                    .format("0,0")
+                                    .replaceAll(",", ".")}
+                                </span>
+                                <p>Tổng thu nhập</p>
+                              </li>
+                              <li className="text-center">
+                                <span>
+                                  {numeral(item.dbevn_product_min_invest)
+                                    .format("0,0")
+                                    .replaceAll(",", ".")}
+                                </span>
+                                <p>Số tiền mua tối thiểu</p>
+                              </li>
+                            </ul>
+                            <span className="note">
+                              Lợi nhuận được tính theo phút , vốn và lợi nhuận
+                              sẽ được hoàn trả khi kết thúc phiên
+                            </span>
+                            <div className="progressBar">
+                              <label>tiến độ dự án:</label>
                             </div>
                           </div>
-                        );
-                          
+                        </div>
+                      );
                   })}
                 </div>
-                :''
-              }
+              ) : (
+                ""
+              )}
             </div>
           </Tab>
-          <Tab eventKey="tabTwo" title="Dự án đã kết thúc"></Tab>
+          <Tab eventKey="tabTwo" title="Dự án đã kết thúc">
+            <Table dataSource={usersTableData} columns={columns} />;
+          </Tab>
         </Tabs>
       </div>
     </FooterOnly>

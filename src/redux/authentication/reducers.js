@@ -1,6 +1,6 @@
 import actions from './actions';
 
-const {ADDBANK_READ_BEGIN, ADDBANK_READ_SUCCESS, ADDBANK_READ_ERR,GETWITHDRAWCOMMAND_READ_BEGIN, GETWITHDRAWCOMMAND_READ_ERR, GETWITHDRAWCOMMAND_READ_SUCCESS, LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_ERR, LOGOUT_BEGIN, LOGOUT_SUCCESS, LOGOUT_ERR, CLEAR_ERR, GETINFO_BEGIN, GETINFO_SUCCESS, GETINFO_ERR, GETPERPJ_BEGIN, GETPERPJ_ERR, GETPERPJ_SUCCESS ,WITHDRAWCOMMAND_READ_BEGIN, WITHDRAWCOMMAND_READ_ERR, WITHDRAWCOMMAND_READ_SUCCESS} = actions;
+const {VERIFYACCOUNT_READ_BEGIN, VERIFYACCOUNT_READ_ERR, VERIFYACCOUNT_READ_SUCCESS,GETDEPCOMMAND_READ_BEGIN, GETDEPCOMMAND_READ_ERR, GETDEPCOMMAND_READ_SUCCESS,ADDBANK_READ_BEGIN, ADDBANK_READ_SUCCESS, ADDBANK_READ_ERR,GETWITHDRAWCOMMAND_READ_BEGIN, GETWITHDRAWCOMMAND_READ_ERR, GETWITHDRAWCOMMAND_READ_SUCCESS, LOGIN_BEGIN, LOGIN_SUCCESS, LOGIN_ERR, LOGOUT_BEGIN, LOGOUT_SUCCESS, LOGOUT_ERR, CLEAR_ERR, GETINFO_BEGIN, GETINFO_SUCCESS, GETINFO_ERR, GETPERPJ_BEGIN, GETPERPJ_ERR, GETPERPJ_SUCCESS ,WITHDRAWCOMMAND_READ_BEGIN, WITHDRAWCOMMAND_READ_ERR, WITHDRAWCOMMAND_READ_SUCCESS} = actions;
 
 const initState = {
   loading: false,
@@ -59,6 +59,22 @@ const AuthReducer = (state = initState, action) => {
           loading: false,
         };
       case ADDBANK_READ_ERR:
+        return {
+          ...state,
+          error: err,
+          loading: false,
+        };
+        case VERIFYACCOUNT_READ_BEGIN:
+        return {
+          ...state,
+          loading: true,
+        };
+      case VERIFYACCOUNT_READ_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+        };
+      case VERIFYACCOUNT_READ_ERR:
         return {
           ...state,
           error: err,
@@ -172,4 +188,35 @@ const commandReducer= (state = initStateCommand, action) =>{
 }
 
 
-export {AuthReducer, projectauthReducer, commandReducer};
+const initStateCommandDep = {
+  data: [],
+  loading: false,
+  error: null,
+};
+const commandReducerDep= (state = initStateCommandDep, action) =>{
+  const { type, data, err } = action;
+  switch (type) {
+ 
+      case GETDEPCOMMAND_READ_BEGIN:
+      return {
+        ...state,
+        loading: true,
+      };
+    case GETDEPCOMMAND_READ_SUCCESS:
+      return {
+        ...state,
+        deps: data,
+        loading: false,
+      };
+    case GETDEPCOMMAND_READ_ERR:
+      return {
+        ...state,
+        error: err,
+        loading: false,
+      };
+    default:
+      return state;
+  }
+}
+
+export {AuthReducer, projectauthReducer, commandReducer , commandReducerDep};

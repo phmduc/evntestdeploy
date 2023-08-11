@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getinfo } from "~/redux/authentication/actionCreator";
 import { withdrawCommand } from "~/redux/authentication/actionCreator";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { isNumeral } from "numeral";
 
 function Withdraw () {
   const [investmentAmount, setInvestmentAmount] = useState("");
@@ -46,6 +48,7 @@ function Withdraw () {
       phone: phone,
       password: password
     }
+   
     dispatch(withdrawCommand(data, checkpass))
 }
 
@@ -144,10 +147,6 @@ function Withdraw () {
             <div className="main-content">
               <div className="usable d-flex justify-space-around align-items-center">
                 <div className="usable-left">
-                  <span>Tổng tài sản</span>
-                  <span className="d-block">
-                     {auth ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(auth.wallet ) : ''}
-                  </span>
                   <span>Số tiền có thể rút</span>
                   <span className="d-block">
                      {auth ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(auth.wallet_can_cash ) : ''}
@@ -155,7 +154,7 @@ function Withdraw () {
                 </div>
                 
                 <div className="usable-right">
-                  <a href="#">
+                  <a href="/profile/record">
                     Nhật kí  >
                   </a>
                 </div>

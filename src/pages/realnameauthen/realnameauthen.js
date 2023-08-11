@@ -5,16 +5,24 @@ import "~/pages/realnameauthen/realnameauthen.css";
 import { Upload, message, Image, Button } from 'antd';
 import { InboxOutlined, DeleteOutlined } from '@ant-design/icons';
 import cloudinary from 'cloudinary-core';
-import axios from "axios";
-
+import { verifyAccount } from "~/redux/authentication/actionCreator";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Cloudinary = new cloudinary.Cloudinary({ cloud_name: 'dgw1cwtd1' }); 
 function RealNameAuthen() {
   const user_phone = sessionStorage.getItem('phone')
+  const user_id = sessionStorage.getItem('user_id')
+
   const { Dragger } = Upload;
   const [selectedImages, setSelectedImages] = useState([]);
   const [uploading, setUploading] = useState(false);
-  const [uploadedUrls, setUploadedUrls] = useState([]);
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1);
+  };
   const handleUpload = async () => {
     try {
       if (selectedImages.length !== 2) {
@@ -46,8 +54,8 @@ function RealNameAuthen() {
       });
 
       const urls = await Promise.all(uploadPromises);
+      dispatch(verifyAccount(user_id, urls, goBack))
       setUploading(false);
-      setUploadedUrls(urls); // Lưu danh sách các URL đã lưu thành công
       const formUrl =
       'https://docs.google.com/forms/u/0/d/e/1FAIpQLSewNJWgnjggWFk7s6yr8Pf3isnY0MxP7lZO-ClpHzNPPLF3Bw/formResponse';
 
@@ -103,7 +111,7 @@ function RealNameAuthen() {
       <FooterOnly>
         <div className="realnameauthen">
           <div className="position-relative">
-            <span className="icon-left">
+            <span onClick={goBack} className="icon-left">
               <i class="bi bi-chevron-left"></i>
             </span>
             <h6>Xác minh tài khoản</h6>

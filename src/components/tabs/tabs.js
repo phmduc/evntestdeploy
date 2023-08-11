@@ -51,12 +51,12 @@ function Tabs() {
     const now = moment();
     const sessionStart = moment(startTime, "HH:mm");
     let sessionEnd;
-    if (startTime === "9h") {
-      sessionEnd = sessionStart.clone().add(8, "hours").add(30, "minutes"); // 9h đến 17h30
-    } else if (startTime === "17h30") {
-      sessionEnd = sessionStart.clone().add(3, "hours").add(30, "minutes"); // 17h30 đến 21h
-    } else if (startTime === "21h") {
-      sessionEnd = sessionStart.clone().add(12, "hours"); // 21h đến 9h
+    if (startTime === "10h10") {
+      sessionEnd = sessionStart.clone().add(6, "hours"); // 10h10 đến 16h10
+    } else if (startTime === "16h10") {
+      sessionEnd = sessionStart.clone().add(5, "hours").add(5, "minutes"); // 16h10 đến 21h1515
+    } else if (startTime === "21h15") {
+      sessionEnd = sessionStart.clone().add(12, "hours").add(55, "minutes"); // 21h1515 đến 10h10
     }
     return now.isBetween(sessionStart, sessionEnd);
   };
@@ -221,11 +221,11 @@ function Tabs() {
                             {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                               <Countdown
                                 nextSessionTime={
-                                  item.nhom_thoi_gian[0] == "21h"
-                                    ? "9h"
-                                    : item.nhom_thoi_gian[0] === "17h30"
-                                    ? "21h"
-                                    : "17h30"
+                                  item.nhom_thoi_gian[0] == "21h15"
+                                    ? "10h15"
+                                    : item.nhom_thoi_gian[0] === "16h10"
+                                    ? "21h15"
+                                    : "16h10"
                                 }
                               />
                             ) : (
@@ -340,11 +340,11 @@ function Tabs() {
                             {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                               <Countdown
                                 nextSessionTime={
-                                  item.nhom_thoi_gian[0] == "21h"
-                                    ? "9h"
-                                    : item.nhom_thoi_gian[0] === "17h30"
-                                    ? "21h"
-                                    : "17h30"
+                                  item.nhom_thoi_gian[0] == "21h15"
+                                    ? "10h15"
+                                    : item.nhom_thoi_gian[0] === "16h10"
+                                    ? "21h15"
+                                    : "16h10"
                                 }
                               />
                             ) : (
@@ -467,11 +467,11 @@ function Tabs() {
                                 {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                                   <Countdown
                                     nextSessionTime={
-                                      item.nhom_thoi_gian[0] == "21h"
-                                        ? "9h"
-                                        : item.nhom_thoi_gian[0] === "17h30"
-                                        ? "21h"
-                                        : "17h30"
+                                      item.nhom_thoi_gian[0] == "21h15"
+                                        ? "10h15"
+                                        : item.nhom_thoi_gian[0] === "16h10"
+                                        ? "21h15"
+                                        : "16h10"
                                     }
                                   />
                                 ) : (
@@ -592,11 +592,11 @@ function Tabs() {
                                 {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                                   <Countdown
                                     nextSessionTime={
-                                      item.nhom_thoi_gian[0] == "21h"
-                                        ? "9h"
-                                        : item.nhom_thoi_gian[0] === "17h30"
-                                        ? "21h"
-                                        : "17h30"
+                                      item.nhom_thoi_gian[0] == "21h15"
+                                        ? "10h15"
+                                        : item.nhom_thoi_gian[0] === "16h10"
+                                        ? "21h15"
+                                        : "16h10"
                                     }
                                   />
                                 ) : (
@@ -717,11 +717,11 @@ function Tabs() {
                                 {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                                   <Countdown
                                     nextSessionTime={
-                                      item.nhom_thoi_gian[0] == "21h"
-                                        ? "9h"
-                                        : item.nhom_thoi_gian[0] === "17h30"
-                                        ? "21h"
-                                        : "17h30"
+                                      item.nhom_thoi_gian[0] == "21h15"
+                                        ? "10h15"
+                                        : item.nhom_thoi_gian[0] === "16h10"
+                                        ? "21h15"
+                                        : "16h10"
                                     }
                                   />
                                 ) : (

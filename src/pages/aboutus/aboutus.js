@@ -11,7 +11,7 @@ class AboutUs extends Component {
            <div className='container'>
               <h6>Về chúng tôi</h6>
               <div className='list-item'>
-                <a href='#' className='item d-flex justify-content-between align-items-center'>
+                <a href='/aboutus/1' className='item d-flex justify-content-between align-items-center'>
                   <div className='item-title d-flex'>
                     <img src='image/logo-evn.webp' />
                     <p>Hồ sơ công ty</p>
@@ -19,7 +19,7 @@ class AboutUs extends Component {
                   <span><i class="bi bi-chevron-right"></i></span>
                 </a>
   
-                <a href='#' className='item d-flex justify-content-between align-items-center'>
+                <a href='/aboutus/2' className='item d-flex justify-content-between align-items-center'>
                   <div className='item-title d-flex'>
                     <img src='image/logo-bh.webp' />
                     <p>Bảo hiểm vốn đầu tư </p>
@@ -27,7 +27,7 @@ class AboutUs extends Component {
                   <span><i class="bi bi-chevron-right"></i></span>
                 </a>
   
-                <a href='#' className='item d-flex justify-content-between align-items-center'>
+                <a href='/aboutus/3' className='item d-flex justify-content-between align-items-center'>
                   <div className='item-title d-flex'>
                     <img src='image/logo-evn.webp' />
                     <p>Vấn đề thường gặp</p>
@@ -35,7 +35,7 @@ class AboutUs extends Component {
                   <span><i class="bi bi-chevron-right"></i></span>
                 </a>
   
-                <a href='#' className='item d-flex justify-content-between align-items-center'>
+                <a href='/aboutus/4' className='item d-flex justify-content-between align-items-center'>
                   <div className='item-title d-flex'>
                     <img src='image/logo-evn.webp' />
                     <p>Quy tắc rút tiền</p>
@@ -43,7 +43,7 @@ class AboutUs extends Component {
                   <span><i class="bi bi-chevron-right"></i></span>
                 </a>
   
-                <a href='#' className='item d-flex justify-content-between align-items-center'>
+                <a href='/aboutus/5' className='item d-flex justify-content-between align-items-center'>
                   <div className='item-title d-flex'>
                     <img src='image/logo-evn.webp' />
                     <p>Chính sách bảo mật</p>

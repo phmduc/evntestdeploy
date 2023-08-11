@@ -19,6 +19,17 @@
     height: 32px;
     object-fit: cover;
 }
+.infoProfile .rank{gap: .5rem;}
+.infoProfile .status{
+    background-color: #dc3545;
+    font-size: 0.75rem;
+    padding: 0px 0.625rem;
+    color: white;
+}
+.infoProfile .active{
+    background-color: #28a745;
+}
+
 .infoProfile .user .nameUser{}
 .infoProfile .user .nameUser .name{
     color: rgb(0, 0, 0);
@@ -31,7 +42,6 @@
     padding: 0px 0.625rem;
     color: #fff;
     width: max-content;
-    margin-top: 0.3rem;
 }
 .infoProfile .assets .itemAssets p{
     margin: 5px 0;

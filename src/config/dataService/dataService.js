@@ -22,18 +22,20 @@ class DataService {
     });
   }
 
-  static patch(path = '', data = {}) {
+  static patch(path = '', data = {}, params = {}) {
     return client({
       method: 'PATCH',
       url: path,
+      params: params,
       data: JSON.stringify(data),
     });
   }
 
-  static put(path = '', data = {}) {
+  static put(path = '', params = {}, data = {}) {
     return client({
       method: 'PUT',
       url: path,
+      params: params,
       data: JSON.stringify(data),
     });
   }
@@ -48,7 +50,7 @@ client.interceptors.request.use((config) => {
   // For example tag along the bearer access token to request header or set a cookie
   const requestConfig = config;
   const { headers } = config;
-  requestConfig.headers = { ...headers, Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RiZXZuLndlYm1hdS5uZXQiLCJpYXQiOjE2OTEwMzQ3NDQsIm5iZiI6MTY5MTAzNDc0NCwiZXhwIjoxNjkxNjM5NTQ0LCJkYXRhIjp7InVzZXIiOnsiaWQiOjEsImRldmljZSI6IiIsInBhc3MiOiJiMDA1Y2UzZGViZmQ5MmE2Yjc0Y2U4ODExMDJhMjVhNSJ9fX0.8YHTF5ZZ4MZt4s_ToTsRItghX0Ey59XtoJ08sfcJeO0` };
+  requestConfig.headers = { ...headers, Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RiZXZuLndlYm1hdS5uZXQiLCJpYXQiOjE2OTE2NTk2NTIsIm5iZiI6MTY5MTY1OTY1MiwiZXhwIjoxNjkyMjY0NDUyLCJkYXRhIjp7InVzZXIiOnsiaWQiOjEsImRldmljZSI6IiIsInBhc3MiOiJiMDA1Y2UzZGViZmQ5MmE2Yjc0Y2U4ODExMDJhMjVhNSJ9fX0.iM9sknIr2wDWHqZJdxueHFut_T3CMmDWgyEM41NZLlU` };
 
   return requestConfig;
 });

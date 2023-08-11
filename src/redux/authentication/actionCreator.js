@@ -2,7 +2,7 @@ import actions from './actions';
 import { DataService } from '../../config/dataService/dataService';
 import { toast } from 'react-toastify';
  
-const {addBankReadBegin, addBankReadErr, addBankReadSuccess ,getwithdrawCommandReadBegin, getwithdrawCommandReadErr, getwithdrawCommandReadSuccess, loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr, getinfoBegin, getinfoErr, getinfoSuccess, getauthpjBegin, getauthpjErr, getauthpjSuccess, withdrawCommandReadBegin, withdrawCommandReadSuccess, withdrawCommandReadErr } = actions;
+const {verifyAccountBegin, verifyAccountErr, verifyAccountSuccess ,getdepCommandReadBegin, getdepCommandReadErr, getdepCommandReadSuccess, addBankReadBegin, addBankReadErr, addBankReadSuccess ,getwithdrawCommandReadBegin, getwithdrawCommandReadErr, getwithdrawCommandReadSuccess, loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr, getinfoBegin, getinfoErr, getinfoSuccess, getauthpjBegin, getauthpjErr, getauthpjSuccess, withdrawCommandReadBegin, withdrawCommandReadSuccess, withdrawCommandReadErr } = actions;
 
 
 const login = (values, callback) => {
@@ -107,6 +107,17 @@ const withdrawCommandGet = (id) => {
   };
 };
 
+const depCommandGet = (id) => {
+  return async (dispatch) => {
+    try {
+      dispatch(getdepCommandReadBegin());
+      const initialState = await DataService.post(`/wp-json/dbevn/v1/deposit-requests/user-${id}`);
+      dispatch(getdepCommandReadSuccess(initialState.data));
+    } catch (err) {
+      dispatch(getdepCommandReadErr(err.response.data.message));
+    }
+  };
+};
 
 const addBank = (id, data) => {
   return async (dispatch) => {
@@ -139,4 +150,24 @@ const removeBank = (id, data) => {
     }
   };
 };
-export { login, logOut, register ,getinfo, getauthpj , withdrawCommand, withdrawCommandGet, addBank, removeBank};
+
+const verifyAccount= (id, data, callback) => {
+  return async (dispatch) => {
+    try {
+      dispatch(verifyAccountBegin());
+      const initialState1 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/upload-cccd-front`,{},{cccd_front: data[0]});
+      const initialState2 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/upload-cccd-back`,{},{cccd_back: data[1]});
+      const initialState3 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/verify`,{verify: "Đã xác minh"});
+      dispatch(verifyAccountSuccess(initialState1.data));
+      dispatch(verifyAccountSuccess(initialState2.data));
+      dispatch(verifyAccountSuccess(initialState3.data));
+      callback()
+      toast.success(initialState3.data)
+        } catch (err) {
+      dispatch(verifyAccountErr(err.response.data.message));
+      toast.error(err.response.data.message)
+    }
+  };
+};
+
+export { login, logOut, register ,getinfo, getauthpj , withdrawCommand, withdrawCommandGet, addBank, removeBank, depCommandGet , verifyAccount};

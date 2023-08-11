@@ -28,6 +28,14 @@ import Shopping from './pages/shopping/shopping';
 import Vip from './pages/vip/vip';
 import Withdraw from './pages/withdraw/withdraw';
 import store from './redux/store';
+import AboutUs1 from './pages/aboutus/aboutus1';
+import AboutUs2 from './pages/aboutus/aboutus2';
+import AboutUs3 from './pages/aboutus/aboutus3';
+import AboutUs4 from './pages/aboutus/aboutus4';
+import AboutUs5 from './pages/aboutus/aboutus5';
+
+
+
 
 function ProfileRoute() {
   const navigate = useNavigate()
@@ -76,6 +84,15 @@ function App() {
           <Route path='/profile/*' element={isLoggedIn ? <ProfileRoute /> : <Authen/>} />
           <Route path='/category' element={<Category />} />
           <Route path='/aboutus' element={<AboutUs />} />
+          <Route path='/aboutus/1' element={<AboutUs1 />} />
+          <Route path='/aboutus/2' element={<AboutUs2 />} />
+          <Route path='/aboutus/3' element={<AboutUs3 />} />
+          <Route path='/aboutus/4' element={<AboutUs4 />} />
+          <Route path='/aboutus/5' element={<AboutUs5 />} />
+
+
+
+
           <Route path='/contact' element={<Contact />} />
           { isLoggedIn ? '' : <Route path='/authen' element={<Authen />} /> }
           

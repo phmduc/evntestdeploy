@@ -56,27 +56,33 @@ function AccountDetail() {
               </div>
 
               <div className="item">
-                <span>Số tiền nạp</span>
+                <span>Tổng tiền nạp</span>
                 <span>
                   <u>đ</u> {auth ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(auth.wallet_deposited ) : ''}
                 </span>
               </div>
               <div className="item">
-                <span>Số tiền rút</span>
+                <span>Tổng tiền rút</span>
                 <span>
                   <u>đ</u> {auth ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(auth.wallet_cashed ) : ''}
                 </span>
               </div>
               <div className="item">
-                <span>Số tiền đầu tư</span>
+                <span>Tổng tiền đầu tư</span>
                 <span>
                   <u>đ</u> {auth ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(auth.wallet_buyed ) : ''}
                 </span>
               </div>
               <div className="item">
-                <span>Thu nhập kiếm dc </span>
+                <span>Tổng lợi nhuận </span>
                 <span>
                   <u>đ</u> {auth ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(auth.wallet_win ) : ''}
+                </span>
+              </div>
+              <div className="item">
+                <span>Số tiền có thể rút </span>
+                <span>
+                  <u>đ</u> {auth ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(auth.wallet_can_cash ) : ''}
                 </span>
               </div>
             </div>

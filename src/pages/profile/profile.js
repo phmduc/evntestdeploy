@@ -44,9 +44,13 @@ function Profile(){
                 <div className="name">
                   <b>{phone}</b>
                 </div>
+                <div className="d-flex rank align-items-center">
                 <div className="level">
                   <span>{auth ? auth.rank : ''}</span>
                 </div>
+                <span className={`status ${auth && auth.status} `}>{auth && auth.status == 'active' ? 'Hoạt động' : 'Bị khoá'}</span> 
+                </div>
+            
               </div>
             </div>
             <div className="assets d-flex align-items-center justify-content-around text-center">

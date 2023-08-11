@@ -21,6 +21,7 @@ function PersonalSetting()  {
   }));
   const navigate = useNavigate();
 
+    
   console.log(auth)
   const goBack = () => {
     navigate(-1);
@@ -54,12 +55,22 @@ function PersonalSetting()  {
             </a>
           </div>
           <div className="list listOptions">
-            <a href="# " className="items d-flex align-items-center">
+            {auth && auth.verify == 'Đã xác minh' ? 
+            <div  className="items d-flex align-items-center">
               <div className="iconImg d-flex">
                 <img src={Image2} alt="" className="img-fluid" />
               </div>
               <p>Đã xác minh</p>
+            </div>
+            :
+            <a href="/profile/realnameauthen " className="items d-flex align-items-center">
+              <div className="iconImg d-flex">
+                <img src={Image2} alt="" className="img-fluid" />
+              </div>
+              <p>Vui lòng nhấn vào để xác minh tài khoản</p>
             </a>
+            }
+          
             <a href="# " className="items d-flex align-items-center">
               <div className="iconImg d-flex">
                 <img src={Image3} alt="" className="img-fluid" />

@@ -23,6 +23,14 @@ const actions = {
   GETWITHDRAWCOMMAND_READ_SUCCESS: 'GETWITHDRAWCOMMAND_READ_SUCCESS',
   GETWITHDRAWCOMMAND_READ_ERR: 'GETWITHDRAWCOMMAND_READ_ERR',
 
+  GETDEPCOMMAND_READ_BEGIN: 'GETDEPCOMMAND_READ_BEGIN',
+  GETDEPCOMMAND_READ_SUCCESS: 'GETDEPCOMMAND_READ_SUCCESS',
+  GETDEPCOMMAND_READ_ERR: 'GETDEPCOMMAND_READ_ERR',
+
+  VERIFYACCOUNT_READ_BEGIN: 'VERIFYACCOUNT_READ_BEGIN',
+  VERIFYACCOUNT_READ_SUCCESS: 'VERIFYACCOUNT_READ_SUCCESS',
+  VERIFYACCOUNT_READ_ERR: 'VERIFYACCOUNT_READ_ERR',
+
   ADDBANK_READ_BEGIN: 'ADDBANK_READ_BEGIN',
   ADDBANK_READ_SUCCESS: 'ADDBANK_READ_SUCCESS',
   ADDBANK_READ_ERR: 'ADDBANK_READ_ERR',
@@ -159,6 +167,25 @@ const actions = {
     };
   },
 
+  getdepCommandReadBegin: () => {
+    return {
+      type: actions.GETDEPCOMMAND_READ_BEGIN,
+    };
+  },
+
+  getdepCommandReadSuccess: (data) => {
+    return {
+      type: actions.GETDEPCOMMAND_READ_SUCCESS,
+      data,
+    };
+  },
+
+  getdepCommandReadErr: (err) => {
+    return {
+      type: actions.GETDEPCOMMAND_READ_ERR,
+      err,
+    };
+  },
 
   addBankReadBegin: () => {
     return {
@@ -175,6 +202,25 @@ const actions = {
   addBankReadErr: (err) => {
     return {
       type: actions.ADDBANK_READ_ERR,
+      err,
+    };
+  },
+
+  verifyAccountBegin: () => {
+    return {
+      type: actions.VERIFYACCOUNT_READ_BEGIN,
+    };
+  },
+
+  verifyAccountSuccess: (data) => {
+    return {
+      type: actions.VERIFYACCOUNT_READ_SUCCESS,
+    };
+  },
+
+  verifyAccountErr: (err) => {
+    return {
+      type: actions.VERIFYACCOUNT_READ_ERR,
       err,
     };
   },
