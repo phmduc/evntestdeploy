@@ -157,12 +157,9 @@ const verifyAccount= (id, data, callback) => {
       dispatch(verifyAccountBegin());
       const initialState1 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/upload-cccd-front`,{},{cccd_front: data[0]});
       const initialState2 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/upload-cccd-back`,{},{cccd_back: data[1]});
-      const initialState3 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/verify`,{verify: "Đã xác minh"});
       dispatch(verifyAccountSuccess(initialState1.data));
       dispatch(verifyAccountSuccess(initialState2.data));
-      dispatch(verifyAccountSuccess(initialState3.data));
       callback()
-      toast.success(initialState3.data)
         } catch (err) {
       dispatch(verifyAccountErr(err.response.data.message));
       toast.error(err.response.data.message)
