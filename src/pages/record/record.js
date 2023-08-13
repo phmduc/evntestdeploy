@@ -16,8 +16,10 @@ function Record() {
   const { commands } = useSelector((state) => ({
     commands: state.command.commands,
   }));
-  const navigate = useNavigate();
+  
 
+
+  const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
@@ -50,7 +52,7 @@ function Record() {
                 <div className="boxRechange d-flex align-items-center">
                   <div className="box1 text-center">
                     <div>
-                      <span>0</span>
+                      <span>{deps ? deps.length : '0'}</span>
                     </div>
                     <div>
                       <span>Nạp tiền</span>
@@ -58,7 +60,7 @@ function Record() {
                   </div>
                   <div className="box2 text-center">
                     <div>
-                      <span>0</span>
+                      <span>{deps ? Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(deps.reduce((total, elem)=>{return total + Number(elem.value)},0)) : '0'}</span>
                     </div>
                     <div>
                       <span>Tích luỹ nạp tiền</span>
@@ -107,7 +109,7 @@ function Record() {
             {
             ( deps && deps.length > 0)
             ?
-            deps.map((elem, index)=>{
+            [...deps].reverse().map((elem, index)=>{
               return(
                 <div className="text-center rowss d-flex align-items-center">
                   <div className="text">
@@ -144,7 +146,7 @@ function Record() {
             {
             ( commands && commands.length > 0)
             ?
-            commands.map((elem, index)=>{
+            [...commands].reverse().map((elem, index)=>{
               return(
                 <div className="text-center rowss d-flex align-items-center">
                   <div className="text">

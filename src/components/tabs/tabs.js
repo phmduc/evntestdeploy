@@ -19,6 +19,8 @@ import { toast } from "react-toastify";
 function Tabs() {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [investmentAmount, setInvestmentAmount] = useState("");
+  const [isrender, setisrender] = useState(false);
+
   const tabSlider = useRef(null);
   const contentSlider = useRef(null);
   const dispatch = useDispatch();
@@ -38,7 +40,7 @@ function Tabs() {
     dispatch(projectsGetData());
     dispatch(getauthpj(id));
     dispatch(getinfo(id));
-  }, [dispatch, id]);
+  }, [dispatch,isrender, id]);
   const settings = {
     dots: false,
     infinite: false,
@@ -80,14 +82,16 @@ function Tabs() {
   const isWithinOpeningTime = (item) => {
     const currentTime = moment();
     const sessionStart = moment(item.nhom_thoi_gian[0], "HH:mm");
+    
+
     const openingEnd = sessionStart
       .clone()
       .add(Number(item.dbevn_product_time_invest), "minutes");
-    return currentTime.isBetween(sessionStart, openingEnd);
+    return {current: currentTime.isBetween(sessionStart, openingEnd), percent: Math.round((Number(currentTime) - Number(sessionStart))/ (Number(openingEnd) - Number(sessionStart)) * 100) };
   };
 
   const investing = (pj_id, money, min) => {
-    if (Number(auth.wallet) < Number(money)) {
+    if (Number(auth.wallet) < Number(money) && Number(auth.wallet_can_cash) < Number(money) ) {
       toast.error("Số tiền trong tài khoản không đủ");
     } else if (Number(money) < Number(min)) {
       toast.error("Số tiền đầu tư phải trên mức tối thiểu");
@@ -100,6 +104,8 @@ function Tabs() {
       dispatch(
         projectsInvest(data, () => {
           toast.success("Đầu tư thành công");
+          setisrender(!isrender);
+          setSelectedProduct(null)
         })
       );
     }
@@ -187,10 +193,12 @@ function Tabs() {
                       </span>
                       <div className="progressBar">
                         <label>tiến độ dự án:</label>
+                        <ProgressBar now={(isWithinOpeningTime(item).percent > 100) ? '100' : (isWithinOpeningTime(item).percent < 0) ? '0' : isWithinOpeningTime(item).percent} label={(isWithinOpeningTime(item).percent > 100) ? '100%' : (isWithinOpeningTime(item).percent < 0) ? '0% Chưa bắt đầu' : isWithinOpeningTime(item).percent+'%'} ></ProgressBar>
                       </div>
-
-                      {id && authpj ? (
-                        isWithinOpeningTime(item) ? (
+                      
+                      {
+                      id && authpj ? (
+                        isWithinOpeningTime(item).current ? (
                           authpj.some((elem) => elem.product_id == item.id) ? (
                             <button className="btn btnStop" disabled>
                               Đã đầu tư
@@ -218,7 +226,7 @@ function Tabs() {
                         <span className="textCountDown">Mua đếm ngược: </span>
                         <div className="countdownJS">
                           <span id="demo">
-                            {isCurrentSession(item.nhom_thoi_gian[0]) ? (
+                          {isCurrentSession(item.nhom_thoi_gian[0]) ? (
                               <Countdown
                                 nextSessionTime={
                                   item.nhom_thoi_gian[0] == "21h15"
@@ -228,9 +236,9 @@ function Tabs() {
                                     : "16h10"
                                 }
                               />
-                            ) : (
-                              "Chưa đến phiên"
-                            )}
+                            ) : isWithinOpeningTime(item).percent > 100 ? (
+                              "Đã qua phiên"
+                            ) : 'Chưa đến phiên'}
                           </span>
                         </div>
                       </div>
@@ -306,10 +314,11 @@ function Tabs() {
                       </span>
                       <div className="progressBar">
                         <label>tiến độ dự án:</label>
+                        <ProgressBar now={(isWithinOpeningTime(item).percent > 100) ? '100' : (isWithinOpeningTime(item).percent < 0) ? '0' : isWithinOpeningTime(item).percent} label={(isWithinOpeningTime(item).percent > 100) ? '100%' : (isWithinOpeningTime(item).percent < 0) ? '0% Chưa bắt đầu' : isWithinOpeningTime(item).percent+'%'} ></ProgressBar>
                       </div>
 
                       {id && authpj ? (
-                        isWithinOpeningTime(item) ? (
+                        isWithinOpeningTime(item).current ? (
                           authpj.some((elem) => elem.product_id == item.id) ? (
                             <button className="btn btnStop" disabled>
                               Đã đầu tư
@@ -347,9 +356,9 @@ function Tabs() {
                                     : "16h10"
                                 }
                               />
-                            ) : (
-                              "Chưa đến phiên"
-                            )}
+                            ) : isWithinOpeningTime(item).percent > 100 ? (
+                              "Đã qua phiên"
+                            ) : 'Chưa đến phiên'}
                           </span>
                         </div>
                       </div>
@@ -429,10 +438,13 @@ function Tabs() {
                           </span>
                           <div className="progressBar">
                             <label>tiến độ dự án:</label>
+                            <ProgressBar now={(isWithinOpeningTime(item).percent > 100) ? '100' : (isWithinOpeningTime(item).percent < 0) ? '0' : isWithinOpeningTime(item).percent} label={(isWithinOpeningTime(item).percent > 100) ? '100%' : (isWithinOpeningTime(item).percent < 0) ? '0% Chưa bắt đầu' : isWithinOpeningTime(item).percent+'%'} ></ProgressBar>
+
+
                           </div>
 
                           {id && authpj ? (
-                            isWithinOpeningTime(item) ? (
+                            isWithinOpeningTime(item).current ? (
                               authpj.some(
                                 (elem) => elem.product_id == item.id
                               ) ? (
@@ -554,10 +566,12 @@ function Tabs() {
                           </span>
                           <div className="progressBar">
                             <label>tiến độ dự án:</label>
+                            <ProgressBar now={(isWithinOpeningTime(item).percent > 100) ? '100' : (isWithinOpeningTime(item).percent < 0) ? '0' : isWithinOpeningTime(item).percent} label={(isWithinOpeningTime(item).percent > 100) ? '100%' : (isWithinOpeningTime(item).percent < 0) ? '0% Chưa bắt đầu' : isWithinOpeningTime(item).percent+'%'} ></ProgressBar>
+
                           </div>
 
                           {id && authpj ? (
-                            isWithinOpeningTime(item) ? (
+                            isWithinOpeningTime(item).current ? (
                               authpj.some(
                                 (elem) => elem.product_id == item.id
                               ) ? (
@@ -589,19 +603,19 @@ function Tabs() {
                             </span>
                             <div className="countdownJS">
                               <span id="demo">
-                                {isCurrentSession(item.nhom_thoi_gian[0]) ? (
-                                  <Countdown
-                                    nextSessionTime={
-                                      item.nhom_thoi_gian[0] == "21h15"
-                                        ? "10h15"
-                                        : item.nhom_thoi_gian[0] === "16h10"
-                                        ? "21h15"
-                                        : "16h10"
-                                    }
-                                  />
-                                ) : (
-                                  "Chưa đến phiên"
-                                )}
+                              {isCurrentSession(item.nhom_thoi_gian[0]) ? (
+                              <Countdown
+                                nextSessionTime={
+                                  item.nhom_thoi_gian[0] == "21h15"
+                                    ? "10h15"
+                                    : item.nhom_thoi_gian[0] === "16h10"
+                                    ? "21h15"
+                                    : "16h10"
+                                }
+                              />
+                            ) : isWithinOpeningTime(item).percent > 100 ? (
+                              "Đã qua phiên"
+                            ) : 'Chưa đến phiên'}
                               </span>
                             </div>
                           </div>
@@ -679,10 +693,12 @@ function Tabs() {
                           </span>
                           <div className="progressBar">
                             <label>tiến độ dự án:</label>
+                           <ProgressBar now={(isWithinOpeningTime(item).percent > 100) ? '100' : (isWithinOpeningTime(item).percent < 0) ? '0' : isWithinOpeningTime(item).percent} label={(isWithinOpeningTime(item).percent > 100) ? '100%' : (isWithinOpeningTime(item).percent < 0) ? '0% Chưa bắt đầu' : isWithinOpeningTime(item).percent+'%'} ></ProgressBar>
+
                           </div>
 
                           {id && authpj ? (
-                            isWithinOpeningTime(item) ? (
+                            isWithinOpeningTime(item).current ? (
                               authpj.some(
                                 (elem) => elem.product_id == item.id
                               ) ? (
@@ -714,19 +730,19 @@ function Tabs() {
                             </span>
                             <div className="countdownJS">
                               <span id="demo">
-                                {isCurrentSession(item.nhom_thoi_gian[0]) ? (
-                                  <Countdown
-                                    nextSessionTime={
-                                      item.nhom_thoi_gian[0] == "21h15"
-                                        ? "10h15"
-                                        : item.nhom_thoi_gian[0] === "16h10"
-                                        ? "21h15"
-                                        : "16h10"
-                                    }
-                                  />
-                                ) : (
-                                  "Chưa đến phiên"
-                                )}
+                              {isCurrentSession(item.nhom_thoi_gian[0]) ? (
+                              <Countdown
+                                nextSessionTime={
+                                  item.nhom_thoi_gian[0] == "21h15"
+                                    ? "10h15"
+                                    : item.nhom_thoi_gian[0] === "16h10"
+                                    ? "21h15"
+                                    : "16h10"
+                                }
+                              />
+                            ) : isWithinOpeningTime(item).percent > 100 ? (
+                              "Đã qua phiên"
+                            ) : 'Chưa đến phiên'}
                               </span>
                             </div>
                           </div>

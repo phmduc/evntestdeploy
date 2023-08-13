@@ -2,12 +2,13 @@ import React, { Component, useState } from "react";
 import FooterOnly from "~/layouts/FooterOnly/FooterOnly.js";
 import Tabs from "~/components/tabs/tabs";
 import "~/pages/realnameauthen/realnameauthen.css";
-import { Upload, message, Image, Button } from 'antd';
+import { Upload, message, Image, Button, Input } from 'antd';
 import { InboxOutlined, DeleteOutlined } from '@ant-design/icons';
 import cloudinary from 'cloudinary-core';
 import { verifyAccount } from "~/redux/authentication/actionCreator";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Cloudinary = new cloudinary.Cloudinary({ cloud_name: 'dgw1cwtd1' }); 
 function RealNameAuthen() {
@@ -17,6 +18,12 @@ function RealNameAuthen() {
   const { Dragger } = Upload;
   const [selectedImages, setSelectedImages] = useState([]);
   const [uploading, setUploading] = useState(false);
+  const [name, setName] = useState('');
+  const [CCCD, setCCCD] = useState('');
+  const [phone, setPhone] = useState('');
+
+
+
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
@@ -28,55 +35,70 @@ function RealNameAuthen() {
       if (selectedImages.length !== 2) {
         message.error('Vui lòng chọn đủ 2 ảnh trước khi lưu vào Cloudinary');
         return;
-      }
+      } else
 
-      setUploading(true);
-      // Lưu các ảnh đã chọn vào Cloudinary
-      const uploadPromises = selectedImages.map(async (image) => {
-        const formData = new FormData();
-        formData.append('file', image.file);
-        formData.append('upload_preset', 'env_upload'); // Thay YOUR_CLOUDINARY_UPLOAD_PRESET bằng upload preset của bạn
-
-        const response = await fetch(
-          `https://api.cloudinary.com/v1_1/dgw1cwtd1/upload`, // Thay YOUR_CLOUD_NAME bằng cloud name của bạn
-          {
-            method: 'POST',
-            body: formData,
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error('Lỗi khi tải lên và lưu ảnh');
-        }
-
-        const data = await response.json();
-        return data.secure_url;
-      });
-
-      const urls = await Promise.all(uploadPromises);
-      dispatch(verifyAccount(user_id, urls, goBack))
-      setUploading(false);
-      const formUrl =
-      'https://docs.google.com/forms/u/0/d/e/1FAIpQLSewNJWgnjggWFk7s6yr8Pf3isnY0MxP7lZO-ClpHzNPPLF3Bw/formResponse';
-
-      const fields = {
-        'entry.39415485': user_phone,
-        'entry.506440723': urls[0],
-        'entry.1227273925': urls[1],
-      };
-
-      const requestOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(fields).toString(),
-      };
+   
+      if(name && phone && CCCD ){
+        setUploading(true);
+        // Lưu các ảnh đã chọn vào Cloudinary
+        const uploadPromises = selectedImages.map(async (image) => {
+          const formData = new FormData();
+          formData.append('file', image.file);
+          formData.append('upload_preset', 'env_upload'); // Thay YOUR_CLOUDINARY_UPLOAD_PRESET bằng upload preset của bạn
   
-      const response = await fetch(formUrl, requestOptions);
-      setSelectedImages([])
-      message.success('Tải lên và lưu ảnh thành công');
-      console.log(urls);
+          const response = await fetch(
+            `https://api.cloudinary.com/v1_1/dgw1cwtd1/upload`, // Thay YOUR_CLOUD_NAME bằng cloud name của bạn
+            {
+              method: 'POST',
+              body: formData,
+            }
+          );
+  
+          if (!response.ok) {
+            throw new Error('Lỗi khi tải lên và lưu ảnh');
+          }
+  
+          const data = await response.json();
+          return data.secure_url;
+        });
+  
+        const urls = await Promise.all(uploadPromises);
+        const info = {
+          real_name: name,
+          real_phone: phone,
+          id_number: CCCD
+        }
+        dispatch(verifyAccount(user_id, urls, goBack, info))
+        setUploading(false);
+        const formUrl =
+        'https://docs.google.com/forms/u/0/d/e/1FAIpQLSewNJWgnjggWFk7s6yr8Pf3isnY0MxP7lZO-ClpHzNPPLF3Bw/formResponse';
+  
+        const fields = {
+          'entry.39415485': user_phone,
+          'entry.1326846868': phone,
+          'entry.1912103182': name,
+          'entry.181924737': CCCD,
+          'entry.506440723': urls[0],
+          'entry.1227273925': urls[1],
+        };
+  
+        const requestOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams(fields).toString(),
+        };
+    
+        const response = await fetch(formUrl, requestOptions);
+        setSelectedImages([])
+        message.success('Tải lên và lưu ảnh thành công');
+        console.log(urls);
+      } else{
+        toast.error('Vui lòng điền đầy đủ thông tin')
+      }
+     
+    
 
     } catch (error) {
       setUploading(false);
@@ -118,14 +140,24 @@ function RealNameAuthen() {
           </div>
 
           <div className="main-content">
-            {/* <div className="item">
+            <div className="item">
               <div><span>Tên</span></div>
-              <div><span>v* trà dũng</span></div>
-            </div> */}
-            {/* <div className="item">
-              <div><span>mã số</span></div>
-              <div><span>123***********123</span></div>
-            </div> */}
+              <div>
+                <Input value={name} onChange={(e)=>{setName(e.target.value)}}></Input>
+              </div>
+            </div>
+            <div className="item">
+              <div><span>Số CCCD/CMND</span></div>
+              <div>                
+                <Input value={CCCD} onChange={(e)=>{setCCCD(e.target.value)}}></Input>
+              </div>
+            </div>
+            <div className="item">
+              <div><span>Số điện thoại</span></div>
+              <div>                
+                <Input value={phone} onChange={(e)=>{setPhone(e.target.value)}}></Input>
+              </div>
+            </div>
             <div className="item">
               <div><span>Ảnh CMND/CCCD</span></div>
               <div><span>Vui lòng đăng 2 mặt trước/sau</span></div>

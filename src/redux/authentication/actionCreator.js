@@ -151,12 +151,13 @@ const removeBank = (id, data) => {
   };
 };
 
-const verifyAccount= (id, data, callback) => {
+const verifyAccount= (id, data, callback, data2) => {
   return async (dispatch) => {
     try {
       dispatch(verifyAccountBegin());
-      const initialState1 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/upload-cccd-front`,{},{cccd_front: data[0]});
-      const initialState2 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/upload-cccd-back`,{},{cccd_back: data[1]});
+      const initialState1 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/upload-cccd-front`,{cccd_front: data[0]},{cccd_front: data[0]});
+      const initialState2 = await DataService.put(`/wp-json/dbevn/v1/users/${id}/upload-cccd-back`,{cccd_back: data[1]},{cccd_back: data[1]});
+      const initialState3 = await DataService.post(`/wp-json/dbevn/v1/verify/user-${id}`,data2);
       dispatch(verifyAccountSuccess(initialState1.data));
       dispatch(verifyAccountSuccess(initialState2.data));
       callback()
