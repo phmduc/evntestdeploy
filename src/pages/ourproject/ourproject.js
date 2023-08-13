@@ -60,6 +60,7 @@ function OurProject() {
         profit: numeral(pj.total_profit).format("0,0").replaceAll(",", "."),
       });
     });
+    usersTableData = usersTableData.reverse()
   }
 
   return (
