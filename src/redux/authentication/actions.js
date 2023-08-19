@@ -27,6 +27,11 @@ const actions = {
   GETDEPCOMMAND_READ_SUCCESS: 'GETDEPCOMMAND_READ_SUCCESS',
   GETDEPCOMMAND_READ_ERR: 'GETDEPCOMMAND_READ_ERR',
 
+  
+  DEPCOMMAND_READ_BEGIN: 'DEPCOMMAND_READ_BEGIN',
+  DEPCOMMAND_READ_SUCCESS: 'DEPCOMMAND_READ_SUCCESS',
+  DEPCOMMAND_READ_ERR: 'DEPCOMMAND_READ_ERR',
+
   VERIFYACCOUNT_READ_BEGIN: 'VERIFYACCOUNT_READ_BEGIN',
   VERIFYACCOUNT_READ_SUCCESS: 'VERIFYACCOUNT_READ_SUCCESS',
   VERIFYACCOUNT_READ_ERR: 'VERIFYACCOUNT_READ_ERR',
@@ -143,6 +148,26 @@ const actions = {
   withdrawCommandReadErr: (err) => {
     return {
       type: actions.WITHDRAWCOMMAND_READ_ERR,
+      err,
+    };
+  },
+
+  depCommandReadBegin: () => {
+    return {
+      type: actions.DEPCOMMAND_READ_BEGIN,
+    };
+  },
+
+  depCommandReadSuccess: (data) => {
+    return {
+      type: actions.DEPCOMMAND_READ_SUCCESS,
+      data,
+    };
+  },
+
+  depCommandReadErr: (err) => {
+    return {
+      type: actions.DEPCOMMAND_READ_ERR,
       err,
     };
   },

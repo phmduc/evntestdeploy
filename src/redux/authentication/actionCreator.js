@@ -2,7 +2,7 @@ import actions from './actions';
 import { DataService } from '../../config/dataService/dataService';
 import { toast } from 'react-toastify';
  
-const {verifyAccountBegin, verifyAccountErr, verifyAccountSuccess ,getdepCommandReadBegin, getdepCommandReadErr, getdepCommandReadSuccess, addBankReadBegin, addBankReadErr, addBankReadSuccess ,getwithdrawCommandReadBegin, getwithdrawCommandReadErr, getwithdrawCommandReadSuccess, loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr, getinfoBegin, getinfoErr, getinfoSuccess, getauthpjBegin, getauthpjErr, getauthpjSuccess, withdrawCommandReadBegin, withdrawCommandReadSuccess, withdrawCommandReadErr } = actions;
+const {depCommandReadBegin, depCommandReadErr, depCommandReadSuccess,verifyAccountBegin, verifyAccountErr, verifyAccountSuccess ,getdepCommandReadBegin, getdepCommandReadErr, getdepCommandReadSuccess, addBankReadBegin, addBankReadErr, addBankReadSuccess ,getwithdrawCommandReadBegin, getwithdrawCommandReadErr, getwithdrawCommandReadSuccess, loginBegin, loginSuccess, loginErr, logoutBegin, logoutSuccess, logoutErr, getinfoBegin, getinfoErr, getinfoSuccess, getauthpjBegin, getauthpjErr, getauthpjSuccess, withdrawCommandReadBegin, withdrawCommandReadSuccess, withdrawCommandReadErr } = actions;
 
 
 const login = (values, callback) => {
@@ -17,9 +17,12 @@ const login = (values, callback) => {
         sessionStorage.setItem('role', response.data.role);
         dispatch(loginSuccess(true));
         callback();
+        toast.success('Đăng nhập thành công')
       }
     } catch (err) {
       dispatch(loginErr(err.response.data.message));
+      toast.error(err.response.data.message)
+
     }
   };
 };
@@ -33,9 +36,11 @@ const register = (values, callback) => {
       if (response.data) {
         dispatch(loginSuccess(true));
         callback();
+        toast.success('Đăng ký thành công')
       }
     } catch (err) {
       dispatch(loginErr(err));
+      toast.error(err.response.data.message)
     }
   };
 };
@@ -80,7 +85,7 @@ const getauthpj = (id) => {
   };
 };
 
-const withdrawCommand = (data, checkpass) => {
+const withdrawCommand = (data, checkpass, callback) => {
   return async (dispatch) => {
     try {
       dispatch(withdrawCommandReadBegin());
@@ -88,6 +93,7 @@ const withdrawCommand = (data, checkpass) => {
       const initialState = await DataService.post('/wp-json/dbevn/v1/cash-requests/create', data);
       dispatch(withdrawCommandReadSuccess(initialState.data));
       toast.success('Tạo lệnh rút thành công')
+      callback()
     } catch (err) {
       dispatch(withdrawCommandReadErr(err.response.data.message));
       toast.error(err.response.data.message)
@@ -95,6 +101,19 @@ const withdrawCommand = (data, checkpass) => {
   };
 };
 
+const depCommand = (data) => {
+  return async (dispatch) => {
+    try {
+      dispatch(depCommandReadBegin());
+      const initialState = await DataService.post('/wp-json/dbevn/v1/deposit-requests/create', data);
+      dispatch(depCommandReadSuccess(initialState.data));
+      toast.success('Tạo lệnh nạp thành công')
+    } catch (err) {
+      dispatch(depCommandReadErr(err.response.data.message));
+      toast.error(err.response.data.message)
+    }
+  };
+};
 const withdrawCommandGet = (id) => {
   return async (dispatch) => {
     try {
@@ -168,4 +187,4 @@ const verifyAccount= (id, data, callback, data2) => {
   };
 };
 
-export { login, logOut, register ,getinfo, getauthpj , withdrawCommand, withdrawCommandGet, addBank, removeBank, depCommandGet , verifyAccount};
+export { login, logOut, register ,getinfo, getauthpj , withdrawCommand, withdrawCommandGet, addBank, removeBank, depCommandGet , verifyAccount, depCommand};

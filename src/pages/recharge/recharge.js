@@ -6,9 +6,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { getinfo } from "~/redux/authentication/actionCreator";
 import CurrencyInput from "react-currency-input-field";
 import { useNavigate } from 'react-router-dom';
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
+import { useRef } from 'react';
+import { depCommand } from "~/redux/authentication/actionCreator";
 
 function Recharge () {
+  const tawkMessengerRef = useRef();
 
+  const numberPhone = sessionStorage.getItem('phone')
+  const onLoad = () => {
+    const cookies = document.cookie.split(";");
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const eqPos = cookie.indexOf("=");
+      const cookieName = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    }
+    // Example for setting name and email
+
+    tawkMessengerRef.current.setAttributes({
+        name: `${numberPhone}`,
+        content:  `Nạp ${investmentAmount}`, 
+    }, function(error) {
+      console.log(error)
+        // do something if error
+    });
+      tawkMessengerRef.current.hideWidget();
+
+    console.log(document.querySelector('frame:nth-child(2)'))
+};
   const id = sessionStorage.getItem('user_id')
   const { auth } = useSelector((state) => ({
     auth: state.auth.login,
@@ -24,12 +50,26 @@ function Recharge () {
     { value: 1000000 },
     { value: 5000000 },
   ];
+  const handleLinkClick = () => {
+    if(investmentAmount){
+      onLoad()
+      tawkMessengerRef.current.maximize();
+  
+      const data={
+        user_id: id,
+        value: investmentAmount,
+      }
+    
+      dispatch(depCommand(data))
+    }
 
+  };
   const [activeIndex, setActiveIndex] = useState(0);
   const [investmentAmount, setInvestmentAmount] = useState("");
 
   const handleItemClick = (index) => {
     setActiveIndex(index);
+    setInvestmentAmount(items[index].value)
   };
 
   const dispatch = useDispatch()
@@ -55,7 +95,7 @@ function Recharge () {
                 </span>
               </div>
               <div className="usable-right">
-                <a href="#">
+                <a href="/profile/record">
                   Nhật kí nạp tiền >
                 </a>
               </div>
@@ -86,9 +126,16 @@ function Recharge () {
               </div>
             </div>
 
-            <div className="link-btn"><a href="#">CSKH</a></div>
+            <div className="link-btn" ><a href="#" onClick={(e)=>{ e.preventDefault(); handleLinkClick()}}>CSKH</a></div>
           </div>
         </div>
+        <TawkMessengerReact
+          propertyId="64ddda6094cf5d49dc6ae679"
+          widgetId="1h819q2mu"
+          onLoad={onLoad}
+          ref={tawkMessengerRef}
+          />
+        
       </FooterOnly>
     );
   }

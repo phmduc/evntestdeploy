@@ -82,6 +82,8 @@ function App() {
         <Routes>
           <Route path='/*' element={<Home />} />
           <Route path='/profile/*' element={isLoggedIn ? <ProfileRoute /> : <Authen/>} />
+          <Route path='/notification' element={isLoggedIn ? <Notification /> : <Authen/>}  />
+
           <Route path='/category' element={<Category />} />
           <Route path='/aboutus' element={<AboutUs />} />
           <Route path='/aboutus/1' element={<AboutUs1 />} />
@@ -98,8 +100,7 @@ function App() {
           
           <Route path='/blogs' element={<Blogs />} />
           <Route path='/blogdetail/:id' element={<Blogdetail />} />
-          <Route path='/notification' element={<Notification />} />
-          <Route path='/notifydetail/:id' element={<NotifyDetail />} />
+          
         </Routes>
       </Router>
     </Provider>

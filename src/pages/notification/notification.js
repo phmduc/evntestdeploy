@@ -2,111 +2,163 @@ import React, { Component } from "react";
 import FooterOnly from "~/layouts/FooterOnly/FooterOnly.js";
 import Tabs from "~/components/tabs/tabs";
 import "~/pages/notification/notification.css";
-import { useSelector, useDispatch } from 'react-redux';
-import { blogsGetData} from '~/redux/blogs/actionCreator';
-import { categoriesGetData } from '~/redux/blogs/actionCreator';
-import { useEffect } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { blogsGetData } from "~/redux/blogs/actionCreator";
+import { categoriesGetData } from "~/redux/blogs/actionCreator";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { readNotificationList } from "~/redux/notification/actionCreator";
+import moment from "moment";
 
 function Notification() {
-  const dispatch = useDispatch()
-  const { blogs, loading, error } = useSelector((state) => ({
-    blogs: state.blogs.blogs,
-    loading: state.blogs.loading,
-    error: state.blogs.error,
-  }));
-  const { category } = useSelector((state) => ({
-    category: state.category.category,
- 
-  }));
-  let current
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
+  const { notification } = useSelector((state) => ({
+    notification: state.notification.data,
+  }));
+  const navigate = useNavigate();
+  const user_id = sessionStorage.getItem("user_id");
   const goBack = () => {
     navigate(-1);
   };
 
-  if(category.length>0){
-    current = category.filter(elem=>{
-     return elem.name == 'Thông báo nền tảng'
-    })[0].id
-  }
   useEffect(() => {
-    dispatch(blogsGetData());
-    dispatch(categoriesGetData())
+    dispatch(readNotificationList(user_id));
   }, [dispatch]);
-    return (
-      <FooterOnly>
-        <div className="notifition">
-          <div className="container">
-            <div className="position-relative">
-                <span onClick={goBack} className="icon-left">
-                  <i class="bi bi-chevron-left"></i>
-                </span>
-                <h6>Thông báo trang web</h6>
-                <a className="icon-right" href="#">
-                  <span >
-                    <i class="bi bi-person-circle"></i>
-                  </span>
-                </a>
-            </div>
+  return (
+    <FooterOnly>
+      <div className="notifition">
+        <div className="container">
+          <div className="position-relative">
+            <span onClick={goBack} className="icon-left">
+              <i class="bi bi-chevron-left"></i>
+            </span>
+            <h6>Thông báo tài khoản</h6>
+            <a className="icon-right" href="#">
+              <span>
+                <i class="bi bi-person-circle"></i>
+              </span>
+            </a>
           </div>
+        </div>
 
-          <div className="container">
-            <div className="main-content">
-              <div className="list-item">
-              {blogs ? blogs.map((blog, index)=>{
-                console.log(blog)
-                if(blog.categories.some(elem=>{
-                  return elem == current;
-                }))
-                return(
-                  <a href={`/notifydetail/${blog.id}`} className="item d-flex justify-content-between">
-                  <div className="item-title d-flex">
-                    <img src="image/speker.webp" />
-                    <div className="sec-date">
-                      <p>{blog.title.rendered}</p>
-                      <div className="date">
-                        <span>{blog.date.replace("T", " ")}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <span>
-                    <i class="bi bi-chevron-right"></i>
-                  </span>
-                </a>
-                )
-              }) : ''}
-              
-              </div>
-  
-              <div className="pages d-flex justify-content-between align-items-center">
-                <div className="item-page">
-                  <span>trang đầu</span>
-                  <span>
-                    <i class="bi bi-dash-lg"></i>
-                  </span>
-                </div>
-  
-                <div className="">
-                  <span>1</span>
-                  <span>/</span>
-                  <span>1</span>
-                </div>
-  
-                <div className="item-page">
-                  <span>
-                    <i class="bi bi-plus-lg"></i>
-                  </span>
-                  <span>trang sau</span>
-                </div>
-              </div>
+        <div className="container">
+          <div className="main-content">
+            <div className="list-item">
+              {notification.length > 0
+                ? notification.map((elem, index) => {
+                  if(elem.trash == '0'){
+                    if (index === 0) {
+                      return (
+                        <>
+                          <span className="time">
+                            {moment(elem.created).format("DD/MM/YYYY")}
+                          </span>
+                          <div className="item">
+                            <span>
+                              {elem.content} Thời gian {elem.created}
+                            </span>
+                            {elem.type == "tax" ? (
+                              <div className={elem.type}>Thông báo thuế</div>
+                            ) : elem.type == "insurance" ? (
+                              <div className={elem.type}>
+                                Thông báo bảo hiểm
+                              </div>
+                            ) : elem.type == "deposit" ? (
+                              <div className={elem.type}>Nạp tiền</div>
+                            ) : elem.type == "cash" ? (
+                              <div className={elem.type}>Rút tiền</div>
+                            ) : elem.type == "verified" ? (
+                              <div className={elem.type}>
+                                Xác minh thành công{" "}
+                              </div>
+                            ) : elem.type == "locked" ? (
+                              <div className={elem.type}>Tài khoản bị khoá</div>
+                            ) : elem.type == "unlocked" ? (
+                              <div className={elem.type}>Mở khoá tài khoản</div>
+                            ) : (
+                              <div className={elem.type}>Thông báo đầu tư</div>
+                            )}
+                          </div>
+                        </>
+                      );
+                    }
+                    if (
+                      moment(elem.created).format("DD/MM/YYYY") ===
+                      moment(notification[index - 1].created).format(
+                        "DD/MM/YYYY"
+                      )
+                    ) {
+                      return (
+                        <div className="item">
+                          <span>
+                            {elem.content} Thời gian {elem.created}
+                          </span>
+                          {elem.type == "tax" ? (
+                            <div className={elem.type}>Thông báo thuế</div>
+                          ) : elem.type == "insurance" ? (
+                            <div className={elem.type}>Thông báo bảo hiểm</div>
+                          ) : elem.type == "deposit" ? (
+                            <div className={elem.type}>Nạp tiền</div>
+                          ) : elem.type == "cash" ? (
+                            <div className={elem.type}>Rút tiền</div>
+                          ) : elem.type == "verified" ? (
+                            <div className={elem.type}>
+                              Xác minh thành công{" "}
+                            </div>
+                          ) : elem.type == "locked" ? (
+                            <div className={elem.type}>Tài khoản bị khoá</div>
+                          ) : elem.type == "unlocked" ? (
+                            <div className={elem.type}>Mở khoá tài khoản</div>
+                          ) : (
+                            <div className={elem.type}>Thông báo đầu tư</div>
+                          )}
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <>
+                          <span className="time">
+                            {moment(elem.created).format("DD/MM/YYYY")}
+                          </span>
+                          <div className="item">
+                            <span>
+                              {elem.content} Thời gian {elem.created}
+                            </span>
+                            {elem.type == "tax" ? (
+                              <div className={elem.type}>Thông báo thuế</div>
+                            ) : elem.type == "insurance" ? (
+                              <div className={elem.type}>
+                                Thông báo bảo hiểm
+                              </div>
+                            ) : elem.type == "deposit" ? (
+                              <div className={elem.type}>Nạp tiền</div>
+                            ) : elem.type == "cash" ? (
+                              <div className={elem.type}>Rút tiền</div>
+                            ) : elem.type == "verified" ? (
+                              <div className={elem.type}>
+                                Xác minh thành công{" "}
+                              </div>
+                            ) : elem.type == "locked" ? (
+                              <div className={elem.type}>Tài khoản bị khoá</div>
+                            ) : elem.type == "unlocked" ? (
+                              <div className={elem.type}>Mở khoá tài khoản</div>
+                            ) : (
+                              <div className={elem.type}>Thông báo đầu tư</div>
+                            )}
+                          </div>
+                        </>
+                      );
+                    }
+                  }
+                  })
+                : ""}
             </div>
           </div>
         </div>
-      </FooterOnly>
-    );
-  }
-
+      </div>
+    </FooterOnly>
+  );
+}
 
 export default Notification;

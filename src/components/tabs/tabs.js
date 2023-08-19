@@ -57,9 +57,16 @@ function Tabs() {
       sessionEnd = sessionStart.clone().add(6, "hours"); // 10h10 đến 16h10
     } else if (startTime === "16h10") {
       sessionEnd = sessionStart.clone().add(5, "hours").add(5, "minutes"); // 16h10 đến 21h1515
-    } else if (startTime === "21h15") {
-      sessionEnd = sessionStart.clone().add(12, "hours").add(55, "minutes"); // 21h1515 đến 10h10
+    }   else if (startTime === "21h15") {
+      const yesterdaySessionStart = sessionStart.clone().subtract(1, "day");
+      const todaySessionEnd = sessionStart.clone().add(12, "hours").add(55, "minutes").subtract(1, "day");
+      if (now.isBetween(yesterdaySessionStart, todaySessionEnd) ) {
+        return true;
+      } else {
+        return false;
+      }
     }
+  
     return now.isBetween(sessionStart, sessionEnd);
   };
 
@@ -230,7 +237,7 @@ function Tabs() {
                               <Countdown
                                 nextSessionTime={
                                   item.nhom_thoi_gian[0] == "21h15"
-                                    ? "10h15"
+                                    ? "10h10"
                                     : item.nhom_thoi_gian[0] === "16h10"
                                     ? "21h15"
                                     : "16h10"
@@ -350,7 +357,7 @@ function Tabs() {
                               <Countdown
                                 nextSessionTime={
                                   item.nhom_thoi_gian[0] == "21h15"
-                                    ? "10h15"
+                                    ? "10h10"
                                     : item.nhom_thoi_gian[0] === "16h10"
                                     ? "21h15"
                                     : "16h10"
@@ -480,7 +487,7 @@ function Tabs() {
                                   <Countdown
                                     nextSessionTime={
                                       item.nhom_thoi_gian[0] == "21h15"
-                                        ? "10h15"
+                                        ? "10h10"
                                         : item.nhom_thoi_gian[0] === "16h10"
                                         ? "21h15"
                                         : "16h10"
@@ -607,7 +614,7 @@ function Tabs() {
                               <Countdown
                                 nextSessionTime={
                                   item.nhom_thoi_gian[0] == "21h15"
-                                    ? "10h15"
+                                    ? "10h10"
                                     : item.nhom_thoi_gian[0] === "16h10"
                                     ? "21h15"
                                     : "16h10"
@@ -734,7 +741,7 @@ function Tabs() {
                               <Countdown
                                 nextSessionTime={
                                   item.nhom_thoi_gian[0] == "21h15"
-                                    ? "10h15"
+                                    ? "10h10"
                                     : item.nhom_thoi_gian[0] === "16h10"
                                     ? "21h15"
                                     : "16h10"
