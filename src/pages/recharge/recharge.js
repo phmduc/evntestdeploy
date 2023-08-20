@@ -55,12 +55,7 @@ function Recharge () {
       onLoad()
       tawkMessengerRef.current.maximize();
   
-      const data={
-        user_id: id,
-        value: investmentAmount,
-      }
-    
-      dispatch(depCommand(data))
+
     }
 
   };

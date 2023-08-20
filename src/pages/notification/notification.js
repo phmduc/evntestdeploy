@@ -56,7 +56,9 @@ function Notification() {
                           </span>
                           <div className="item">
                             <span>
-                              {elem.content} Thời gian {elem.created}
+                              {elem.content} Thời gian { moment(elem.created).format(
+                        "DD/MM/YYYY HH:mm:ss" 
+                      )}
                             </span>
                             {elem.type == "tax" ? (
                               <div className={elem.type}>Thông báo thuế</div>
@@ -92,7 +94,9 @@ function Notification() {
                       return (
                         <div className="item">
                           <span>
-                            {elem.content} Thời gian {elem.created}
+                            {elem.content} Thời gian { moment(elem.created).format(
+                        "DD/MM/YYYY HH:mm:ss" 
+                      )}
                           </span>
                           {elem.type == "tax" ? (
                             <div className={elem.type}>Thông báo thuế</div>
@@ -123,7 +127,9 @@ function Notification() {
                           </span>
                           <div className="item">
                             <span>
-                              {elem.content} Thời gian {elem.created}
+                              {elem.content} Thời gian { moment(elem.created).format(
+                        "DD/MM/YYYY HH:mm:ss" 
+                      )}
                             </span>
                             {elem.type == "tax" ? (
                               <div className={elem.type}>Thông báo thuế</div>
