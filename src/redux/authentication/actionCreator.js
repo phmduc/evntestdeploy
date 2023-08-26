@@ -91,14 +91,13 @@ const withdrawCommand = (data, checkpass, callback) => {
       dispatch(withdrawCommandReadBegin());
       const response = await DataService.post('/wp-json/dbevn/v1/auth', checkpass);
       const initialState = await DataService.post('/wp-json/dbevn/v1/cash-requests/create', data);
-      dispatch(withdrawCommandReadSuccess(initialState.data));
       toast.success('Tạo lệnh rút thành công')
       callback()
     } catch (err) {
       dispatch(withdrawCommandReadErr(err.response.data.message));
       toast.error(err.response.data.message)
     }
-  };
+  };  
 };
 
 const depCommand = (data) => {

@@ -50,7 +50,7 @@ client.interceptors.request.use((config) => {
   // For example tag along the bearer access token to request header or set a cookie
   const requestConfig = config;
   const { headers } = config;
-  requestConfig.headers = { ...headers, Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RiZXZuLndlYm1hdS5uZXQiLCJpYXQiOjE2OTIyNjg1NjEsIm5iZiI6MTY5MjI2ODU2MSwiZXhwIjoxNjkyODczMzYxLCJkYXRhIjp7InVzZXIiOnsiaWQiOjEsImRldmljZSI6IiIsInBhc3MiOiJiMDA1Y2UzZGViZmQ5MmE2Yjc0Y2U4ODExMDJhMjVhNSJ9fX0.Q05knic_M_MKItp6jUTM_JcbK2drPl_-8WN_8TprCC0` };
+  requestConfig.headers = { ...headers, Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaXNlcnZlci5xdXlkYXV0dW5vaWJvZXZuLmNvbSIsImlhdCI6MTY5MjYzNDAwOSwibmJmIjoxNjkyNjM0MDA5LCJleHAiOjE2OTMyMzg4MDksImRhdGEiOnsidXNlciI6eyJpZCI6MSwiZGV2aWNlIjoiIiwicGFzcyI6ImIwMDVjZTNkZWJmZDkyYTZiNzRjZTg4MTEwMmEyNWE1In19fQ.g_kTORxiit0BD5ZV8f-3ZIMOgCm3YlnfwhNzm1eHnJI` };
 
   return requestConfig;
 });

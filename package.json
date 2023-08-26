@@ -2,7 +2,7 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://dbevn.webmau.net",
+  "proxy": "https://apiserver.quydautunoiboevn.com/",
   "dependencies": {
     "@tawk.to/tawk-messenger-react": "^2.0.2",
     "@testing-library/jest-dom": "^5.16.5",

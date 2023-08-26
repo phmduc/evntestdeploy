@@ -78,9 +78,9 @@ function Notification() {
                               <div className={elem.type}>Tài khoản bị khoá</div>
                             ) : elem.type == "unlocked" ? (
                               <div className={elem.type}>Mở khoá tài khoản</div>
-                            ) : (
-                              <div className={elem.type}>Thông báo đầu tư</div>
-                            )}
+                            ) : elem.type == "warning" ?  (
+                              <div className={elem.type}>Xác minh tài khoản nghi vấn</div>
+                            ) : <div className={elem.type}>Thông báo đầu tư</div>}
                           </div>
                         </>
                       );
@@ -99,24 +99,26 @@ function Notification() {
                       )}
                           </span>
                           {elem.type == "tax" ? (
-                            <div className={elem.type}>Thông báo thuế</div>
-                          ) : elem.type == "insurance" ? (
-                            <div className={elem.type}>Thông báo bảo hiểm</div>
-                          ) : elem.type == "deposit" ? (
-                            <div className={elem.type}>Nạp tiền</div>
-                          ) : elem.type == "cash" ? (
-                            <div className={elem.type}>Rút tiền</div>
-                          ) : elem.type == "verified" ? (
-                            <div className={elem.type}>
-                              Xác minh thành công{" "}
-                            </div>
-                          ) : elem.type == "locked" ? (
-                            <div className={elem.type}>Tài khoản bị khoá</div>
-                          ) : elem.type == "unlocked" ? (
-                            <div className={elem.type}>Mở khoá tài khoản</div>
-                          ) : (
-                            <div className={elem.type}>Thông báo đầu tư</div>
-                          )}
+                              <div className={elem.type}>Thông báo thuế</div>
+                            ) : elem.type == "insurance" ? (
+                              <div className={elem.type}>
+                                Thông báo bảo hiểm
+                              </div>
+                            ) : elem.type == "deposit" ? (
+                              <div className={elem.type}>Nạp tiền</div>
+                            ) : elem.type == "cash" ? (
+                              <div className={elem.type}>Rút tiền</div>
+                            ) : elem.type == "verified" ? (
+                              <div className={elem.type}>
+                                Xác minh thành công{" "}
+                              </div>
+                            ) : elem.type == "locked" ? (
+                              <div className={elem.type}>Tài khoản bị khoá</div>
+                            ) : elem.type == "unlocked" ? (
+                              <div className={elem.type}>Mở khoá tài khoản</div>
+                            ) : elem.type == "warning" ?  (
+                              <div className={elem.type}>Xác minh tài khoản nghi vấn</div>
+                            ) : <div className={elem.type}>Thông báo đầu tư</div>}
                         </div>
                       );
                     } else {
@@ -149,9 +151,9 @@ function Notification() {
                               <div className={elem.type}>Tài khoản bị khoá</div>
                             ) : elem.type == "unlocked" ? (
                               <div className={elem.type}>Mở khoá tài khoản</div>
-                            ) : (
-                              <div className={elem.type}>Thông báo đầu tư</div>
-                            )}
+                            ) : elem.type == "warning" ?  (
+                              <div className={elem.type}>Xác minh tài khoản nghi vấn</div>
+                            ) : <div className={elem.type}>Thông báo đầu tư</div>}
                           </div>
                         </>
                       );

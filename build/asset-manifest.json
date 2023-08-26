@@ -1,12 +1,11 @@
 {
   "files": {
-    "main.css": "/static/css/main.db4e9d27.css",
-    "main.js": "/static/js/main.285cb093.js",
+    "main.css": "/static/css/main.067cfb44.css",
+    "main.js": "/static/js/main.63c69ee8.js",
     "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
     "static/media/bootstrap-icons.woff?": "/static/media/bootstrap-icons.4753c5ba57962b4d7bf8.woff",
     "static/media/bootstrap-icons.woff2?": "/static/media/bootstrap-icons.6d63d0501e5ed7b79dab.woff2",
     "static/media/bg-login.webp": "/static/media/bg-login.814b8d8c9630861349a7.webp",
-    "static/media/4b79f400.webp": "/static/media/150197cfc3f41705236adbe2174dd98d4b79f400.ef1ff98d59ec1159cb10.webp",
     "static/media/488888.webp": "/static/media/488888.d82ff06fd0fa0b2c35a0.webp",
     "static/media/tải xuống (2).webp": "/static/media/tải xuống (2).94331ff2bdd9868e5fde.webp",
     "static/media/EVN-logo.9702d7df.webp": "/static/media/EVN-logo.9702d7df.02f36a67dd3ee6dfaac0.webp",
@@ -27,12 +26,12 @@
     "static/media/shimingrenzheng-icon.webp": "/static/media/shimingrenzheng-icon.afee01c21792079c45e4.webp",
     "static/media/shoujihao-icon.webp": "/static/media/shoujihao-icon.acf354eb12cb19c4c7e0.webp",
     "static/media/xiugaimima-icon.webp": "/static/media/xiugaimima-icon.3ce7435f65cf4545b6c0.webp",
-    "main.db4e9d27.css.map": "/static/css/main.db4e9d27.css.map",
-    "main.285cb093.js.map": "/static/js/main.285cb093.js.map",
+    "main.067cfb44.css.map": "/static/css/main.067cfb44.css.map",
+    "main.63c69ee8.js.map": "/static/js/main.63c69ee8.js.map",
     "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.db4e9d27.css",
-    "static/js/main.285cb093.js"
+    "static/css/main.067cfb44.css",
+    "static/js/main.63c69ee8.js"
   ]
 }

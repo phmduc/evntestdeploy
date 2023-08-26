@@ -49,37 +49,25 @@ function Tabs() {
     asNavFor: tabSlider.current,
   };
 
-  const isCurrentSession = (startTime) => {
+
+
+
+  const isCurrentSession = (startTime, endTime) => {
     const now = moment();
     const sessionStart = moment(startTime, "HH:mm");
-    let sessionEnd;
-    if (startTime === "10h10") {
-      sessionEnd = sessionStart.clone().add(6, "hours"); // 10h10 đến 16h10
-    } else if (startTime === "16h10") {
-      sessionEnd = sessionStart.clone().add(5, "hours").add(5, "minutes"); // 16h10 đến 21h1515
-    }   else if (startTime === "21h15") {
-      const yesterdaySessionStart = sessionStart.clone().subtract(1, "day");
-      const todaySessionEnd = sessionStart.clone().add(12, "hours").add(55, "minutes").subtract(1, "day");
-      if (now.isBetween(yesterdaySessionStart, todaySessionEnd) ) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  
+    let sessionEnd = sessionStart.clone().add(Number(endTime),"minutes");
     return now.isBetween(sessionStart, sessionEnd);
   };
 
   const sortedItems = projects.sort((a, b) => {
     if (
-      isCurrentSession(a.nhom_thoi_gian[0]) &&
-      !isCurrentSession(b.nhom_thoi_gian[0])
+      Number(a.dbevn_product_min_invest) < Number(b.dbevn_product_min_invest)
     ) {
       return -1;
     }
     if (
-      !isCurrentSession(a.nhom_thoi_gian[0]) &&
-      isCurrentSession(b.nhom_thoi_gian[0])
+      Number(a.dbevn_product_min_invest) > Number(b.dbevn_product_min_invest)
+
     ) {
       return 1;
     }
@@ -98,11 +86,7 @@ function Tabs() {
   };
 
   const investing = (pj_id, money, min) => {
-    if (Number(auth.wallet) < Number(money) && Number(auth.wallet_can_cash) < Number(money) ) {
-      toast.error("Số tiền trong tài khoản không đủ");
-    } else if (Number(money) < Number(min)) {
-      toast.error("Số tiền đầu tư phải trên mức tối thiểu");
-    } else {
+    if (money) {
       const data = {
         user_id: id,
         product_id: pj_id,
@@ -110,8 +94,6 @@ function Tabs() {
       };
       dispatch(
         projectsInvest(data, () => {
-          toast.success("Đầu tư thành công");
-          setisrender(!isrender);
           setSelectedProduct(null)
         })
       );
@@ -206,18 +188,12 @@ function Tabs() {
                       {
                       id && authpj ? (
                         isWithinOpeningTime(item).current ? (
-                          authpj.some((elem) => elem.product_id == item.id) ? (
-                            <button className="btn btnStop" disabled>
-                              Đã đầu tư
-                            </button>
-                          ) : (
                             <button
                               className="btn btnRegister"
                               onClick={() => setSelectedProduct(item)}
                             >
                               Đăng ký
                             </button>
-                          )
                         ) : (
                           <button className="btn btnStop" disabled>
                             Ngừng đăng ký
@@ -227,21 +203,18 @@ function Tabs() {
                         <a href="/authen" className="btn btnRegister">
                           Đăng nhập để giao dịch
                         </a>
-                      )}
+                      )
+                      }
 
                       <div className="countdown d-flex align-items-center justify-content-center">
                         <span className="textCountDown">Mua đếm ngược: </span>
                         <div className="countdownJS">
                           <span id="demo">
-                          {isCurrentSession(item.nhom_thoi_gian[0]) ? (
+                          {isCurrentSession(item.nhom_thoi_gian[0], item.dbevn_product_time_invest) ? (
                               <Countdown
                                 nextSessionTime={
-                                  item.nhom_thoi_gian[0] == "21h15"
-                                    ? "10h10"
-                                    : item.nhom_thoi_gian[0] === "16h10"
-                                    ? "21h15"
-                                    : "16h10"
-                                }
+                                  item.nhom_thoi_gian[0]
+                                } time={item.dbevn_product_time_invest}
                               />
                             ) : isWithinOpeningTime(item).percent > 100 ? (
                               "Đã qua phiên"
@@ -324,20 +297,15 @@ function Tabs() {
                         <ProgressBar now={(isWithinOpeningTime(item).percent > 100) ? '100' : (isWithinOpeningTime(item).percent < 0) ? '0' : isWithinOpeningTime(item).percent} label={(isWithinOpeningTime(item).percent > 100) ? '100%' : (isWithinOpeningTime(item).percent < 0) ? '0% Chưa bắt đầu' : isWithinOpeningTime(item).percent+'%'} ></ProgressBar>
                       </div>
 
-                      {id && authpj ? (
+                      {
+                      id && authpj ? (
                         isWithinOpeningTime(item).current ? (
-                          authpj.some((elem) => elem.product_id == item.id) ? (
-                            <button className="btn btnStop" disabled>
-                              Đã đầu tư
-                            </button>
-                          ) : (
                             <button
                               className="btn btnRegister"
                               onClick={() => setSelectedProduct(item)}
                             >
                               Đăng ký
                             </button>
-                          )
                         ) : (
                           <button className="btn btnStop" disabled>
                             Ngừng đăng ký
@@ -347,21 +315,17 @@ function Tabs() {
                         <a href="/authen" className="btn btnRegister">
                           Đăng nhập để giao dịch
                         </a>
-                      )}
-
+                      )
+                      }
                       <div className="countdown d-flex align-items-center justify-content-center">
                         <span className="textCountDown">Mua đếm ngược: </span>
                         <div className="countdownJS">
                           <span id="demo">
-                            {isCurrentSession(item.nhom_thoi_gian[0]) ? (
+                          {isCurrentSession(item.nhom_thoi_gian[0], item.dbevn_product_time_invest) ? (
                               <Countdown
                                 nextSessionTime={
-                                  item.nhom_thoi_gian[0] == "21h15"
-                                    ? "10h10"
-                                    : item.nhom_thoi_gian[0] === "16h10"
-                                    ? "21h15"
-                                    : "16h10"
-                                }
+                                  item.nhom_thoi_gian[0]
+                                } time={item.dbevn_product_time_invest}
                               />
                             ) : isWithinOpeningTime(item).percent > 100 ? (
                               "Đã qua phiên"
@@ -450,32 +414,26 @@ function Tabs() {
 
                           </div>
 
-                          {id && authpj ? (
-                            isWithinOpeningTime(item).current ? (
-                              authpj.some(
-                                (elem) => elem.product_id == item.id
-                              ) ? (
-                                <button className="btn btnStop" disabled>
-                                  Đã đầu tư
-                                </button>
-                              ) : (
-                                <button
-                                  className="btn btnRegister"
-                                  onClick={() => setSelectedProduct(item)}
-                                >
-                                  Đăng ký
-                                </button>
-                              )
-                            ) : (
-                              <button className="btn btnStop" disabled>
-                                Ngừng đăng ký
-                              </button>
-                            )
-                          ) : (
-                            <a href="/authen" className="btn btnRegister">
-                              Đăng nhập để giao dịch
-                            </a>
-                          )}
+                          {
+                      id && authpj ? (
+                        isWithinOpeningTime(item).current ? (
+                            <button
+                              className="btn btnRegister"
+                              onClick={() => setSelectedProduct(item)}
+                            >
+                              Đăng ký
+                            </button>
+                        ) : (
+                          <button className="btn btnStop" disabled>
+                            Ngừng đăng ký
+                          </button>
+                        )
+                      ) : (
+                        <a href="/authen" className="btn btnRegister">
+                          Đăng nhập để giao dịch
+                        </a>
+                      )
+                      }
 
                           <div className="countdown d-flex align-items-center justify-content-center">
                             <span className="textCountDown">
@@ -483,19 +441,15 @@ function Tabs() {
                             </span>
                             <div className="countdownJS">
                               <span id="demo">
-                                {isCurrentSession(item.nhom_thoi_gian[0]) ? (
-                                  <Countdown
-                                    nextSessionTime={
-                                      item.nhom_thoi_gian[0] == "21h15"
-                                        ? "10h10"
-                                        : item.nhom_thoi_gian[0] === "16h10"
-                                        ? "21h15"
-                                        : "16h10"
-                                    }
-                                  />
-                                ) : (
-                                  "Chưa đến phiên"
-                                )}
+                              {isCurrentSession(item.nhom_thoi_gian[0], item.dbevn_product_time_invest) ? (
+                              <Countdown
+                                nextSessionTime={
+                                  item.nhom_thoi_gian[0]
+                                } time={item.dbevn_product_time_invest}
+                              />
+                            ) : isWithinOpeningTime(item).percent > 100 ? (
+                              "Đã qua phiên"
+                            ) : 'Chưa đến phiên'}
                               </span>
                             </div>
                           </div>
@@ -576,33 +530,26 @@ function Tabs() {
                             <ProgressBar now={(isWithinOpeningTime(item).percent > 100) ? '100' : (isWithinOpeningTime(item).percent < 0) ? '0' : isWithinOpeningTime(item).percent} label={(isWithinOpeningTime(item).percent > 100) ? '100%' : (isWithinOpeningTime(item).percent < 0) ? '0% Chưa bắt đầu' : isWithinOpeningTime(item).percent+'%'} ></ProgressBar>
 
                           </div>
-
-                          {id && authpj ? (
-                            isWithinOpeningTime(item).current ? (
-                              authpj.some(
-                                (elem) => elem.product_id == item.id
-                              ) ? (
-                                <button className="btn btnStop" disabled>
-                                  Đã đầu tư
-                                </button>
-                              ) : (
-                                <button
-                                  className="btn btnRegister"
-                                  onClick={() => setSelectedProduct(item)}
-                                >
-                                  Đăng ký
-                                </button>
-                              )
-                            ) : (
-                              <button className="btn btnStop" disabled>
-                                Ngừng đăng ký
-                              </button>
-                            )
-                          ) : (
-                            <a href="/authen" className="btn btnRegister">
-                              Đăng nhập để giao dịch
-                            </a>
-                          )}
+                          {
+                      id && authpj ? (
+                        isWithinOpeningTime(item).current ? (
+                            <button
+                              className="btn btnRegister"
+                              onClick={() => setSelectedProduct(item)}
+                            >
+                              Đăng ký
+                            </button>
+                        ) : (
+                          <button className="btn btnStop" disabled>
+                            Ngừng đăng ký
+                          </button>
+                        )
+                      ) : (
+                        <a href="/authen" className="btn btnRegister">
+                          Đăng nhập để giao dịch
+                        </a>
+                      )
+                      }
 
                           <div className="countdown d-flex align-items-center justify-content-center">
                             <span className="textCountDown">
@@ -610,15 +557,11 @@ function Tabs() {
                             </span>
                             <div className="countdownJS">
                               <span id="demo">
-                              {isCurrentSession(item.nhom_thoi_gian[0]) ? (
+                              {isCurrentSession(item.nhom_thoi_gian[0], item.dbevn_product_time_invest) ? (
                               <Countdown
                                 nextSessionTime={
-                                  item.nhom_thoi_gian[0] == "21h15"
-                                    ? "10h10"
-                                    : item.nhom_thoi_gian[0] === "16h10"
-                                    ? "21h15"
-                                    : "16h10"
-                                }
+                                  item.nhom_thoi_gian[0]
+                                } time={item.dbevn_product_time_invest}
                               />
                             ) : isWithinOpeningTime(item).percent > 100 ? (
                               "Đã qua phiên"
@@ -704,48 +647,37 @@ function Tabs() {
 
                           </div>
 
-                          {id && authpj ? (
-                            isWithinOpeningTime(item).current ? (
-                              authpj.some(
-                                (elem) => elem.product_id == item.id
-                              ) ? (
-                                <button className="btn btnStop" disabled>
-                                  Đã đầu tư
-                                </button>
-                              ) : (
-                                <button
-                                  className="btn btnRegister"
-                                  onClick={() => setSelectedProduct(item)}
-                                >
-                                  Đăng ký
-                                </button>
-                              )
-                            ) : (
-                              <button className="btn btnStop" disabled>
-                                Ngừng đăng ký
-                              </button>
-                            )
-                          ) : (
-                            <a href="/authen" className="btn btnRegister">
-                              Đăng nhập để giao dịch
-                            </a>
-                          )}
-
+                          {
+                      id && authpj ? (
+                        isWithinOpeningTime(item).current ? (
+                            <button
+                              className="btn btnRegister"
+                              onClick={() => setSelectedProduct(item)}
+                            >
+                              Đăng ký
+                            </button>
+                        ) : (
+                          <button className="btn btnStop" disabled>
+                            Ngừng đăng ký
+                          </button>
+                        )
+                      ) : (
+                        <a href="/authen" className="btn btnRegister">
+                          Đăng nhập để giao dịch
+                        </a>
+                      )
+                      }
                           <div className="countdown d-flex align-items-center justify-content-center">
                             <span className="textCountDown">
                               Mua đếm ngược:{" "}
                             </span>
                             <div className="countdownJS">
                               <span id="demo">
-                              {isCurrentSession(item.nhom_thoi_gian[0]) ? (
+                              {isCurrentSession(item.nhom_thoi_gian[0], item.dbevn_product_time_invest) ? (
                               <Countdown
                                 nextSessionTime={
-                                  item.nhom_thoi_gian[0] == "21h15"
-                                    ? "10h10"
-                                    : item.nhom_thoi_gian[0] === "16h10"
-                                    ? "21h15"
-                                    : "16h10"
-                                }
+                                  item.nhom_thoi_gian[0]
+                                } time={item.dbevn_product_time_invest}
                               />
                             ) : isWithinOpeningTime(item).percent > 100 ? (
                               "Đã qua phiên"

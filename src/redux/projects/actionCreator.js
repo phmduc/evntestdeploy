@@ -1,6 +1,7 @@
 import axios from 'axios';
 import actions from './actions';
 import { DataService } from '../../config/dataService/dataService';
+import { toast } from 'react-toastify';
 
 
 
@@ -24,6 +25,7 @@ const projectsInvest = (data, callback = ()=>{}) => {
       dispatch(projectsInvestBegin());
       const initialState = await DataService.post('/wp-json/dbevn/v1/orders/create', data);
       dispatch(projectsInvestSuccess(initialState.data));
+      toast.success(initialState.data);
       callback()
     } catch (err) {
       dispatch(projectsInvestErr(err));

@@ -64,6 +64,11 @@
   background-color: #F8D7DA;
   color: #721C24;
 }
+
+.notifition .list-item .item .warning{
+  background-color: #FFF3CD;
+  color: #856404;
+}
 .notifition .list-item .item .item-title p {
     margin-bottom: 0;
     display: flex;

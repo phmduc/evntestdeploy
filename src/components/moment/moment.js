@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 
-const Countdown = ({ nextSessionTime }) => {
+const Countdown = ({ nextSessionTime, time }) => {
   const calculateTimeLeft = () => {
     const now = moment();
-    const nextSession = moment(nextSessionTime, 'HH[h]mm');
+    let nextSession = moment(nextSessionTime, 'HH[h]mm').add(Number(time),"minutes")
+    
     const duration = moment.duration(nextSession.diff(now));
-
     return {
       hours: duration.hours(),
       minutes: duration.minutes(),
