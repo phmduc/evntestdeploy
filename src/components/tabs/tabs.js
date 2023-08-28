@@ -54,8 +54,9 @@ function Tabs() {
 
   const isCurrentSession = (startTime, endTime) => {
     const now = moment();
-    const sessionStart = moment(startTime, "HH:mm");
-    let sessionEnd = sessionStart.clone().add(Number(endTime),"minutes");
+    const sessionStart = moment('0h00', "HH:mm");
+    const sessionEnd = moment(startTime, "HH:mm");
+
     return now.isBetween(sessionStart, sessionEnd);
   };
 
@@ -82,7 +83,7 @@ function Tabs() {
     const openingEnd = sessionStart
       .clone()
       .add(Number(item.dbevn_product_time_invest), "minutes");
-    return {current: currentTime.isBetween(sessionStart, openingEnd), percent: Math.round((Number(currentTime) - Number(sessionStart))/ (Number(openingEnd) - Number(sessionStart)) * 100) };
+    return {current: currentTime.isBetween(sessionStart, openingEnd), percent:  Math.round( 60 + Math.random() * 10) };
   };
 
   const investing = (pj_id, money, min) => {
@@ -216,9 +217,7 @@ function Tabs() {
                                   item.nhom_thoi_gian[0]
                                 } time={item.dbevn_product_time_invest}
                               />
-                            ) : isWithinOpeningTime(item).percent > 100 ? (
-                              "Đã qua phiên"
-                            ) : 'Chưa đến phiên'}
+                            )  : 'Đã qua phiên'}
                           </span>
                         </div>
                       </div>
@@ -327,9 +326,7 @@ function Tabs() {
                                   item.nhom_thoi_gian[0]
                                 } time={item.dbevn_product_time_invest}
                               />
-                            ) : isWithinOpeningTime(item).percent > 100 ? (
-                              "Đã qua phiên"
-                            ) : 'Chưa đến phiên'}
+                            )  : 'Đã qua phiên'}
                           </span>
                         </div>
                       </div>
@@ -447,9 +444,7 @@ function Tabs() {
                                   item.nhom_thoi_gian[0]
                                 } time={item.dbevn_product_time_invest}
                               />
-                            ) : isWithinOpeningTime(item).percent > 100 ? (
-                              "Đã qua phiên"
-                            ) : 'Chưa đến phiên'}
+                            )  : 'Đã qua phiên'}
                               </span>
                             </div>
                           </div>
@@ -563,9 +558,7 @@ function Tabs() {
                                   item.nhom_thoi_gian[0]
                                 } time={item.dbevn_product_time_invest}
                               />
-                            ) : isWithinOpeningTime(item).percent > 100 ? (
-                              "Đã qua phiên"
-                            ) : 'Chưa đến phiên'}
+                            )  : 'Đã qua phiên'}
                               </span>
                             </div>
                           </div>
@@ -679,9 +672,7 @@ function Tabs() {
                                   item.nhom_thoi_gian[0]
                                 } time={item.dbevn_product_time_invest}
                               />
-                            ) : isWithinOpeningTime(item).percent > 100 ? (
-                              "Đã qua phiên"
-                            ) : 'Chưa đến phiên'}
+                            )  : 'Đã qua phiên'}
                               </span>
                             </div>
                           </div>

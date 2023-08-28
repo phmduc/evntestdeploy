@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.067cfb44.css",
-    "main.js": "/static/js/main.63c69ee8.js",
+    "main.js": "/static/js/main.bf12f8e8.js",
     "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
     "static/media/bootstrap-icons.woff?": "/static/media/bootstrap-icons.4753c5ba57962b4d7bf8.woff",
     "static/media/bootstrap-icons.woff2?": "/static/media/bootstrap-icons.6d63d0501e5ed7b79dab.woff2",
@@ -16,9 +16,9 @@
     "static/media/slick.eot": "/static/media/slick.a4e97f5a2a64f0ab1323.eot",
     "static/media/slick.ttf": "/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/static/media/slick.295183786cd8a1389865.woff",
-    "static/media/tixian.370c1ff2.webp": "/static/media/tixian.370c1ff2.ada7b77e4faf53bf4ee1.webp",
-    "static/media/tải xuống.webp": "/static/media/tải xuống.376edfca7e5bf2e1d52e.webp",
-    "static/media/tải xuống (1).webp": "/static/media/tải xuống (1).f8ab86b25b469b994ff1.webp",
+    "static/media/icon2.webp": "/static/media/icon2.ada7b77e4faf53bf4ee1.webp",
+    "static/media/icon1.webp": "/static/media/icon1.376edfca7e5bf2e1d52e.webp",
+    "static/media/icon3.webp": "/static/media/icon3.f8ab86b25b469b994ff1.webp",
     "static/media/jiaoyimima-icon.webp": "/static/media/jiaoyimima-icon.514d60fdc47a0543402c.webp",
     "static/media/huiyuandengji-icon.webp": "/static/media/huiyuandengji-icon.e41ad502d8e33599f265.webp",
     "index.html": "/index.html",
@@ -27,11 +27,11 @@
     "static/media/shoujihao-icon.webp": "/static/media/shoujihao-icon.acf354eb12cb19c4c7e0.webp",
     "static/media/xiugaimima-icon.webp": "/static/media/xiugaimima-icon.3ce7435f65cf4545b6c0.webp",
     "main.067cfb44.css.map": "/static/css/main.067cfb44.css.map",
-    "main.63c69ee8.js.map": "/static/js/main.63c69ee8.js.map",
+    "main.bf12f8e8.js.map": "/static/js/main.bf12f8e8.js.map",
     "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.067cfb44.css",
-    "static/js/main.63c69ee8.js"
+    "static/js/main.bf12f8e8.js"
   ]
 }

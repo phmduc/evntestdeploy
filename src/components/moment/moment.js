@@ -4,7 +4,7 @@ import moment from 'moment';
 const Countdown = ({ nextSessionTime, time }) => {
   const calculateTimeLeft = () => {
     const now = moment();
-    let nextSession = moment(nextSessionTime, 'HH[h]mm').add(Number(time),"minutes")
+    let nextSession = moment(nextSessionTime, 'HH[h]mm')
     
     const duration = moment.duration(nextSession.diff(now));
     return {
