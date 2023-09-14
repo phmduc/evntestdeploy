@@ -68,7 +68,7 @@ function Notification() {
                               </div>
                             ) : elem.type == "deposit" ? (
                               <div className={elem.type}>Nạp tiền</div>
-                            ) : elem.type == "cash" ? (
+                            ) : elem.type == "cashout" ? (
                               <div className={elem.type}>Rút tiền</div>
                             ) : elem.type == "verified" ? (
                               <div className={elem.type}>
@@ -106,7 +106,7 @@ function Notification() {
                               </div>
                             ) : elem.type == "deposit" ? (
                               <div className={elem.type}>Nạp tiền</div>
-                            ) : elem.type == "cash" ? (
+                            ) : elem.type == "cashout" ? (
                               <div className={elem.type}>Rút tiền</div>
                             ) : elem.type == "verified" ? (
                               <div className={elem.type}>
@@ -141,7 +141,7 @@ function Notification() {
                               </div>
                             ) : elem.type == "deposit" ? (
                               <div className={elem.type}>Nạp tiền</div>
-                            ) : elem.type == "cash" ? (
+                            ) : elem.type == "cashout" ? (
                               <div className={elem.type}>Rút tiền</div>
                             ) : elem.type == "verified" ? (
                               <div className={elem.type}>

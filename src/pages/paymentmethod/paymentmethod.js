@@ -103,8 +103,8 @@ function PaymentMethod() {
                     label: "Vietcombank",
                   },
                   {
-                    value: "Asia Commercial Bank",
-                    label: "Asia Commercial Bank",
+                    value: "Ngân hàng ACB",
+                    label: "Ngân hàng ACB",
                   },
                   {
                     value: "DongA Bank",
@@ -115,16 +115,16 @@ function PaymentMethod() {
                     label: "Vietin Bank",
                   },
                   {
-                    value: "Bank for Investment and Development of Vietnam",
-                    label: "Bank for Investment and Development of Vietnam",
+                    value: "BIDV",
+                    label: "BIDV",
                   },
                   {
                     value: "Eximbank",
                     label: "Eximbank",
                   },
                   {
-                    value: "Bank Central Asia",
-                    label: "Bank Central Asia",
+                    value: "Ngân hàng Trung ương Châu Á",
+                    label: "Ngân hàng Trung ương Châu Á",
                   },
                   {
                     value: "Bank Negara Indonesia",
@@ -139,48 +139,48 @@ function PaymentMethod() {
                     label: "CIMB Niaga",
                   },
                   {
-                    value: "Vietnam Prosperity Joint-Stock Commercial Bank",
-                    label: "Vietnam Prosperity Joint-Stock Commercial Bank",
+                    value: "VPBank",
+                    label: "VPBank",
                   },
                   {
                     value: "Military Commercial Joint Stock Bank",
                     label: "Military Commercial Joint Stock Bank",
                   },
                   {
-                    value: "Tien Phong Commercial",
-                    label: "Tien Phong Commercial",
+                    value: "TPBank",
+                    label: "TPBank",
                   },
                   {
                     value: "Agribank",
                     label: "Agribank",
                   },
                   {
-                    value: "Lien Viet Post Joint Stock Commercial Bank",
-                    label: "Lien Viet Post Joint Stock Commercial Bank",
+                    value: "LietVietPostBank",
+                    label: "LietVietPostBank",
                   },
                   {
-                    value: "Saigon - Hanoi Commercial Joint Stock Bank",
-                    label: "Saigon - Hanoi Commercial Joint Stock Bank",
+                    value: "SHB Bank",
+                    label: "SHB Bank",
                   },
                   {
-                    value: "Vietnam Public Joint-stock Commercial Bank",
-                    label: "Vietnam Public Joint-stock Commercial Bank",
+                    value: "PVcomBank",
+                    label: "PVcomBank",
                   },
                   {
                     value: "Saigon Bank",
                     label: "Saigon Bank",
                   },
                   {
-                    value: "Southeast Asia Commercial Joint Stock Bank",
-                    label: "Southeast Asia Commercial Joint Stock Bank",
+                    value: "SeABank",
+                    label: "SeABank",
                   },
                   {
-                    value: "Kien Long Commercial Joint Stock Bank",
-                    label: "Kien Long Commercial Joint Stock Bank",
+                    value: "KienlongBank",
+                    label: "KienlongBank",
                   },
                   {
-                    value: "Nam A Commercial Joint Stock Bank",
-                    label: "Nam A Commercial Joint Stock Bank",
+                    value: "Nam Á Bank",
+                    label: "Nam Á Bank",
                   },
                   {
                     value: "National Citizen Commercial Joint Stock Bank",
@@ -195,16 +195,16 @@ function PaymentMethod() {
                     label: "Orient Commercial Joint Stock Bank",
                   },
                   {
-                    value: "Vietnam International Commercial Joint Stock Bank",
-                    label: "Vietnam International Commercial Joint Stock Bank",
+                    value: "VIB Bank",
+                    label: "VIB Bank",
                   },
                   {
-                    value: "Sai Gon Joint Stock Commercial Bank",
-                    label: "Sai Gon Joint Stock Commercial Bank",
+                    value: "Ngân hàng SCB",
+                    label: "Ngân hàng SCB",
                   },
                   {
-                    value: "Saigon Bank for Industry and Trade",
-                    label: "Saigon Bank for Industry and Trade",
+                    value: "SaigonBank",
+                    label: "SaigonBank",
                   },
                   {
                     value: "VietABank",
@@ -215,16 +215,12 @@ function PaymentMethod() {
                     label: "Bao Viet Bank",
                   },
                   {
-                    value: "Vietnam Thuong Tin Commercial Joint Stock Bank",
-                    label: "Vietnam Thuong Tin Commercial Joint Stock Bank",
+                    value: "VietBank",
+                    label: "VietBank",
                   },
                   {
-                    value: "Petrolimex Group Commercial Joint Stock Bank",
-                    label: "Petrolimex Group Commercial Joint Stock Bank",
-                  },
-                  {
-                    value: "BIDV",
-                    label: "BIDV",
+                    value: "PG Bank",
+                    label: "PG Bank",
                   },
                   {
                     value: "MB Bank",
@@ -239,10 +235,6 @@ function PaymentMethod() {
                     label: "Shinhan bank",
                   },
                   {
-                    value: "ACB Bank",
-                    label: "ACB Bank",
-                  },
-                  {
                     value: "VIP Bank",
                     label: "VIP Bank",
                   },
@@ -251,8 +243,8 @@ function PaymentMethod() {
                     label: "PCcombank",
                   },
                   {
-                    value: "VIB Bank",
-                    label: "VIB Bank",
+                    value: "Ngân hàng An Binh",
+                    label: "Ngân hàng An Binh",
                   },
                 ]}
               />
