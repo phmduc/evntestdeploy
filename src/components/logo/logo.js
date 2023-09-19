@@ -5,7 +5,6 @@ class Logo extends Component {
     render() {
         return (
             <div>
-                hihih
             </div>
         );
     }

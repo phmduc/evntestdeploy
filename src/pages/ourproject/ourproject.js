@@ -102,14 +102,7 @@ function OurProject() {
                           ) : (
                             " "
                           )}
-                          {/* <div className="span position-absolute">
-                        <div>
-                          <span>Sản phẩm phúc lợi</span>
-                        </div>
-                        <div>
-                          <span>Rất khuyến khích</span>
-                        </div>
-                      </div> */}
+                  
                           <div className="content">
                             <ul>
                               <li className="text-center">

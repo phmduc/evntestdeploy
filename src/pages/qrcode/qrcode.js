@@ -29,19 +29,15 @@ function Qrcode() {
       ".qrcode .contentQR .inviteCode .valueSpan"
     ).textContent;
 
-    // Tạo phần tử input tạm thời
     const tempInput = document.createElement("input");
     tempInput.value = valueToCopy;
     document.body.appendChild(tempInput);
 
-    // Sao chép giá trị vào clipboard
     tempInput.select();
     document.execCommand("copy");
 
-    // Loại bỏ phần tử input tạm thời
     document.body.removeChild(tempInput);
 
-    // Hiển thị thông báo hoặc thực hiện các hành động khác
     const copyNotif = document.querySelector(".copyNotif");
     copyNotif.classList.add("show");
 
